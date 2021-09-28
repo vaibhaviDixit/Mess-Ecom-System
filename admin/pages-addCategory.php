@@ -34,34 +34,32 @@
 						<h1 class="h3 d-inline align-middle">Add Category</h1>
 				
 					</div>
-					<div class="row">
-						<div class="col-12 col-lg-12">
-							<div class="card">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Category Name</h5>
-								</div>
-								<div class="card-body">
-									<input type="text" class="form-control" placeholder="Input">
-								</div>
-						
+					<form>
+				
 
-								<div class="card-header">
-									<h5 class="card-title mb-0">Description of Category</h5>
-								</div>
-								<div class="card-body">
-									<textarea class="form-control" rows="2" placeholder="Textarea"></textarea>
-								</div>
-
-							</div>
-							
-							<button class="btn btn-success">Add Category</button>
-
-
-						
+					 	<div class="row">
+								    <div class="col-sm-12 mb-3">
+								     	<label for="catName" class="form-label">Category Name</label>
+								     	<input type="text" class="form-control" id="catName">
+								      		
+								    </div>
 						</div>
 
-					
-					</div>
+						<div class="row">
+								    <div class="col-sm-12 mb-3">
+								     	<label for="catDesc" class="form-label">Description of Category</label>
+							           <textarea class="form-control" rows="3" id="catDesc"></textarea>
+								      		
+								    </div>
+						</div>
+
+						<button class="btn btn-success">Add Category</button>
+
+					</form>
+
+
+							
+				
 
 				</div>
 			</main>

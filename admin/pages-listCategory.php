@@ -38,9 +38,9 @@
 						<h1 class="h3 d-inline align-middle">Categories</h1>
 					</div>
 
-				<div class="container">
+				<div class="container table-responsive">
 
-					<table class="table table-striped table-bordered table-hover table-responsive table-sm" id="dttable">
+					<table class="table table-striped table-bordered table-hover  table-sm" id="dttable">
 					<thead>
 						<tr>
 						<th scope="col">Category Name</th>

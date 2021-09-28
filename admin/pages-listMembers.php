@@ -38,9 +38,9 @@
 						<h1 class="h3 d-inline align-middle">Members</h1>
 					</div>
 
-				<div class="container">
+				<div class="container table-responsive">
 
-					<table class="table table-striped table-bordered table-hover table-responsive table-sm" id="dttable">
+					<table class="table table-striped table-bordered table-hover table-sm" id="dttable">
 					<thead>
 						<tr>
 						<th scope="col">Member Name</th>
@@ -49,6 +49,9 @@
 						<th scope="col">Join Date</th>
 						<th scope="col">Subscription Type</th>
 						<th scope="col">Subscription Duration</th>
+						<th scope="col">Adhar</th>
+						<th scope="col">PAN</th>
+						<th scope="col">Photo</th>
 						<th scope="col">Total Amount</th>
 						<th scope="col">Amount Paid</th>
 						<th scope="col">Amount Left</th>
@@ -60,6 +63,42 @@
 
 						<tr>
 
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+
+						</tr>
+
+						<tr>
+
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+
+						</tr>
+						<tr>
+
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>

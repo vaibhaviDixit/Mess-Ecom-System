@@ -37,7 +37,7 @@
   <div class="user-profile mt-5 pt-5">
      
      <div class="d-flex justify-content-evenly align-items-center">
-         <img src="images/pic-1.png" class="img-thumbnail img-fluid rounded-circle" alt="...">
+         <img src="images/pic-2.png" class="img-thumbnail img-fluid rounded-circle" alt="...">
          <div>
            <h3 class="fs-2">Nora </h3>
          <h3 class="fs-4">9284552172</h3>
@@ -91,15 +91,9 @@
                     <div class="tab-pane container fade" id="Rate">...</div>
             </div>
 
-
-    
-
-
-         
-
     </div>
 
-
+</div>
 <!--  -->
 
 
