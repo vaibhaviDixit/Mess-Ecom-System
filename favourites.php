@@ -32,7 +32,7 @@
 
  
  <div class="mt-5" style="margin-top: 9rem !important;">
-    <h1 class="heading mt-5">My Cart</h1>
+    <h1 class="heading mt-5">My Favourites</h1>
 </div>
 
 <div class="container-fluid mt-2 p-5">
@@ -47,8 +47,8 @@
                     <h3 class="product-name">Pohe</h3>
                     <h2 class="product-price">&#8377;60</h2>
                      <div class="quantity">
-                                <span class="dec">-</span>
-                                <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
+                               <span class="dec">-</span>
+                                <span class="qty-input" id="qty">1</span>
                                 <span class="inc">+</span>
                      </div>
                      <p class="product-remove btn btn-danger">
@@ -69,8 +69,8 @@
                     <h3 class="product-name">Pohe</h3>
                     <h2 class="product-price">&#8377;60</h2>
                      <div class="quantity">
-                                <span class="dec">-</span>
-                                <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
+                               <span class="dec">-</span>
+                                <span class="qty-input" id="qty">1</span>
                                 <span class="inc">+</span>
                      </div>
                      <p class="product-remove btn btn-danger">
@@ -92,7 +92,7 @@
                     <h2 class="product-price">&#8377;60</h2>
                      <div class="quantity">
                                 <span class="dec">-</span>
-                                <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
+                                <span class="qty-input" id="qty">1</span>
                                 <span class="inc">+</span>
                      </div>
                      <p class="product-remove btn btn-danger">
@@ -145,8 +145,6 @@
     <!-- footer -->
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- custom js file link  -->

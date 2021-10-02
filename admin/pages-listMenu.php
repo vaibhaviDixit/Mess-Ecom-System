@@ -13,8 +13,13 @@
 
 	<link href="css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
+	<!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+</head>
 <body>
 	<div class="wrapper">
 		<?php
@@ -38,10 +43,10 @@
 						<h1 class="h3 d-inline align-middle">Menu items</h1>
 					</div>
 
-				<div class="container">
+				<div class="container table-responsive">
 
-					<table class="table table-striped table-bordered table-hover table-responsive table-sm" id="dttable">
-					<thead>
+					<table class="table table-striped table-bordered table-hover table-sm pt-3 " id="dttable">
+					<thead class="table-dark">
 						<tr>
 
 						<th scope="col">Photo</th>
@@ -61,7 +66,11 @@
 						<td scope="col">Description</td>
 						<td scope="col">Category</td>
 						<td scope="col">Price</td>
-						<td scope="col">Action</td>
+						<td scope="col">
+							<a href=""><i class="fas fa-trash-alt"></i></a>
+							<a href=""><i class="far fa-edit"></i></a>
+
+						</td>
 
 						</tr>
 

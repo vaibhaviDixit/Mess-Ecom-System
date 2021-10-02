@@ -10,6 +10,7 @@
 
 	<link href="css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -34,66 +35,48 @@
 						<h1 class="h3 d-inline align-middle">Add Menu</h1>
 				
 					</div>
-					<div class="row">
-						<div class="col-12 col-lg-12">
-							<div class="card">
-								<div class="card-header">
-									<h5 class="card-title mb-0">Menu Name</h5>
-								</div>
-								<div class="card-body">
-									<input type="text" class="form-control" placeholder="Input">
-								</div>
-								
-								<div class="card-header">
-									<h5 class="card-title mb-0">Menu Description</h5>
-								</div>
-								<div class="card-body">
-									<textarea class="form-control" rows="2" placeholder="Textarea"></textarea>
-								</div>
 
-								<div class="card-header">
-									<h5 class="card-title mb-0">Menu Price</h5>
-								</div>
-								<div class="card-body">
-									<input type="text" class="form-control" placeholder="Input">
-								</div>
-								
-							
+					<form>
+						  <div class="row">
+							    <div class="col mb-3">
+							    	<label for="menuName" class="form-label">Menu Name</label>
+							        <input type="text" class="form-control" id="menuName">
+							    </div>
+						   </div>
 
-								<div class="card-header">
-									<h5 class="card-title mb-0">Category of Menu</h5>
-								</div>
-								<div class="card-body">
-									<select class="form-select mb-3">
-										<option selected>Sweets</option>
-										<option>Rice</option>
-										<option>Bhaji</option>
-									</select>
-		
-								</div>
+						 <div class="row">
+							    <div class="col mb-3">
+							    	<label for="menuDesc" class="form-label">Menu Description</label>
+							       <textarea class="form-control" rows="3" id="menuDesc"></textarea>
+							    </div>
+						  </div>
 
-								<div class="card-header">
-									<h5 class="card-title mb-0">Photo of Menu</h5>
-								</div>
-								<div class="card-body">
-									<input type="file" class="form-control" placeholder="Input">
-								</div>
+						   <div class="row">
+							    <div class="col-sm-4 mb-3">
+							    	<label for="menuPrice" class="form-label">Menu Price</label>
+							      <input type="date" class="form-control" id="menuPrice">
+							    </div>
+							     <div class="col-sm-4 mb-3">
+							     	<label for="menuCate" class="form-label">Category Of Menu</label>
+							      		<select class="form-select mb-3" id="menuCate">
+											<option selected>Breakfast</option>
+											<option>Lunch</option>
+											<option>Dinner</option>
+									   </select>
+							    </div>
+							     <div class="col-sm-4 mb-3">
+							     	<label for="menuPhoto" class="form-label">Photo of Menu </label>
+							     	<input class="form-control form-control-sm" type="file" id="menuPhoto">
+							    </div>
 
+						  </div>
 
-								
+						  <button class="btn btn-success">Add Menu</button>
 
-								
+					</form>
 
-							</div>
-							
-							<button class="btn btn-success">Add Menu</button>
-
-
-						
-						</div>
 
 					
-					</div>
 
 				</div>
 			</main>

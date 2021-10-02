@@ -1,3 +1,20 @@
+<?php
+
+session_start();
+include ('database.inc.php');
+include ('function.inc.php');
+
+//if user not logged in and try to access admin panel then redirect it to login
+if(!isset($_SESSION['admin_login'])){
+	redirect('pages-sign-in.php');
+}
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +27,8 @@
 
 	<link href="css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>

@@ -40,8 +40,8 @@
 
 				<div class="container table-responsive">
 
-					<table class="table table-striped table-bordered table-hover  table-sm" id="dttable">
-					<thead>
+					<table class="table table-striped table-bordered table-hover  table-sm pt-3" id="dttable">
+					<thead class="table-dark">
 						<tr>
 						<th scope="col">Category Name</th>
 						<th scope="col">Description</th>

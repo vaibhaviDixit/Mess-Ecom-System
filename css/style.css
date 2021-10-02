@@ -85,7 +85,9 @@ header .logo{
 header .logo i{
     color:var(--green);
 }
-
+header .navbar{
+    display: block;
+}
 header .navbar a{
     font-size: 1.5rem;
     border-radius: .5rem;
@@ -176,6 +178,10 @@ header .icons #menu-bars{
     font-size: 5rem;
 }
 
+.home .home-slider {
+    overflow: hidden !important;
+}
+
 .home .home-slider .slide{
     display: flex;
     align-items: center;
@@ -216,6 +222,8 @@ header .icons #menu-bars{
     background:var(--green);
 }
 
+
+
 .dishes .box-container{
     display: grid;
     grid-template-columns: repeat(auto-fit,25rem);
@@ -245,8 +253,6 @@ header .icons #menu-bars{
     border: 1px solid #ccc;
 }
 .quantity span{
-    background: #eee;
-    padding: 0 1rem;
     cursor: pointer;
 }
 .box .eyeClick .fa-times{
@@ -562,7 +568,7 @@ header .icons #menu-bars{
 /*user page css*/
 .activity-wrapper{
     background: #f4f4f5;
-    padding: 2rem;
+    padding: 2rem 0;
     margin: 1rem 0;
 }
 .user-history {
@@ -570,26 +576,50 @@ header .icons #menu-bars{
 }
 .user-history .activities{
     background: var(--black);
-    border-radius: 8px;
+    border-radius: 10px;
+    padding-right: 0;
 }
 .activities .nav-tabs{
     border:none;
     padding: 1rem 0;
 
 }
+.activities .nav .nav-item{
+        padding: 1rem 0;
+}
+
 .activities .nav-tabs .nav-link.active {
     color: var(--green) !important;
+    border-radius: 10px 0 0 10px;
 }
 .activities .nav-tabs i{
     margin-right: 1rem;
 }
 .activities .nav-tabs a{
     color: #05f950  !important;
-    padding: 2rem 1rem;
+    padding: 1rem;
 }
 .activities .nav-tabs a:hover{
     color:var(--green) !important;
 }
+#Rate{
+
+}
+.star-rating ul{
+    list-style-type: none;
+}
+.star-rating .star{
+    cursor: pointer;
+    padding: 1rem;
+    font-size: 2rem;
+}
+.orange{
+    color: orange;
+}
+.yellow{
+    color: yellow;
+}
+
 /**/
 
 .footer{
@@ -734,15 +764,6 @@ header .icons #menu-bars{
     font-size: 1.5rem;
 
 }
-
-
-
-
-
-
-
-
-
 
 
 

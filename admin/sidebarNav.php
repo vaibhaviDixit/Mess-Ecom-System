@@ -10,7 +10,7 @@
 					</li>
 
 					<li class="sidebar-item active">
-						<a class="sidebar-link" href="adminPanel.php">
+						<a class="sidebar-link" href="index.php">
               			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
            				 </a>
 					</li>
@@ -21,11 +21,6 @@
            			 </a>
 					</li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-sign-in.php">
-              			<i class="align-middle" data-feather="log-in"></i> <span class="align-middle">Sign In</span>
-           				</a>
-					</li>
 					<li class="sidebar-header">
 						Members
 					</li>
@@ -118,17 +113,7 @@
             			</a>
 					</li>
 
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-pendingOrder.php">
-              <i class="align-middle" data-feather="map"></i> <span class="align-middle">Pending </span>
-            </a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-deliveredOrder.php">
-              <i class="align-middle" data-feather="map"></i> <span class="align-middle">Delivered</span>
-            </a>
-					</li>
+					
 
 					<li class="sidebar-header">
 						Reports

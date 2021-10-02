@@ -37,11 +37,12 @@
 					<div class="mb-3">
 						<h1 class="h3 d-inline align-middle">Members</h1>
 					</div>
+					<hr>
 
 				<div class="container table-responsive">
 
-					<table class="table table-striped table-bordered table-hover table-sm" id="dttable">
-					<thead>
+					<table class="table table-striped table-bordered table-hover table-sm pt-3" id="dttable">
+					<thead class="table-primary">
 						<tr>
 						<th scope="col">Member Name</th>
 						<th scope="col">Member Phone</th>

@@ -79,9 +79,10 @@
         <div class="swiper-pagination"></div>
 
     </div>
+   
 
 </section>
-
+  
 <!-- home section ends -->
 
 <!-- dishes section starts  -->
@@ -109,9 +110,9 @@
             </div>
             <span>&#8377;150</span>
              <div class="quantity">
-                    <span class="dec">-</span>
-                    <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
-                    <span class="inc">+</span>
+                   <span class="dec">-</span>
+                   <span class="qty-input" id="qty">1</span>
+                   <span class="inc">+</span>
             </div>
             <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 
@@ -149,9 +150,9 @@
             </div>
             <span>&#8377;150</span>
              <div class="quantity">
-                    <span class="dec">-</span>
-                    <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
-                    <span class="inc">+</span>
+                   <span class="dec">-</span>
+                   <span class="qty-input" id="qty">1</span>
+                   <span class="inc">+</span>
             </div>
             <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i>  Add to Cart</a>
 
@@ -190,8 +191,8 @@
             <span>&#8377;150</span>
              <div class="quantity">
                     <span class="dec">-</span>
-                    <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
-                    <span class="inc">+</span>
+                   <span class="qty-input" id="qty">1</span>
+                   <span class="inc">+</span>
             </div>
             <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i>  Add to Cart</a>
 
@@ -230,8 +231,8 @@
             <span>&#8377;150</span>
              <div class="quantity">
                     <span class="dec">-</span>
-                    <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
-                    <span class="inc">+</span>
+                   <span class="qty-input" id="qty">1</span>
+                   <span class="inc">+</span>
             </div>
             <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i>  Add to Cart</a>
 
@@ -319,9 +320,9 @@
                                 </div>
                                 <h3>Pohe</h3><span class="price">&#8377;12.99</span>
                                 <div class="quantity">
-                                    <span class="dec">-</span>
-                                    <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
-                                    <span class="inc">+</span>
+                                       <span class="dec">-</span>
+                                       <span class="qty-input" id="qty">1</span>
+                                       <span class="inc">+</span>
                                 </div>
                                 <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i>  Add to Cart</a>
 
@@ -344,14 +345,11 @@
                                     </p>
 
                                 </div>
-                           
-
-
-                        
-                      
+                                 
 
                      </div>
 
+                    </div>
               </div>
               <div class="tab-pane container fade" id="menu1">...</div>
               <div class="tab-pane container fade" id="menu2">...</div>
@@ -485,9 +483,9 @@
                 <h3>Milk</h3>
                 <span>&#8377;50/Ltr</span>
                  <div class="quantity">
-                        <span class="dec">-</span>
-                        <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
-                        <span class="inc">+</span>
+                       <span class="dec">-</span>
+                       <span class="qty-input" id="qty">1</span>
+                       <span class="inc">+</span>
                 </div>
                 <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
             
@@ -533,8 +531,7 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="card">
-                         <img src="images/menu-6.jpg" class="card-img-top" alt="..." style="height: 15rem;
-    object-fit: cover;">
+                         <img src="images/menu-6.jpg" class="card-img-top" alt="..." style="height: 15rem;object-fit: cover;">
                       <div class="card-body">
                         <h5 class="card-title">Breakfast</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -545,8 +542,7 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="card">
-                         <img src="images/menu-4.jpg" class="card-img-top" alt="..." style="height: 15rem;
-    object-fit: cover;">
+                         <img src="images/menu-4.jpg" class="card-img-top" alt="..." style="height: 15rem; object-fit: cover;">
                       <div class="card-body">
                         <h5 class="card-title">Barbecues</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -573,9 +569,16 @@
 
 <!-- offers & deals ends-->
 
-
-
-
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
 
 
 <!-- loader part  -->
@@ -593,11 +596,21 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

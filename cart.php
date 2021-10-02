@@ -48,7 +48,7 @@
                     <h2 class="product-price">&#8377;60</h2>
                      <div class="quantity">
                                 <span class="dec">-</span>
-                                <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
+                                <span class="qty-input" id="qty">1</span>
                                 <span class="inc">+</span>
                      </div>
                      <p class="product-remove btn btn-danger">
@@ -65,7 +65,7 @@
                     <h2 class="product-price">&#8377;60</h2>
                      <div class="quantity">
                                 <span class="dec">-</span>
-                                <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
+                                <span class="qty-input" id="qty">1</span>
                                 <span class="inc">+</span>
                      </div>
                      <p class="product-remove btn btn-danger">
@@ -82,7 +82,7 @@
                     <h2 class="product-price">&#8377;60</h2>
                      <div class="quantity">
                                 <span class="dec">-</span>
-                                <input type="number" class="qty-input" id="qty" value="1" name="quantity" min="1" max="10">
+                                <span class="qty-input" id="qty">1</span>
                                 <span class="inc">+</span>
                      </div>
                      <p class="product-remove btn btn-danger">

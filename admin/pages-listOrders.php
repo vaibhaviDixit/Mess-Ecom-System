@@ -11,8 +11,11 @@
 
 	<title>Admin</title>
 
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link href="css/app.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -35,13 +38,14 @@
 				<div class="container-fluid p-0">
 
 					<div class="mb-3">
-						<h1 class="h3 d-inline align-middle">All Orders</h1>
+						<h1 class="h3 d-inline ">All Orders</h1>
 					</div>
+					<hr>
 
-				<div class="container">
+				<div class="container table-responsive fs-6">
 
-					<table class="table table-striped table-bordered table-hover table-responsive table-sm" id="dttable">
-					<thead>
+					<table class="table table-striped  table-hover  table-sm pt-3" id="dttable">
+					<thead class=" table-primary">
 						<tr>
 
 						<th scope="col">Customer Name</th>
@@ -51,6 +55,7 @@
 						<th scope="col">Amount</th>
 						<th scope="col">Payment Mode</th>
 						<th scope="col">Payment Status</th>
+						<th scope="col">Order Status</th>
 
 						</tr>
 					</thead>
@@ -64,6 +69,31 @@
 						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>
+						<td scope="col"> <button class="orderBtn pendingBtn" >Pending</button> </td>
+
+						</tr>
+
+						<tr>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col"> <button class="orderBtn deliveredBtn" >Delivered</button> </td>
+
+						</tr>
+
+						<tr>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col">xyz</td>
+						<td scope="col"> <button class=" orderBtn cancelledBtn" >Cancelled</button> </td>
 
 						</tr>
 
@@ -103,6 +133,7 @@
 	</script>
 
 	<script src="js/app.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
 </body>
 

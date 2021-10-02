@@ -35,9 +35,8 @@ session_start();
                 ?>
 
             
-  <a class="fas fa-user" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-  </a>
-
+        <a class="fas fa-user" href="user.php" ></a>
+  
 
              <!--  <a tabindex="0" class=" fas fa-user" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-content="And here's some amazing content. It's very engaging. Right?"></a> -->
         <?php
@@ -84,11 +83,11 @@ session_start();
                  
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" name="loginemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="">
+                    <input type="email" name="loginemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required="" autocomplete="off">
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" name="loginpassword" class="form-control" id="exampleInputPassword1" required="">
+                    <input type="password" name="loginpassword" class="form-control" id="exampleInputPassword1" required="" autocomplete="off">
                   </div>
                   <div class="mb-3 ">
                     <a href="">Forgot Password?</a>
@@ -99,35 +98,33 @@ session_start();
              </div>
 
              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                  <form>
+
+                  <form  action="index.php">
+                     
+                     <span id="validation"></span>
+                    
 
                    <div class="mb-3">
-                    <label for="name" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name"  required="">
+                    <label for="regname" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="regname"   autocomplete="off">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1"  required="">
+                    <label for="regemail" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="regemail"   autocomplete="off">
                   </div>
                   <div class="mb-3">
-                    <label for="phone" class="form-label">Phone</label>
-                    <input type="text" class="form-control" id="phone"  required="">
-                  </div>
-                <!--   <div class="mb-3">
-                    <label for="address" class="form-label">Delivery address</label>
-                    <textarea type="text" class="form-control" id="address"  required="" rows="5"></textarea>
-                  </div>
- -->
-
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" required="">
+                    <label for="regphone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="regphone"  autocomplete="off">
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" required="">
+                    <label for="regpass1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="regpass1" autocomplete="off">
                   </div>
-                  <button type="submit" class="custombtn">Register</button>
+                  <div class="mb-3">
+                    <label for="regpass2" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="regpass2"  autocomplete="off">
+                  </div>
+                  <button type="submit" class="custombtn" name="submit" onclick="return regValidation()" >Register</button>
                 </form>
 
 

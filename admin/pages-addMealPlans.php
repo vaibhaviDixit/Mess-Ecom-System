@@ -10,6 +10,7 @@
 
 	<link href="css/app.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -34,44 +35,42 @@
 						<h1 class="h3 d-inline align-middle">Add Meal Plans</h1>
 				
 					</div>
-					<div class="row">
-						<div class="col-12 col-lg-12">
-							<div class="card">
-						
+					<form>
+						<div class="row">
+							 <div class="col mb-3">
+							    	<label for="mealDesc" class="form-label">Meal Description</label>
+							       <textarea class="form-control" rows="3" id="mealDesc"></textarea>
+							 </div>
 
-								<div class="card-header">
-									<h5 class="card-title mb-0">Meal Description</h5>
-								</div>
-								<div class="card-body">
-									<textarea class="form-control" rows="2" placeholder="Textarea"></textarea>
-								</div>
+						</div>
 
-							
+						<div class="row">
+							 <div class="col-sm-4 mb-3">
+							    	<label for="mealPrice" class="form-label">Meal Price</label>
+							       <input type="text" class="form-control" rows="3" id="mealPrice">
+							 </div>
 
-								<div class="card-header">
-									<h5 class="card-title mb-0">Subscription Type</h5>
-								</div>
-								<div class="card-body">
-									<select class="form-select mb-3">
-										<option selected>Student</option>
-										<option>Classic</option>
-										<option>Executive</option>
+							 <div class="col-sm-4 mb-3">
+							    	<label for="mealType" class="form-label">Subscription Type</label>
+							      	<select class="form-select mb-3" id="mealType">
+											<option selected>Breakfast</option>
+											<option>Lunch</option>
+											<option>Dinner</option>
 									</select>
-		
-								</div>
+							 </div>
 
-								
+							 <div class="col-sm-4 mb-3">
+							    	<label for="mealPhoto" class="form-label">Meal Photo</label>
+							    	<input class="form-control form-control-sm" type="file" id="mealPhoto">
+							 </div>
 
-							</div>
-							
-							<button class="btn btn-success">Add Meal</button>
-
-
-						
 						</div>
 
 					
-					</div>
+							<button class="btn btn-success">Add Meal</button>
+
+					</form>
+
 
 				</div>
 			</main>
