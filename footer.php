@@ -60,3 +60,21 @@
 </div>
 <!-- footer section ends -->
 
+   <!-- footer -->
+
+
+<!-- loader part  -->
+<!-- <div class="loader-container">
+    <img src="images/loader.gif" alt="">
+</div> -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+</body>
+</html>
+

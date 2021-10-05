@@ -1,11 +1,9 @@
 
-main.content table a{
 
-	background-color:rgb(34,46,60);
-    color: white;
-	padding: 0.2rem ;
+
+a{
+	text-decoration: none !important;
 }
-
 table .orderBtn{
 	border: none;
     border-radius: 6px;
@@ -26,8 +24,22 @@ table .deliveredBtn{
 table .cancelledBtn{
 	background: red !important;
 }
-.card .social a{
+.card .social>a{
 	    color: #e8eef3;
     background: #07124e;
     border-radius: 50%;
 }
+
+.redStar{
+	color: red !important;
+}
+
+
+
+
+
+
+
+
+
+

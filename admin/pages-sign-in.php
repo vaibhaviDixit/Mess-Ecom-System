@@ -16,6 +16,7 @@ if (isset($_POST['submit'])) {
 
 		$row=mysqli_fetch_assoc($res);
 		$_SESSION['admin_login']='yes';
+		$_SESSION['admin_name']=$row['name'];
 		redirect('index.php');
 
 	}
@@ -27,7 +28,6 @@ if (isset($_POST['submit'])) {
 
 
 ?>
-
 
 
 <!DOCTYPE html>
@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
 					<div class="d-table-cell align-middle">
 
 						<div class="text-center mt-4">
-							<h1 class="h2">Welcome back, Charles</h1>
+							<h1 class="h2">Welcome back</h1>
 							<p class="lead">
 								Sign in to your account to continue
 							</p>

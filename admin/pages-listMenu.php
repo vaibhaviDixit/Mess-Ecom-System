@@ -1,78 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+include ('top.php');
+//join two tables menu and category ,select category name based on equality of category id
+$sql="select menu.*, category.name from menu,category where menu.category_id=category.id ";
+$res=mysqli_query($con,$sql);
 
+?>
 
- 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
-
-	<title>Admin</title>
-
-	<link href="css/app.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-	<!-- font awesome cdn link  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-
-
-</head>
-<body>
-	<div class="wrapper">
-		<?php
-
-		include 'sidebarNav.php'
-
-		?>
-
-		<div class="main">
-
-			<?php
-
-				include 'adminTopNav.php';
-
-			?>
-		
 			<main class="content">
 				<div class="container-fluid p-0">
 
 					<div class="mb-3">
 						<h1 class="h3 d-inline align-middle">Menu items</h1>
 					</div>
-
+					<hr>
 				<div class="container table-responsive">
 
-					<table class="table table-striped table-bordered table-hover table-sm pt-3 " id="dttable">
-					<thead class="table-dark">
+					<table class="table table-striped  table-hover table-sm pt-3 " id="dttable">
+					<thead class="table-primary">
 						<tr>
-
-						<th scope="col">Photo</th>
+						<th scope="col">Sr. No</th>
 						<th scope="col">Name</th>
+						<th scope="col" width="10%">Photo</th>
 						<th scope="col">Description</th>
 						<th scope="col">Category</th>
 						<th scope="col">Price</th>
-						<th scope="col">Action</th>
+						<th scope="col">Actions</th>
 
 						</tr>
 					</thead>
 					<tbody>
 
+						<?php  
+
+							if(mysqli_num_rows($res) > 0){
+								$i=1;
+								while( $row=mysqli_fetch_assoc($res) ){
+
+						?>
+
+						
 						<tr>
-						<td scope="col">Photo</td>
-						<td scope="col">Name</td>
-						<td scope="col">Description</td>
-						<td scope="col">Category</td>
-						<td scope="col">Price</td>
+						<td scope="col"> <?php  echo $i; ?></td>
+						<td scope="col"> <?php  echo $row['menuName']; ?></td>
+						<td scope="col"><a target="_blank" href="<?php  echo SITE_MENU_IMAGE.$row['menuPhoto']; ?>"> <img class="img-fluid" src="<?php  echo SITE_MENU_IMAGE.$row['menuPhoto']; ?>" > </a></td>
+						<td scope="col"> <?php  echo $row['menuDesc']; ?></td>
+						<td scope="col"> <?php  echo $row['name']; ?></td>
+						<td scope="col"> <?php  echo $row['menuPrice']; ?></td>
 						<td scope="col">
-							<a href=""><i class="fas fa-trash-alt"></i></a>
-							<a href=""><i class="far fa-edit"></i></a>
+
+							<a href="pages-addMenu.php?id=<?php echo $row['id']; ?>"> <button class="btn btn-success btn-sm">Edit</button> </a>
+
+
+							<?php
+								if( $row['status'] == 1 ){
+							?>
+							<a href="?id=<?php echo $row['id']; ?>&type=deactive "> <button class="btn btn-primary btn-sm">Active</button> </a>
+
+							<?php
+
+								}
+								else
+								{
+							?>
+							<a href="?id=<?php echo $row['id']; ?>&type=active "> <button class="btn btn-secondary btn-sm">Deactive</button> </a>
+
+							<?php
+								}
+
+							?>
+							
+							<a href="?id=<?php echo $row['id']; ?>&type=delete "> <button class="btn btn-danger btn-sm">Delete</button> </a>
+
 
 						</td>
 
 						</tr>
+
+
+						<?php
+								$i++;
+
+								}
+							}
+							else{
+							?>
+							<td colspan="4">Data not found</td>
+
+							<?php
+
+							}
+
+						?>
+						
 
 						
 						
@@ -93,24 +113,41 @@
 
 			<?php
 
-				include 'adminFooter.php';
+				include 'footer.php';
 
 			?>
-		</div>
-	</div>
+<?php
 
 
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
-	<script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+if( isset($_GET['type']) && $_GET['type']!==' '  &&  isset($_GET['id']) && $_GET['id'] > 0  )
+{
 
-	<script type="text/javascript">
-		$(document).ready( function () {
-	    $('#dttable').DataTable();
-	} );
-	</script>
+	$type=$_GET['type'];
+	$id=$_GET['id'];
 
-	<script src="js/app.js"></script>
+	if( $type == 'delete')
+	{
+		 mysqli_query($con,"delete from menu where id='$id' ");
+		 redirect('pages-listMenu.php');
 
-</body>
+	}
 
-</html>
+	if( $type=='active' || $type=='deactive'){
+		$status=1;
+
+		if($type=='deactive'){
+			$status=0;
+		}
+
+		mysqli_query($con,"update menu set status='$status' where id='$id' ");
+		redirect('pages-listMenu.php');
+
+	}
+
+
+
+
+
+}
+
+?>

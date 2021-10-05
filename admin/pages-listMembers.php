@@ -1,36 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+include ('top.php');
+$sql="select members.*, subscriptions.subscriptionName from members,subscriptions  where members.subscription=subscriptions.id ";
+$res=mysqli_query($con,$sql);
 
+?>
 
- 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
-
-	<title>Admin</title>
-
-	<link href="css/app.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
-
-<body>
-	<div class="wrapper">
-		<?php
-
-		include 'sidebarNav.php'
-
-		?>
-
-		<div class="main">
-
-			<?php
-
-				include 'adminTopNav.php';
-
-			?>
-		
 			<main class="content">
 				<div class="container-fluid p-0">
 
@@ -41,81 +16,96 @@
 
 				<div class="container table-responsive">
 
-					<table class="table table-striped table-bordered table-hover table-sm pt-3" id="dttable">
+					<table class="table table-striped  table-hover table-sm pt-3" id="dttable">
 					<thead class="table-primary">
 						<tr>
-						<th scope="col">Member Name</th>
-						<th scope="col">Member Phone</th>
-						<th scope="col">Member Address</th>
-						<th scope="col">Join Date</th>
-						<th scope="col">Subscription Type</th>
-						<th scope="col">Subscription Duration</th>
-						<th scope="col">Adhar</th>
-						<th scope="col">PAN</th>
-						<th scope="col">Photo</th>
-						<th scope="col">Total Amount</th>
-						<th scope="col">Amount Paid</th>
-						<th scope="col">Amount Left</th>
-
+							<th scope="col">Sr No.</th>
+							<th scope="col">Member Name</th>
+							<th scope="col">Member Phone</th>
+							<th scope="col">Member Address</th>
+							<th scope="col">Join Date</th>
+							<th scope="col">Subscription Type</th>
+							<th scope="col">Subscription Duration</th>
+							<th scope="col">Adhar</th>
+							<th scope="col">PAN</th>
+							<th scope="col">Photo</th>
+							<th scope="col">Total Amount</th>
+							<th scope="col">Amount Paid</th>
+							<th scope="col">Amount Left</th>
+							<th scope="col">Actions</th>
 
 						</tr>
 					</thead>
 					<tbody>
+<?php  
 
-						<tr>
+							if(mysqli_num_rows($res) > 0){
+								$i=1;
+								while( $row=mysqli_fetch_assoc($res) ){
 
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-
-						</tr>
-
-						<tr>
-
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-
-						</tr>
-						<tr>
-
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-						<td scope="col">xyz</td>
-
-						</tr>
+						?>
 
 						
-						
+						<tr>
+						<td scope="col"> <?php  echo $i; ?></td>
+						<td scope="col"> <?php  echo $row['name']; ?></td>
+						<td scope="col"> <?php  echo $row['phone']; ?></td>
+						<td scope="col"> <?php  echo $row['address']; ?></td>
+						<td scope="col"> <?php 
+
+						 echo $row['joinDate'];
+
+						  ?></td>
+						<td scope="col"> <?php  echo $row['subscriptionName']; ?></td>
+						<td scope="col"> <?php  echo $row['duration']; ?></td>
+						<td scope="col" width="10%"> <?php  
+							if(SITE_DOC_IMAGE.$row['adhar']==""){
+								echo "NA";
+							}else{
+								?>
+								<a target="_blank" href="<?php  echo SITE_DOC_IMAGE.$row['adhar']; ?>"> <img class="img-fluid" src="<?php  echo SITE_DOC_IMAGE.$row['adhar']; ?>" > </a> 
+								<?php
+
+							}
+
+						?> </td>
+
+						<td scope="col" width="10%"> <a target="_blank" href="<?php  echo SITE_DOC_IMAGE.$row['pan']; ?>"> <img class="img-fluid" src="<?php  echo SITE_DOC_IMAGE.$row['pan']; ?>" > </a> </td>
+
+						<td scope="col" width="10%"> <a target="_blank" href="<?php  echo SITE_DOC_IMAGE.$row['photo']; ?>"> <img class="img-fluid" src="<?php  echo SITE_DOC_IMAGE.$row['photo']; ?>" > </a> </td>
+
+						<td scope="col"> <?php  echo $row['totalAmount']; ?></td>
+						<td scope="col"> <?php  echo $row['paidAmount']; ?></td>
+						<td scope="col"> <?php  echo $row['totalAmount']-$row['paidAmount']; ?></td>
+						<td scope="col">
+
+							<a href="pages-addMembers.php?id=<?php echo $row['id']; ?>"> <button class="btn btn-success btn-sm">Edit</button> </a>
+							
+							<a href="?id=<?php echo $row['id']; ?>&type=delete "> <button class="btn btn-danger btn-sm">Delete</button> </a>
+
+
+						</td>
+
+		
+
+						</tr>
+
+
+						<?php
+								$i++;
+
+								}
+							}
+							else{
+							?>
+							<td colspan="4">Data not found</td>
+
+							<?php
+
+							}
+
+						?>
 					</tbody>
-
 					</table>
 
 
@@ -131,24 +121,29 @@
 
 			<?php
 
-				include 'adminFooter.php';
+				include 'footer.php';
 
 			?>
-		</div>
-	</div>
+	
+	<?php
 
 
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
-	<script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+if( isset($_GET['type']) && $_GET['type']!==' '  &&  isset($_GET['id']) && $_GET['id'] > 0  )
+{
 
-	<script type="text/javascript">
-		$(document).ready( function () {
-	    $('#dttable').DataTable();
-	} );
-	</script>
+	$type=$_GET['type'];
+	$id=$_GET['id'];
 
-	<script src="js/app.js"></script>
+	if( $type == 'delete')
+	{
+		 mysqli_query($con,"delete from members where id='$id' ");
+		 redirect('pages-listMembers.php');
 
-</body>
+	}
 
-</html>
+
+
+
+}
+
+?>

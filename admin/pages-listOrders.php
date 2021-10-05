@@ -1,39 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+include ('top.php');
 
+?>
 
- 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
-
-	<title>Admin</title>
-
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link href="css/app.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
-</head>
-
-<body>
-	<div class="wrapper">
-		<?php
-
-		include 'sidebarNav.php'
-
-		?>
-
-		<div class="main">
-
-			<?php
-
-				include 'adminTopNav.php';
-
-			?>
-		
 			<main class="content">
 				<div class="container-fluid p-0">
 
@@ -116,25 +86,7 @@
 
 			<?php
 
-				include 'adminFooter.php';
+				include 'footer.php';
 
 			?>
-		</div>
-	</div>
-
-
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
-	<script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
-
-	<script type="text/javascript">
-		$(document).ready( function () {
-	    $('#dttable').DataTable();
-	} );
-	</script>
-
-	<script src="js/app.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-
-</body>
-
-</html>
+	

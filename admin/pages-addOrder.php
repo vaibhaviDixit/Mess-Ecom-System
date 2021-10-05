@@ -1,31 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+include ('top.php');
 
-	<title>Admin</title>
-
-	<link href="css/app.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
-
-<body>
-	<div class="wrapper">
-		<?php
-
-		include 'sidebarNav.php'
-
-		?>
-
-		<div class="main">
-			<?php
-
-				include 'adminTopNav.php';
-
-			?>
+?>
 
 			<main class="content">
 				<div class="container-fluid p-0">
@@ -98,14 +75,6 @@
 
 			<?php
 
-				include 'adminFooter.php';
+				include 'footer.php';
 
 			?>
-		</div>
-	</div>
-
-	<script src="js/app.js"></script>
-
-</body>
-
-</html>

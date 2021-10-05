@@ -1,46 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<?php
 
-	<title>Admin</title>
 
-	<link href="css/app.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-</head>
+include ('top.php');
 
-<body>
-	<div class="wrapper">
-		<?php
+$msg="";
+$category="";
+$description="";
+$id="";
 
-		include 'sidebarNav.php'
 
-		?>
 
-		<div class="main">
-			<?php
 
-				include 'adminTopNav.php';
+if(isset($_GET['id']) && $_GET['id']>0){
+	$id=mysqli_real_escape_string( $con,htmlspecialchars( $_GET['id'] ) );
 
-			?>
+
+	$row=mysqli_fetch_assoc( mysqli_query($con,"select * from category where id='$id' ") );
+	$category=$row['name'];
+	$description=$row['description'];
+
+}
+
+
+if (isset($_POST['submit'])) {
+	$category=mysqli_real_escape_string( $con,htmlspecialchars( $_POST['category'] ) );
+	$description=mysqli_real_escape_string($con, htmlspecialchars( $_POST['description'] ) );
+ 
+
+	if($id==""){
+		//here id is blank means admin wants to add new category
+		$sql="select * from category where name='$category' ";
+
+	}
+	else{
+		//here id is set means admin wants to edit existing category
+		$sql="select * from category where name='$category' and id!='$id' ";
+
+	}
+
+
+	if(mysqli_num_rows(mysqli_query($con,$sql)) >0 ){
+
+		$msg="Category already exists";
+
+	}
+	else{
+
+		//if id is not set then insert new category 
+		if($id==""){
+			mysqli_query($con,"insert into category(name,description,status) values('$category','$description',1) ");
+
+		}
+		else{
+			//if id is set then update exsting category
+			mysqli_query($con,"update category set name='$category', description='$description' where id='$id'  ");
+		}
+		redirect('pages-listCategory.php');
+		
+	}
+	
+}
+
+
+
+
+
+
+?>
+
 
 			<main class="content">
 				<div class="container-fluid p-0">
 
 					<div class="mb-3">
-						<h1 class="h3 d-inline align-middle">Add Category</h1>
+						<h1 class="h3 d-inline align-middle">Manage Category</h1>
 				
 					</div>
-					<form>
+					<hr>
+
+					<?php 
+					if(strlen( $msg ) > 0){
+					?>
+					<div class="alert alert-danger" role="alert" >  <?php echo $msg;  ?> </div>
+					<?php
+						}
+
+					?>
+					<form method="post">
 				
 
 					 	<div class="row">
 								    <div class="col-sm-12 mb-3">
-								     	<label for="catName" class="form-label">Category Name</label>
-								     	<input type="text" class="form-control" id="catName">
+								     	<label for="catName" class="form-label">Category Name<span class="redStar">*</span></label>
+								     	<input type="text" class="form-control" id="catName" name="category" required autocomplete="off" value="<?php echo $category; ?>">
 								      		
 								    </div>
 						</div>
@@ -48,13 +101,12 @@
 						<div class="row">
 								    <div class="col-sm-12 mb-3">
 								     	<label for="catDesc" class="form-label">Description of Category</label>
-							           <textarea class="form-control" rows="3" id="catDesc"></textarea>
+							           <textarea class="form-control" rows="3" id="catDesc" name="description" autocomplete="off"  > <?php echo $description; ?> </textarea>
 								      		
 								    </div>
 						</div>
 
-						<button class="btn btn-success">Add Category</button>
-
+						<input type="submit" name="submit" class="btn btn-success" value="Submit">
 					</form>
 
 
@@ -68,14 +120,6 @@
 
 			<?php
 
-				include 'adminFooter.php';
+				include 'footer.php';
 
 			?>
-		</div>
-	</div>
-
-	<script src="js/app.js"></script>
-
-</body>
-
-</html>

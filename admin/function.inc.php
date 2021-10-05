@@ -8,12 +8,12 @@ function printArray($arr){
 
 
 function redirect($link){
-	?>
+?>
 <script type="text/javascript">
 	
 	window.location.href='<?php echo $link; ?>'
 </script>
-	<?php
+<?php
 	die();
 }
 

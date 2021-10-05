@@ -1,4 +1,187 @@
-<nav class="navbar navbar-expand navbar-light navbar-bg">
+<?php
+
+session_start();
+include ('database.inc.php');
+include ('function.inc.php');
+include ('constants.inc.php');
+
+//if user not logged in and try to access admin panel then redirect it to login
+if(!isset($_SESSION['admin_login'])){
+	redirect('pages-sign-in.php');
+}
+
+
+?>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Admin</title>
+    <!-- cdn for data table -->
+ 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css">
+    <link href="css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+</head>
+
+<body>
+	<div class="wrapper">
+			<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="index.html">
+          <span class="align-middle">AdminKit</span>
+        </a>
+
+				<ul class="sidebar-nav">
+					<li class="sidebar-header">
+						Pages
+					</li>
+
+					<li class="sidebar-item active">
+						<a class="sidebar-link" href="index.php">
+              			<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
+           				 </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-profile.php">
+           			   <i class="align-middle" data-feather="user"></i> <span class="align-middle">Profile</span>
+           			 </a>
+					</li>
+
+					<li class="sidebar-header">
+						Members
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-addMembers.php">
+              			<i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Add Members</span>
+           			    </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-listMembers.php">
+             			 <i class="align-middle" data-feather="map"></i> <span class="align-middle">View Members</span>
+           				 </a>
+					</li>
+
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-addPayment.php">
+              			<i class="align-middle" data-feather="map"></i> <span class="align-middle">Add Payment</span>
+           				</a>
+					</li>
+
+				
+
+					<li class="sidebar-header">
+						Categories
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-addCategory.php">
+              			<i class="align-middle" data-feather="square"></i> <span class="align-middle">Add Category</span>
+            			</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-listCategory.php">
+              <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Categories</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header">
+						Menu
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-addMenu.php">
+              <i class="align-middle" data-feather="square"></i> <span class="align-middle">Add Menu</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-listMenu.php">
+              <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">List Menu</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header">
+						Meal Plans
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-addMealPlans.php">
+              <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Add Meals</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-listMealPlans.php">
+              <i class="align-middle" data-feather="map"></i> <span class="align-middle">List Meals</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header">
+						Orders
+					</li>
+
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-addOrder.php">
+              <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Add Order</span>
+            </a>
+					</li>
+
+					
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-listOrders.php">
+             				 <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">List Orders</span>
+            			</a>
+					</li>
+
+					
+
+					<li class="sidebar-header">
+						Reports
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="charts-chartjs.html">
+              <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Online Orders</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="maps-google.html">
+              <i class="align-middle" data-feather="map"></i> <span class="align-middle">Payment Dues</span>
+            </a>
+					</li>
+
+					
+				</ul>
+
+				
+			</div>
+		</nav>
+<!-- sidebar nav ends -->
+
+<!-- admin navbar starts -->
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
 				<a class="sidebar-toggle js-sidebar-toggle">
           <i class="hamburger align-self-center"></i>
         </a>
@@ -143,7 +326,7 @@
               </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">  <?php  echo $_SESSION['admin_name']; ?> </span>
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
@@ -158,3 +341,4 @@
 					</ul>
 				</div>
 			</nav>
+			<!-- admin navbar ends -->
