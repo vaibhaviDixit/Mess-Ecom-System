@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+include ('include/database.inc.php');
+include ('include/function.inc.php');
+include ('include/constants.inc.php');
 
 
 ?>
@@ -23,6 +26,7 @@ session_start();
 
     <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -119,32 +123,32 @@ session_start();
 
              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                  <form  action="index.php" method="post">
+                  <form  method="post" id="userRegister">
                      
                      <span id="validation"></span>
                     
 
                    <div class="mb-3">
                     <label for="regname" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="regname"   autocomplete="off">
+                    <input type="text" class="form-control" id="regname"  name="regname" autocomplete="off">
                   </div>
                   <div class="mb-3">
                     <label for="regemail" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="regemail"   autocomplete="off">
+                    <input type="email" class="form-control" id="regemail"  name="regemail" autocomplete="off">
                   </div>
                   <div class="mb-3">
                     <label for="regphone" class="form-label">Phone</label>
-                    <input type="text" class="form-control" id="regphone"  autocomplete="off">
+                    <input type="text" class="form-control" id="regphone" name="regphone" autocomplete="off">
                   </div>
                   <div class="mb-3">
                     <label for="regpass1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="regpass1" autocomplete="off">
+                    <input type="password" class="form-control" id="regpass1" name="regpass1" autocomplete="off">
                   </div>
                   <div class="mb-3">
                     <label for="regpass2" class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" id="regpass2"  autocomplete="off">
                   </div>
-                  <button type="submit" class="custombtn" name="submit" onclick="return regValidation()" >Register</button>
+                  <button type="submit" class="custombtn"  onclick="return regValidation()" >Register</button>
                 </form>
 
 

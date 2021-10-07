@@ -250,37 +250,56 @@
 
 
     <div class="container-fluid row">
-        
-                    <!-- Nav tabs -->
-            <div class="col-md-2">
-            <ul class="nav nav-tabs fs-2 flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#all">All</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#menu1">Lunch</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#menu2">Breakfast</a>
-              </li>
-               <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#menu2">Dinner</a>
-              </li>
 
-            </ul>
+          <?php
+
+                    $mealsSql="select meals.*, subscriptions.subscriptionName from meals,subscriptions where meals.mealSubscription=subscriptions.id ";
+                     $cat_id="";
+                    if(isset($_GET['cat_id']) && $_GET['cat_id']>0){
+                        $cat_id=getSafeVal($_GET['cat_id']);
+                        $mealsSql.=" and meals.mealType='$cat_id' ";
+                    }
+                    $meals=mysqli_query($con,$mealsSql);
+                ?>
+        
+            <?php
+                $cate=mysqli_query($con,"select * from category where status=1");
+            ?>
+            <div class="col-md-3 fs-2">
+            <form method="post">
+               <ul class="list-group categories">
+                    <li class="list-group-item disabled" aria-disabled="true">Categories</li>
+
+                    <?php
+                    while ($cate_row=mysqli_fetch_assoc($cate) ) {
+                        $class='list-group-item d-flex justify-content-between align-items-start list-group-item-action ';
+                        if($cat_id==$cate_row['id']){
+                            $class.=' activeCate active';
+                        }
+                        $categoryId=$cate_row['id'];
+                        $num=mysqli_num_rows(mysqli_query($con,"select * from meals where meals.mealType='$categoryId'"));
+                        echo "<a href='?cat_id=".$cate_row['id']."' class='".$class."'>".$cate_row['name']." <div><span class='badge bg-primary rounded-pill'>".$num."</span></div> </a> ";
+                       
+                        
+                    }
+                    ?>
+                </ul>
+            </form>
             </div>
 
             <!-- Tab panes -->
-            <div class="tab-content col-md-10">
-              <div class="tab-pane container active" id="all">
+            <div class="tab-content col-md-9">
+              
+              <div class="tab-pane container active" >
 
                     <div class="box-container">
 
-                    
-
+                        <?php
+                            while ($meals_row=mysqli_fetch_assoc($meals) ) {
+                        ?>
                         <div class="box">
                             <div class="image">
-                                <img src="images/menu-1.jpg" alt="">
+                                <img src="<?php echo SITE_MENU_IMAGE.$meals_row['mealPhoto'];  ?>" alt="">
                                 <a  class="fas fa-eye desc"></a>
                                 <a href="#" class="fas fa-heart"></a>
                             </div>
@@ -292,7 +311,9 @@
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star-half-alt"></i>
                                 </div>
-                                <h3>Pohe</h3><span class="price">&#8377;12.99</span>
+                                <h3> <?php echo $meals_row['subscriptionName'];  ?> </h3>
+                                <h3> <?php echo $meals_row['mealName'];  ?> </h3>
+                                <span class="price">&#8377; <?php echo $meals_row['mealPrice'];  ?></span>
                                 <div class="quantity">
                                        <span class="dec">-</span>
                                        <span class="qty-input" id="qty">1</span>
@@ -305,28 +326,20 @@
                                 <div class="eyeClick">
                                     <a  class="fas fa-times remove"></a>
                                     <p>
-                                         BootstrapDesigned and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                                        Code licensed MIT, docs CC BY 3.0.
-                                        Currently v5.0.2.Bootstrap
-                                        Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                                        Code licensed MIT, docs CC BY 3.0.
-                                        Currently v5.0.2.Bootstrap
-                                        Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                                        Code licensed MIT, docs CC BY 3.0.
-                                        Currently v5.0.2.
-                                    
+                                        <?php echo $meals_row['mealDesc'];  ?>
 
                                     </p>
 
                                 </div>
                                  
-
                      </div>
+                     <?php } ?>
+                     <!-- meal card ends -->
+
 
                     </div>
               </div>
-              <div class="tab-pane container fade" id="menu1">...</div>
-              <div class="tab-pane container fade" id="menu2">...</div>
+
             </div>
 
 

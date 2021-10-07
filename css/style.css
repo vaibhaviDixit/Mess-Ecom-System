@@ -765,9 +765,19 @@ header .icons #menu-bars{
 
 }
 
+.categories  a{
+    color: black  !important;
 
+} 
 
-
+.categories .activeCate {
+    color: white !important;
+     background-color: #063a52 !important;
+    border-color:transparent !important;
+} 
+.rounded-pill {
+    background: #079b07 !important;
+}
 
 
 
@@ -848,6 +858,9 @@ header .icons #menu-bars{
    .cart .cart-total{
     margin-left: 0;
     margin-top: 1rem;
+   }
+   section .tab-content{
+    margin-top: 5rem !important;
    }
 
 }

@@ -221,6 +221,12 @@ function regValidation(){
   var pass1=document.getElementById('regpass1').value;
   var pass2=document.getElementById('regpass2').value;
 
+
+  if(name==""){
+    document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" >Please fill your name </div>';
+    return false;
+
+  }
   if(name.length<5){
     document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" >Name is too short</div>';
     return false;
@@ -271,6 +277,38 @@ return true;
 
 
 }
+
+
+//user registration
+
+jQuery('#userRegister').on('submit',function(e){
+  
+   jQuery("#validation").html("");
+  jQuery.ajax({
+    url:'user_register.php',
+    type:'post',
+    data:jQuery('#userRegister').serialize(),
+    success:function(result){
+
+        msg=jQuery.parseJSON(result);
+        if(msg.status=="error"){
+          jQuery("#validation").html("<div class='alert alert-danger' role='alert' >"+msg.message+"</div>");
+        } 
+                
+    }
+
+
+  });
+
+e.preventDefault();
+});
+
+
+
+//
+
+
+
 
 
 

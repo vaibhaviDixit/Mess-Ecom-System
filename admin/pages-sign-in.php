@@ -1,7 +1,7 @@
 <?php
 session_start();
-include ('database.inc.php');
-include ('function.inc.php');
+include ('../include/database.inc.php');
+include ('../include/function.inc.php');
 
 //check admin login credentials
 $msg="";

@@ -17,6 +17,11 @@ function redirect($link){
 	die();
 }
 
+function getSafeVal($str){
+	global $con;
+	$str=mysqli_real_escape_string($con,htmlspecialchars($str));
+	return $str;
+}
 
 
 ?>

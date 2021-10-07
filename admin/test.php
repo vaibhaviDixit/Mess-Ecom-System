@@ -1,26 +1,27 @@
+<script type="text/javascript">
+                var catid=7;
+                function fun(a){
+                  catid=a;
+                  alert(catid);
+                }
+
+             </script>
+
+<a href="#" onclick="fun(9)">9</a>
+<a href="#" onclick="fun(5)">5</a>
+
+
+
+
+
+
 <?php 
 
-if(isset($_POST['submit']))
-{
-	echo "<pre>";
-	print_r($_FILES);
-   
-   if(!empty( $_FILES["file"]["name"] ) ){
-   	echo "yes ";
-   }
-   else{
-   	echo "no";
-   }
 
-}
+	$mm="<script>document.write(catid);</script>";
+   echo $mm;
+
 
 
 
  ?>
-
-
-<form method="post" enctype="multipart/form-data">
-
-	 <input type="file" name="file">
-	 <input type="submit" name="submit" value="upload">
-</form>

@@ -1,9 +1,12 @@
 <?php
 
 session_start();
-include ('database.inc.php');
-include ('function.inc.php');
-include ('constants.inc.php');
+
+
+
+include ('../include/database.inc.php');
+include ('../include/function.inc.php');
+include ('../include/constants.inc.php');
 
 //if user not logged in and try to access admin panel then redirect it to login
 if(!isset($_SESSION['admin_login'])){

@@ -2,7 +2,7 @@
 
 include ('top.php');
 
-$sql="select meals.*, subscriptions.subscriptionName from meals,subscriptions  where meals.mealSubscription=subscriptions.id ";
+$sql="select meals.*, subscriptions.subscriptionName,category.name from meals,subscriptions,category  where meals.mealSubscription=subscriptions.id and meals.mealType=category.id";
 $res=mysqli_query($con,$sql);
 
 ?>
@@ -17,11 +17,12 @@ $res=mysqli_query($con,$sql);
 
 				<div class="container table-responsive">
 
-					<table class="table table-striped table-bordered table-hover  table-sm pt-3" id="dttable">
+					<table class="table table-striped   table-hover  table-sm pt-3" id="dttable">
 					<thead class="table-primary">
 						<tr>
 
 						<th scope="col">Sr No.</th>
+						<th scope="col">Name</th>
 						<th scope="col">Description</th>
 						<th scope="col">Photo</th>
 						<th scope="col">Price</th>
@@ -43,13 +44,14 @@ $res=mysqli_query($con,$sql);
 						
 						<tr>
 						<td scope="col"> <?php  echo $i; ?></td>
-						<td scope="col"> <?php  echo $row['mealDesc']; ?></td>
-						<td scope="col" width="10%"> <a target="_blank" href="<?php  echo SITE_MENU_IMAGE.$row['mealPhoto']; ?>"> <img class="img-fluid" src="<?php  echo SITE_MENU_IMAGE.$row['mealPhoto']; ?>" > </a> </td>
+						<td scope="col" > <?php  echo $row['mealName']; ?></td>
+						<td scope="col" > <?php  echo $row['mealDesc']; ?></td>
+						<td scope="col" > <a target="_blank" href="<?php  echo SITE_MENU_IMAGE.$row['mealPhoto']; ?>"> <img class="img-fluid" src="<?php  echo SITE_MENU_IMAGE.$row['mealPhoto']; ?>" > </a> </td>
 
-						<td scope="col"> <?php  echo $row['mealPrice']; ?></td>
-						<td scope="col"> <?php  echo $row['mealType']; ?></td>
+						<td scope="col" > <?php  echo $row['mealPrice']; ?></td>
+						<td scope="col" > <?php  echo $row['name']; ?></td>
 						<td scope="col"> <?php  echo $row['subscriptionName']; ?></td>
-						<td scope="col" width="30%">
+						<td scope="col" >
 
 							<a href="pages-addMealPlans.php?id=<?php echo $row['id']; ?>"> <button class="btn btn-success btn-sm">Edit</button> </a>
 							
@@ -83,9 +85,6 @@ $res=mysqli_query($con,$sql);
 
 
 				</div>
-
-
-
 					
 				</div>
 			</main>
