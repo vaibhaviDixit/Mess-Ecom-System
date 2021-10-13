@@ -39,7 +39,7 @@ include ('top.php');
 						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>
-						<td scope="col"> <button class="orderBtn pendingBtn" >Pending</button> </td>
+						<td scope="col"> <span class="badge rounded-pill bg-warning text-dark">Pending</span> </td>
 
 						</tr>
 
@@ -51,7 +51,7 @@ include ('top.php');
 						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>
-						<td scope="col"> <button class="orderBtn deliveredBtn" >Delivered</button> </td>
+						<td scope="col"> <span class="badge rounded-pill bg-success">Delivered</span> </td>
 
 						</tr>
 
@@ -63,7 +63,7 @@ include ('top.php');
 						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>
 						<td scope="col">xyz</td>
-						<td scope="col"> <button class=" orderBtn cancelledBtn" >Cancelled</button> </td>
+						<td scope="col"> <span class="badge rounded-pill bg-danger">Cancelled</span> </td>
 
 						</tr>
 

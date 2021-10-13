@@ -117,7 +117,7 @@ header .icons a{
 
 header .icons i:hover,
 header .icons a:hover{
-    color:#fff !important;
+    color:#fff ;
     background: var(--green);
     transform: rotate(360deg);
 }
@@ -249,12 +249,10 @@ header .icons #menu-bars{
     margin: 0 1rem;
 }
 
-.quantity input{
-    border: 1px solid #ccc;
-}
 .quantity span{
     cursor: pointer;
 }
+
 .box .eyeClick .fa-times{
     position: absolute;
     right: 0;
@@ -765,6 +763,33 @@ header .icons #menu-bars{
 
 }
 
+.addToCartSuccess{
+    position: absolute; 
+    font-weight: bold;
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    z-index: 999;
+    display: none;
+}
+#cartItems{
+
+    position: absolute;
+    top: -25%;
+    right: -14%;
+    background: var(--green);
+    color: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 13px;
+    padding: 5px;
+    line-height: 16px;
+
+}
+
+
 .categories  a{
     color: black  !important;
 
@@ -779,13 +804,37 @@ header .icons #menu-bars{
     background: #079b07 !important;
 }
 
+.userModal{
+    position: absolute;
+    right: 3rem;
+    margin: 1rem 0;
+}
+.userModal a{
+    background: none !important;
+    color: black !important;
+    
+}
 
+.userModal li{
+    cursor: pointer;
+}
+.userModal li:hover,.userModal li:hover a{
+    background-color: #eeeeee;
+    transform: none !important;
+    color: var(--green) !important;
+}
+.rateMsg .form-control{
+  color: #f9fbfd !important;
+   background-color: rgb(25 25 40) !important;
+   border-radius: 15px;
+   
+}
+.rateMsg .form-control:focus{
+    border-color:#f4f4f5  !important; 
+    outline: 0 !important;
+    box-shadow: 0 0 0 0.25rem rgb(13 14 14 / 95%) !important;
 
-
-
-
-
-
+}
 
 
 /* media queries  */

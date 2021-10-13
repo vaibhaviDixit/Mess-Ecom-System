@@ -39,12 +39,20 @@ if (isset($_POST['submit'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<title>Admin</title>
+ 	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mess Website</title>
 
-	<link href="css/app.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<!-- custom css file link  -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link  -->
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	
 </head>
 
@@ -67,13 +75,13 @@ if (isset($_POST['submit'])) {
 								<div class="m-sm-4">
 									<form method="post">
 										<span class="text-danger"><?php echo $msg; ?></span>
-										<div class="mb-3">
-											<label class="form-label">Email</label>
-											<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" required autocomplete="off" />
+										<div class="mb-3 ">
+											<label class="form-label fs-5">Email</label>
+											<input class="form-control form-control-sm" type="email" name="email" placeholder="Enter your email" required autocomplete="off" />
 										</div>
 										<div class="mb-3">
-											<label class="form-label">Password</label>
-											<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter your password" required autocomplete="off" />
+											<label class="form-label fs-5">Password</label>
+											<input class="form-control form-control-sm" type="password" name="password" placeholder="Enter your password" required autocomplete="off" />
 											<small>
 									            <a href="index.html">Forgot password?</a>
 									        </small>

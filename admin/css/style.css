@@ -4,28 +4,11 @@
 a{
 	text-decoration: none !important;
 }
-table .orderBtn{
-	border: none;
-    border-radius: 6px;
-    color: white;
-    font-weight: bold;
-    font-size: 0.5rem;
-}
+
 *{
     font-size: 98%;
 }
-table .pendingBtn{
 
-    background: yellow !important;
-}
-
-table .deliveredBtn{
-	background: green !important;
-}
-
-table .cancelledBtn{
-	background: red !important;
-}
 .card .social>a{
 	    color: #e8eef3;
     background: #07124e;

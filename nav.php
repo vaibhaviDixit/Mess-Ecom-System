@@ -6,6 +6,29 @@ include ('include/function.inc.php');
 include ('include/constants.inc.php');
 
 
+$cart_array=array();
+if(isset($_SESSION['CURRENT_USER'])){
+  //get cart of user from database
+  $getUserCart=getUserCart();
+
+  foreach ($getUserCart as $key => $value) {
+   $cart_array[]= array(
+        'id'=>$value['menuId'],
+        'qty'=>$value['qty'],
+        'mealType'=>$value['menuType']
+
+      );
+  }
+  printArray($getUserCart);
+  die();
+}
+else{
+  //get cart from session
+  printArray($_SESSION['cart']);
+  die();
+}
+
+
 ?>
 
 
@@ -51,7 +74,9 @@ include ('include/constants.inc.php');
         <i class="fas fa-bars" id="menu-bars"></i>
         <i class="fas fa-search" id="search-icon"></i>
         <a href="favourites.php" class="fas fa-heart"></a>
-        <a href="cart.php" class="fas fa-shopping-cart"></a>
+        <a href="cart.php" class="fas fa-shopping-cart" style="position: relative;"><span id="cartItems"><?php
+          echo count($_SESSION['cart']);
+        ?></span></a>
         <?php 
 
             if(isset($_SESSION['CURRENT_USER'])){
@@ -60,6 +85,16 @@ include ('include/constants.inc.php');
 
             
         <a class="fas fa-user" href="user.php" ></a>
+
+        <div class="userModal">
+          <div class="card">
+             <ul class="list-group list-group-flush">
+              <li class="list-group-item">  <a href=""> Profile</a></li>
+              <li class="list-group-item"> <a href="logout.php"> Logout</a></li>
+            </ul>
+
+          </div>
+        </div>
   
 
              <!--  <a tabindex="0" class=" fas fa-user" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-content="And here's some amazing content. It's very engaging. Right?"></a> -->
@@ -145,9 +180,10 @@ include ('include/constants.inc.php');
                     <input type="password" class="form-control" id="regpass1" name="regpass1" autocomplete="off">
                   </div>
                   <div class="mb-3">
-                    <label for="regpass2" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="regpass2"  autocomplete="off">
+                    <label for="OTP" class="form-label">Enter OTP</label>
+                    <input type="text" class="form-control" id="OTP"  autocomplete="off">
                   </div>
+                   <input type="text" class="form-control" name="type" value="register" hidden>
                   <button type="submit" class="custombtn"  onclick="return regValidation()" >Register</button>
                 </form>
 

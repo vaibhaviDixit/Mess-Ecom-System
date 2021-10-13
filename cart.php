@@ -3,6 +3,7 @@
 
         include 'nav.php';
 
+
     ?>
     <!-- nav ends -->
 <!-- home section starts  -->
@@ -18,14 +19,28 @@
 
         <div class="products">
             
-            <div class="product">
-                <img src="images/menu-3.jpg" alt="" class="img-fluid">
+
+            <?php
+                if(isset($_SESSION['cart'])){
+
+                    foreach ($_SESSION['cart'] as $key => $value) {
+                    
+                    
+                    if($value['mealType']=="meal"){
+                        $id=$value['id'];
+                         $mealsSql="select * from meals where id='$id'";
+                         $meals=mysqli_query($con,$mealsSql);
+                         while ($meals_row=mysqli_fetch_assoc($meals) ){
+                            ?>
+
+                             <div class="product">
+                <img src="<?php echo SITE_MENU_IMAGE.$meals_row['mealPhoto'];  ?>" alt="" class="img-fluid">
                 <div class="product-info">
-                    <h3 class="product-name">Pohe</h3>
-                    <h2 class="product-price">&#8377;60</h2>
+                    <h3 class="product-name"><?php echo $meals_row['mealName'];  ?></h3>
+                    <h2 class="product-price">&#8377;<?php echo $meals_row['mealPrice'];  ?></h2>
                      <div class="quantity">
                                 <span class="dec">-</span>
-                                <span class="qty-input" id="qty">1</span>
+                                <span class="qty-input" id="qty"><?php echo $value['qty'];  ?> </span>
                                 <span class="inc">+</span>
                      </div>
                      <p class="product-remove btn btn-danger">
@@ -35,14 +50,27 @@
 
                  </div>
             </div>
-            <div class="product">
-                <img src="images/menu-2.jpg" alt="" class="img-fluid">
+
+            <?php
+
+                         }
+                    }
+
+                    if($value['mealType']=="menu"){
+                        $id=$value['id'];
+                         $menuSql="select * from menu where id='$id'";
+                         $menu=mysqli_query($con,$menuSql);
+                         while ($menuRow=mysqli_fetch_assoc($menu) ){
+                            ?>
+
+                             <div class="product">
+                <img src="<?php echo SITE_MENU_IMAGE.$menuRow['menuPhoto'];  ?>" alt="" class="img-fluid">
                 <div class="product-info">
-                    <h3 class="product-name">Pohe</h3>
-                    <h2 class="product-price">&#8377;60</h2>
+                    <h3 class="product-name"><?php  echo $menuRow['menuName']; ?></h3>
+                    <h2 class="product-price">&#8377;<?php  echo $menuRow['menuPrice']; ?></h2>
                      <div class="quantity">
                                 <span class="dec">-</span>
-                                <span class="qty-input" id="qty">1</span>
+                                <span class="qty-input" id="qty"><?php echo $value['qty'];  ?></span>
                                 <span class="inc">+</span>
                      </div>
                      <p class="product-remove btn btn-danger">
@@ -52,23 +80,19 @@
 
                  </div>
             </div>
-            <div class="product">
-                <img src="images/menu-1.jpg" alt="" class="img-fluid">
-                <div class="product-info">
-                    <h3 class="product-name">Pohe</h3>
-                    <h2 class="product-price">&#8377;60</h2>
-                     <div class="quantity">
-                                <span class="dec">-</span>
-                                <span class="qty-input" id="qty">1</span>
-                                <span class="inc">+</span>
-                     </div>
-                     <p class="product-remove btn btn-danger">
-                         <i class="fa fa-trash"></i>
-                         <span>Remove</span>
-                     </p>
 
-                 </div>
-            </div>
+            <?php
+
+                         }
+                    }
+                }
+
+            }
+
+            ?>
+           
+           
+            
 
         </div>
         <div class="cart-total">

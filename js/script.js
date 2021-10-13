@@ -94,37 +94,10 @@ var swiper = new Swiper(".swiper", {
   loop:true,
 });
 
-// function loader(){
-//   document.querySelector('.loader-container').classList.add('fade-out');
-// }
-
-// function fadeOut(){
-//   setInterval(loader, 3000);
-// }
-
-// window.onload = fadeOut;
-
-
-
-// add to cart
-
-// var data=0;
-// document.querySelector('.qty-input').innerText=data;
-// document.querySelector('.inc').onclick = () =>{
-//   data=data+1;
-//   document.querySelector('.qty-input').innerText=data;
-// }
-// document.querySelector('.dec').onclick = () =>{
-//   data=data-1;
-//   document.querySelector('.qty-input').innerText=data;
-// }
-
-
- $(document).ready(function () {
 
 
       // quantity increment decrement
-        $('.inc').click(function (e) {
+        $("body").on("click",".inc",function(e){
             e.preventDefault();
             var incre_value = $(this).parents('.quantity').find('.qty-input').text();
             var value = parseInt(incre_value, 10);
@@ -136,7 +109,7 @@ var swiper = new Swiper(".swiper", {
 
         });
 
-        $('.dec').click(function (e) {
+       $("body").on("click",".dec",function(e){
             e.preventDefault();
             var decre_value = $(this).parents('.quantity').find('.qty-input').text();
             var value = parseInt(decre_value, 10);
@@ -149,27 +122,16 @@ var swiper = new Swiper(".swiper", {
 
 
 
-
-    });
-
-// document.querySelector('.desc').onclick = () =>{
-//   document.querySelector('.eyeClick').style.right='0';
-// }
-
-// document.querySelector('.remove').onclick = () =>{
-//   document.querySelector('.eyeClick').style.right='-1500px';
-// }
-
 $("body").on("click",".desc",function(){
   // var a=$(this).closest('.box');
   var a=$(this).parents('.box');
-  $(a).find(".eyeClick").show();
+  $(a).find(".eyeClick").show(500);
 
 });
 
 $("body").on("click",".remove",function(){
   var a=$(this).closest('.box');
-  $(a).find(".eyeClick").hide();
+  $(a).find(".eyeClick").hide(500);
 
 });
 
@@ -219,7 +181,6 @@ function regValidation(){
   var email=document.getElementById('regemail').value;
   var phone=document.getElementById('regphone').value;
   var pass1=document.getElementById('regpass1').value;
-  var pass2=document.getElementById('regpass2').value;
 
 
   if(name==""){
@@ -253,15 +214,12 @@ function regValidation(){
      document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" >Mobile no. must be 10 digit</div>';
       return false;
   }
-  if(pass1=="" || pass2==""){
+  if(pass1==""){
     document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" > Please fill the password</div>';
     return false;
   }
 
-  if(pass1!=pass2){
-    document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" > Password not matching</div>';
-    return false;
-  }
+
   
   if(pass1.length<=2 || pass1.length>=20){
      document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" > Password must be between 3 and 20 characters</div>';
@@ -291,9 +249,12 @@ jQuery('#userRegister').on('submit',function(e){
     success:function(result){
 
         msg=jQuery.parseJSON(result);
+        
         if(msg.status=="error"){
           jQuery("#validation").html("<div class='alert alert-danger' role='alert' >"+msg.message+"</div>");
-        } 
+        }else{
+
+        }
                 
     }
 
@@ -305,8 +266,61 @@ e.preventDefault();
 
 
 
-//
+//fetch category wise meals
+$(document).on("click",".fetchMeals",function(){
+  var catId=$(this).data("id");
+  $(".categories").children().removeClass(" activeCate active ");
 
+  $(this).addClass(" activeCate active ");
+  // alert(catId);
+
+  jQuery.ajax({
+    url:'fetchMeals.php',
+    type:'post',
+    data:{id : catId},
+    success:function(result){
+        // console.log(result);
+        $(".displayMeals").html(result);
+    }
+
+  });
+
+
+
+});
+
+  
+
+//cart
+
+function addCartMeals(mealId,mealType,operation) {
+
+  qty=$("#"+mealType+"Qty"+mealId).text();
+
+   jQuery.ajax({
+    url:'addCart.php',
+    type:'post',
+    data:{id : mealId,qty:qty,mealType:mealType,operation:operation},
+    success:function(result){
+      setTimeout(function() {
+        $(".addToCartSuccess").fadeIn(200);
+      }, 200);
+
+      setTimeout(function() {
+        $(".addToCartSuccess").fadeOut(200);
+      }, 1000);
+
+    }
+
+  });
+
+
+}
+
+
+
+
+ 
 
 
 

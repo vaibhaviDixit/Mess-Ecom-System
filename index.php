@@ -59,6 +59,10 @@
   
 <!-- home section ends -->
 
+<div class="alert alert-success w-20 addToCartSuccess" role="alert" >
+Added to cart successfully!
+</div>
+
 <!-- dishes section starts  -->
 
 <section class="dishes" id="">
@@ -67,14 +71,22 @@
     <h1 class="heading"> Delicious Dishes </h1>
 
     <div class="box-container">
+
+            <?php
+                    //select menu items
+                    $menuSql="select * from menu where status=1";
+                    $menuItems=mysqli_query($con,$menuSql);
+                    while($menuRow=mysqli_fetch_assoc($menuItems)){
+
+           ?>
         
 
 
             <div class="box">
             <a  class="fas fa-heart"></a>
             <a  class="fas fa-eye desc" ></a>
-            <img src="images/dish-2.png" alt="">
-            <h3>tasty food</h3>
+            <img src="<?php echo SITE_MENU_IMAGE.$menuRow['menuPhoto'];  ?>" alt="">
+            <h3><?php  echo $menuRow['menuName']; ?></h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -82,153 +94,23 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star-half-alt"></i>
             </div>
-            <span>&#8377;150</span>
+            <span>&#8377;<?php  echo $menuRow['menuPrice']; ?></span>
              <div class="quantity">
                    <span class="dec">-</span>
-                   <span class="qty-input" id="qty">1</span>
+                   <span class="qty-input" id="menuQty<?php  echo $menuRow['id']; ?>">1</span>
                    <span class="inc">+</span>
             </div>
-            <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+            <a href="javascript:void(0)" class="custombtn addCart"  onclick="addCartMeals(<?php  echo $menuRow['id']; ?>,'menu','add')"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
 
             <div class="eyeClick">
                 <a  class="fas fa-times remove"></a>
-                <p>
-                     BootstrapDesigned and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.Bootstrap
-                    Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.Bootstrap
-                    Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.
-                
-
-                </p>
+                <p> <?php  echo $menuRow['menuDesc']; ?> </p>
 
             </div>
         
           </div>
+          <?php  } ?>
 
-  <div class="box">
-            <a  class="fas fa-heart"></a>
-            <a  class="fas fa-eye desc" ></a>
-            <img src="images/dish-2.png" alt="">
-            <h3>tasty food</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <span>&#8377;150</span>
-             <div class="quantity">
-                   <span class="dec">-</span>
-                   <span class="qty-input" id="qty">1</span>
-                   <span class="inc">+</span>
-            </div>
-            <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i>  Add to Cart</a>
-
-            <div class="eyeClick">
-                <a  class="fas fa-times remove"></a>
-                <p>
-                     BootstrapDesigned and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.Bootstrap
-                    Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.Bootstrap
-                    Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.
-                
-
-                </p>
-
-            </div>
-        
-          </div>
-
-  <div class="box">
-            <a  class="fas fa-heart"></a>
-            <a  class="fas fa-eye desc" ></a>
-            <img src="images/dish-2.png" alt="">
-            <h3>tasty food</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <span>&#8377;150</span>
-             <div class="quantity">
-                    <span class="dec">-</span>
-                   <span class="qty-input" id="qty">1</span>
-                   <span class="inc">+</span>
-            </div>
-            <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i>  Add to Cart</a>
-
-            <div class="eyeClick">
-                <a  class="fas fa-times remove"></a>
-                <p>
-                     BootstrapDesigned and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.Bootstrap
-                    Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.Bootstrap
-                    Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.
-                
-
-                </p>
-
-            </div>
-        
-          </div>
-
-  <div class="box">
-            <a  class="fas fa-heart"></a>
-            <a  class="fas fa-eye desc" ></a>
-            <img src="images/dish-2.png" alt="">
-            <h3>tasty food</h3>
-            <div class="stars">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star-half-alt"></i>
-            </div>
-            <span>&#8377;150</span>
-             <div class="quantity">
-                    <span class="dec">-</span>
-                   <span class="qty-input" id="qty">1</span>
-                   <span class="inc">+</span>
-            </div>
-            <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i>  Add to Cart</a>
-
-            <div class="eyeClick">
-                <a  class="fas fa-times remove"></a>
-                <p>
-                     BootstrapDesigned and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.Bootstrap
-                    Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.Bootstrap
-                    Designed and built with all the love in the world by the Bootstrap team with the help of our contributors.
-                    Code licensed MIT, docs CC BY 3.0.
-                    Currently v5.0.2.
-                
-
-                </p>
-
-            </div>
-        
-          </div>
 
 
 
@@ -251,18 +133,10 @@
 
     <div class="container-fluid row">
 
-          <?php
-
-                    $mealsSql="select meals.*, subscriptions.subscriptionName from meals,subscriptions where meals.mealSubscription=subscriptions.id ";
-                     $cat_id="";
-                    if(isset($_GET['cat_id']) && $_GET['cat_id']>0){
-                        $cat_id=getSafeVal($_GET['cat_id']);
-                        $mealsSql.=" and meals.mealType='$cat_id' ";
-                    }
-                    $meals=mysqli_query($con,$mealsSql);
-                ?>
+         
         
             <?php
+                //select all active categories 
                 $cate=mysqli_query($con,"select * from category where status=1");
             ?>
             <div class="col-md-3 fs-2">
@@ -273,12 +147,11 @@
                     <?php
                     while ($cate_row=mysqli_fetch_assoc($cate) ) {
                         $class='list-group-item d-flex justify-content-between align-items-start list-group-item-action ';
-                        if($cat_id==$cate_row['id']){
-                            $class.=' activeCate active';
-                        }
                         $categoryId=$cate_row['id'];
+                        //get number of items in  particular category
                         $num=mysqli_num_rows(mysqli_query($con,"select * from meals where meals.mealType='$categoryId'"));
-                        echo "<a href='?cat_id=".$cate_row['id']."' class='".$class."'>".$cate_row['name']." <div><span class='badge bg-primary rounded-pill'>".$num."</span></div> </a> ";
+
+                        echo "<a href='javascript:void(0)' class='fetchMeals ".$class."' data-id='".$cate_row['id']."'>".$cate_row['name']." <div><span class='badge bg-primary rounded-pill'>".$num."</span></div> </a> ";
                        
                         
                     }
@@ -288,10 +161,14 @@
             </div>
 
             <!-- Tab panes -->
-            <div class="tab-content col-md-9">
-              
-              <div class="tab-pane container active" >
+            <div class="tab-content col-md-9 displayMeals">
 
+                    <?php
+
+                             $mealsSql="select meals.*, subscriptions.subscriptionName from meals,subscriptions where meals.mealSubscription=subscriptions.id ";
+                            $meals=mysqli_query($con,$mealsSql);
+                    ?>
+              
                     <div class="box-container">
 
                         <?php
@@ -316,10 +193,10 @@
                                 <span class="price">&#8377; <?php echo $meals_row['mealPrice'];  ?></span>
                                 <div class="quantity">
                                        <span class="dec">-</span>
-                                       <span class="qty-input" id="qty">1</span>
+                                       <span class="qty-input" id="mealQty<?php echo $meals_row['id']; ?>">1</span>
                                        <span class="inc">+</span>
                                 </div>
-                                <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i>  Add to Cart</a>
+                                <a href="javascript:void(0)" class="custombtn addCart" onclick="addCartMeals(<?php echo $meals_row['id']; ?>,'meal','add')"><i class="fas fa-shopping-cart"></i>  Add to Cart</a>
 
                             </div>
 
@@ -338,7 +215,6 @@
 
 
                     </div>
-              </div>
 
             </div>
 
@@ -556,16 +432,7 @@
 
 <!-- offers & deals ends-->
 
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Dropdown button
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
+
 
 
 
