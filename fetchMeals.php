@@ -24,8 +24,8 @@ $output="";
                         $output.='<div class="box">
                             <div class="image">
                                 <img src="'.SITE_MENU_IMAGE.$meals_row['mealPhoto'].'" alt="">
-                                <a  class="fas fa-eye desc"></a>
-                                <a href="#" class="fas fa-heart"></a>
+                                <a  href="javascript:void(0)" class="fas fa-eye desc"></a>
+                                <a href="javascript:void(0)" class="fas fa-heart" onclick="addToFav('.$meals_row['id'].',`meal`,`add`)"></a>
                             </div>
                             <div class="content">
                                 <div class="stars">

@@ -45,8 +45,63 @@ if($operation=="add"){
 
 		
 	}
+	$totalItems=count(getFullCart());
+	$arr=array('totalItems'=>$totalItems);
+	echo json_encode($arr);
 }
 
+if($operation=="updateCartAdd" || $operation=="updateCartRemove"){
+	if(isset($_SESSION['CURRENT_USER'])){
+		//user is logged in
+		$uid=$_SESSION['CURRENT_USER'];
+		manageCart($uid,$mealType,$mealId,$qty);
+		
+
+	}
+	else{
+		//user is not logged in
+		
+			foreach ($_SESSION['cart'] as $key => $value) {
+				if($value['id']==$mealId && $value['mealType']==$mealType){
+					$_SESSION['cart'][$key]['qty']=intval($qty);
+
+				}
+			}
+
+
+		
+		
+	}
+}
+
+
+
+if($operation=="remove"){
+
+	if(isset($_SESSION['CURRENT_USER'])){
+		//user is logged in
+		$uid=$_SESSION['CURRENT_USER'];
+
+		mysqli_query($con,"delete from cart where userId='$uid' and menuType='$mealType' and menuId='$mealId' ");
+		
+
+	}
+	else{
+		//user is not logged in
+
+			foreach ($_SESSION['cart'] as $key => $value) {
+				if($value['id']==$mealId && $value['mealType']==$mealType){
+					unset($_SESSION['cart'][$key]);
+
+				}
+			}
+
+		
+	}
+	$arr=array('action'=>'remove');
+	echo json_encode($arr);
+
+}
 
 
 ?>

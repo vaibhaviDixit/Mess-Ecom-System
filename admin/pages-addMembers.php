@@ -227,7 +227,7 @@ $res_subscriptions=mysqli_query($con,"select * from subscriptions");
 				<div class="container-fluid p-0">
 
 					<div class="mb-3">
-						<h1 class="h3 d-inline align-middle">Add Members</h1>
+						<h1 class="h3 d-inline align-middle">Manage Members</h1>
 					</div>
 					<hr>
 					
@@ -251,9 +251,9 @@ $res_subscriptions=mysqli_query($con,"select * from subscriptions");
 							    	<label for="memberPhone" class="form-label">Member Phone<span class="redStar">*</span></label>
 							      <input type="text" class="form-control" id="memberPhone" name="memberPhone" required value="<?php echo $memberPhone; ?>">
 							    </div>
-							  </div>
+							</div>
 
-							  <div class="row">
+						<div class="row">
 							    <div class="col mb-3">
 							    	<label for="memberAddress" class="form-label">Member Address<span class="redStar">*</span></label>
 							      <textarea class="form-control" rows="3" id="memberAddress" name="memberAddress" required>

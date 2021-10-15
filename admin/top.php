@@ -138,6 +138,22 @@ if(!isset($_SESSION['admin_login'])){
 					</li>
 
 					<li class="sidebar-header">
+						Subscriptions
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-addSubscription.php">
+              <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Add Subscription</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-listSubscription.php">
+              <i class="align-middle" data-feather="map"></i> <span class="align-middle">List Subscription</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header">
 						Orders
 					</li>
 

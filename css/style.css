@@ -50,7 +50,7 @@ section:nth-child(even){
 .custombtn{
     margin: 1rem 0px;
     display: inline-block;
-    font-size: 1.5rem;
+    font-size: 2rem;
     color:#fff;
     background: var(--black);
     border-radius: .5rem;
@@ -713,6 +713,7 @@ header .icons #menu-bars{
     border: 1px solid #eee;
     position: relative;
     margin-bottom: 2rem;
+    align-items: center;
 }
 
 .cart .products .product:hover{
@@ -763,7 +764,7 @@ header .icons #menu-bars{
 
 }
 
-.addToCartSuccess{
+.successMsg{
     position: absolute; 
     font-weight: bold;
     top: 90%;
@@ -772,8 +773,15 @@ header .icons #menu-bars{
     position: fixed;
     z-index: 999;
     display: none;
+    background-color: black;
+    color: white;
+    border: none;
 }
-#cartItems{
+.successMsg .green-tick{
+    margin-right: 5px;
+    color: green;
+}
+.count{
 
     position: absolute;
     top: -25%;
@@ -799,10 +807,39 @@ header .icons #menu-bars{
     color: white !important;
      background-color: #063a52 !important;
     border-color:transparent !important;
-} 
+}
 .rounded-pill {
     background: #079b07 !important;
 }
+
+.tiffinSection{
+
+    border-bottom: 5px solid var(--green);
+
+}
+
+.tiffinSection a{
+    color: var(--black);
+    padding: 0.5rem 1rem;
+}
+.tiffinSection a:hover{
+    color: #f7f6f6 !important;
+    background: var(--green);
+    padding: 0.5rem 1rem;
+    border-start-start-radius: 10px;
+    border-end-end-radius: 10px;
+
+}
+
+.tiffinSection .activeCate{
+    color: #f7f6f6 !important;
+    background: var(--green);
+    padding: 0.5rem 1rem;
+    border-start-start-radius: 10px;
+    border-end-end-radius: 10px;
+
+}
+
 
 .userModal{
     position: absolute;

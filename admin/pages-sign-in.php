@@ -1,7 +1,7 @@
 <?php
 session_start();
-include ('../include/database.inc.php');
-include ('../include/function.inc.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/Mess Web/include/database.inc.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/Mess Web/include/function.inc.php');
 
 //check admin login credentials
 $msg="";

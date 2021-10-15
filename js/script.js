@@ -173,96 +173,10 @@ function ratings(e){
 
 //validation to register user
 
-function regValidation(){
-
-  
-
-  var name=document.getElementById('regname').value;
-  var email=document.getElementById('regemail').value;
-  var phone=document.getElementById('regphone').value;
-  var pass1=document.getElementById('regpass1').value;
-
-
-  if(name==""){
-    document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" >Please fill your name </div>';
-    return false;
-
-  }
-  if(name.length<5){
-    document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" >Name is too short</div>';
-    return false;
-
-  }
-  if(!isNaN(name)){
-     document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" >Only characters are allowed in name</div>';
-    return false;
-  }
-
-  if(email==""){
-    document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" > Please fill your email</div>';
-    return false;
-  }
-  if(phone==""){
-    document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" > Please fill your phone</div>';
-    return false;
-  }
-  if(isNaN(phone)){
-     document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" >Invalid mobile number</div>';
-     return false;
-  }
-  if(phone.length!=10){
-     document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" >Mobile no. must be 10 digit</div>';
-      return false;
-  }
-  if(pass1==""){
-    document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" > Please fill the password</div>';
-    return false;
-  }
-
-
-  
-  if(pass1.length<=2 || pass1.length>=20){
-     document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" > Password must be between 3 and 20 characters</div>';
-     return false;
-  }
-
-  
-  
-
-return true;
-
-
-
-
-}
 
 
 //user registration
 
-jQuery('#userRegister').on('submit',function(e){
-  
-   jQuery("#validation").html("");
-  jQuery.ajax({
-    url:'user_register.php',
-    type:'post',
-    data:jQuery('#userRegister').serialize(),
-    success:function(result){
-
-        msg=jQuery.parseJSON(result);
-        
-        if(msg.status=="error"){
-          jQuery("#validation").html("<div class='alert alert-danger' role='alert' >"+msg.message+"</div>");
-        }else{
-
-        }
-                
-    }
-
-
-  });
-
-e.preventDefault();
-});
 
 
 
@@ -289,6 +203,31 @@ $(document).on("click",".fetchMeals",function(){
 
 });
 
+
+$('.tiffinSection a:first-child').addClass(' activeCate active ');
+
+$(document).on("click",".fetchTiffins",function(){
+  var subId=$(this).data("id");
+  
+  $(".tiffinSection").children().removeClass(" activeCate active ");
+
+  $(this).addClass(" activeCate active ");
+
+
+  jQuery.ajax({
+    url:'fetchTiffins.php',
+    type:'post',
+    data:{id : subId},
+    success:function(result){
+        // console.log(result);
+        $(".displayTiffins").html(result);
+    }
+
+  });
+
+
+});
+
   
 
 //cart
@@ -297,30 +236,81 @@ function addCartMeals(mealId,mealType,operation) {
 
   qty=$("#"+mealType+"Qty"+mealId).text();
 
+  if(operation=="updateCartAdd"){
+
+    q=$("#"+mealType+"QtyUpdate"+mealId).text();
+    qty=parseInt(q)+1;
+    
+  
+
+  }
+  if(operation=="updateCartRemove"){
+
+    q=$("#"+mealType+"QtyUpdate"+mealId).text();
+    qty=parseInt(q)-1;
+   
+  
+  }
+
    jQuery.ajax({
     url:'addCart.php',
     type:'post',
     data:{id : mealId,qty:qty,mealType:mealType,operation:operation},
     success:function(result){
+         
+
+      msg=jQuery.parseJSON(result);
+      if(msg.action=="remove"){
+          window.location.href="cart.php";
+      }
+
+      $("#cartItems").html(msg.totalItems);
+
       setTimeout(function() {
-        $(".addToCartSuccess").fadeIn(200);
+        $("#addToCartSuccess").fadeIn(200);
       }, 200);
 
       setTimeout(function() {
-        $(".addToCartSuccess").fadeOut(200);
+        $("#addToCartSuccess").fadeOut(200);
       }, 1000);
 
     }
 
   });
 
-
 }
 
 
+function addToFav(mealId,mealType,operation){
 
 
- 
+   jQuery.ajax({
+    url:'addToFav.php',
+    type:'post',
+    data:{id : mealId,mealType:mealType,operation:operation},
+    success:function(result){
+         
+
+      msg=jQuery.parseJSON(result);
+      if(msg.action=="remove"){
+          window.location.href="favourites.php";
+      }
+
+      $("#favItems").html(msg.totalItems);
+
+      setTimeout(function() {
+        $("#addToFavSuccess").fadeIn(200);
+      }, 200);
+
+      setTimeout(function() {
+        $("#addToFavSuccess").fadeOut(200);
+      }, 1000);
+
+    }
+
+  });
+
+}
 
 
 

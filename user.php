@@ -4,13 +4,19 @@
 
         include 'nav.php';
 
+        //if user not logged in and try to access user panel then redirect it to login
+
+        if(!isset($_SESSION['CURRENT_USER'])){
+          redirect('index.php');
+        }
+
+
     ?>
     <!-- nav ends -->
+
 <!-- user section starts  -->
 
-
 <div class="container-fluid mt-5 pt-5">
-
 
   <div class="user-profile mt-5 pt-5">
      

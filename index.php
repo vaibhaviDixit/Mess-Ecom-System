@@ -59,10 +59,6 @@
   
 <!-- home section ends -->
 
-<div class="alert alert-success w-20 addToCartSuccess" role="alert" >
-Added to cart successfully!
-</div>
-
 <!-- dishes section starts  -->
 
 <section class="dishes" id="">
@@ -83,7 +79,7 @@ Added to cart successfully!
 
 
             <div class="box">
-            <a  class="fas fa-heart"></a>
+            <a href="javascript:void(0)" class="fas fa-heart"  onclick="addToFav(<?php  echo $menuRow['id']; ?>,'menu','add')"></a>
             <a  class="fas fa-eye desc" ></a>
             <img src="<?php echo SITE_MENU_IMAGE.$menuRow['menuPhoto'];  ?>" alt="">
             <h3><?php  echo $menuRow['menuName']; ?></h3>
@@ -178,7 +174,7 @@ Added to cart successfully!
                             <div class="image">
                                 <img src="<?php echo SITE_MENU_IMAGE.$meals_row['mealPhoto'];  ?>" alt="">
                                 <a  class="fas fa-eye desc"></a>
-                                <a href="#" class="fas fa-heart"></a>
+                                <a href="javascript:void(0)" class="fas fa-heart" onclick="addToFav(<?php echo $meals_row['id']; ?>,'meal','add')"></a>
                             </div>
                             <div class="content">
                                 <div class="stars">
@@ -237,26 +233,38 @@ Added to cart successfully!
 
     <div class="container mx-auto mt-5" >
         
-        <nav class="fs-2 m-5">
-          <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="student-tab" data-bs-toggle="tab" data-bs-target="#student" type="button" role="tab" aria-controls="student" aria-selected="true">Student</button>
-            <button class="nav-link" id="classic-tab" data-bs-toggle="tab" data-bs-target="#classic" type="button" role="tab" aria-controls="classic" aria-selected="false">Classic</button>
-            <button class="nav-link" id="executive-tab" data-bs-toggle="tab" data-bs-target="#executive" type="button" role="tab" aria-controls="executive" aria-selected="false">Executive</button>
-          </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="student" role="tabpanel" aria-labelledby="student">
+        <div class="fs-2 m-5">
+            <div class="nav d-flex justify-content-center tiffinSection" >
 
-        <div class="container">
-              <div class="row">
+              <?php 
+                $tiffins=mysqli_query($con,"select * from subscriptions");
+                while($subRow=mysqli_fetch_assoc($tiffins)){
+              ?>
+
+              <a href="javascript:void(0)" data-id="<?php echo $subRow['id']; ?>" class="fetchTiffins" ><?php echo $subRow['subscriptionName']; ?></a>
+              <?php
+                 }
+               ?>
+
+            </div>
+       </div>
+
+    <div >
+
+        <div class="row displayTiffins">
+                          <?php 
+                $subs=mysqli_query($con,"select * from subscriptions");
+                $plans=mysqli_fetch_assoc($subs);
+
+                ?>
                 <div class="col-sm-4"> 
                     <div class="card">
                       <div class="card-header fs-2 fw-bold">
-                        Monthy Plan
+                        15 Days Plan
                       </div>
                       <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377; 0.0</h5>
-                        <p class="card-text fs-4">With supporting text below as a natural lead-in to additional content.</p>
+                        <h5 class="card-title fs-3 fw-bold">&#8377;<?php echo $plans['15Days']; ?></h5>
+                        <p class="card-text fs-4"><?php echo $plans['description']; ?></p>
                         <a href="#" class="custombtn">Subscribe</a>
                       </div>
                     </div>
@@ -268,8 +276,8 @@ Added to cart successfully!
                         Weekly Plan
                       </div>
                       <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377; 0.0</h5>
-                        <p class="card-text fs-4">With supporting text below as a natural lead-in to additional content.</p>
+                        <h5 class="card-title fs-3 fw-bold">&#8377;<?php echo $plans['weekly']; ?></h5>
+                        <p class="card-text fs-4"><?php echo $plans['description']; ?></p>
                         <a href="#" class="custombtn">Subscribe</a>
                       </div>
                     </div>
@@ -278,11 +286,11 @@ Added to cart successfully!
                 <div class="col-sm-4"> 
                     <div class="card">
                       <div class="card-header fs-2 fw-bold">
-                        15 Days Plan
+                       Monthy Plan
                       </div>
                       <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377; 0.0</h5>
-                        <p class="card-text fs-4">With supporting text below as a natural lead-in to additional content.</p>
+                        <h5 class="card-title fs-3 fw-bold">&#8377;<?php echo $plans['monthly']; ?></h5>
+                        <p class="card-text fs-4"><?php echo $plans['description']; ?></p>
                         <a href="#" class="custombtn">Subscribe</a>
                       </div>
                     </div>
@@ -290,16 +298,9 @@ Added to cart successfully!
 
                  
               
-              </div>
+              
         </div>
-            
-           
 
-
-
-      </div>
-      <div class="tab-pane fade" id="classic" role="tabpanel" aria-labelledby="classic-tab">classic</div>
-      <div class="tab-pane fade" id="executive" role="tabpanel" aria-labelledby="executive-tab">executive</div>
     </div>
 
     </div>
