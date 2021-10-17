@@ -177,6 +177,16 @@ function ratings(e){
 
 //user registration
 
+$(".user-icon").on("mouseover", function(){
+
+      $(".userModal").slideDown(300);
+});
+
+
+$(".userModal").on("click", function(){
+
+      $(".userModal").slideUp(300);
+});
 
 
 
@@ -195,6 +205,56 @@ $(document).on("click",".fetchMeals",function(){
     success:function(result){
         // console.log(result);
         $(".displayMeals").html(result);
+    }
+
+  });
+
+
+
+});
+
+//fetch category wise daily products
+$(document).on("click",".fetchProducts",function(){
+
+  var procatId=$(this).data("id");
+  // alert(procatId);
+  $(".proCate").children().removeClass(" activeCate active ");
+
+  $(this).addClass(" activeCate active ");
+  
+
+  jQuery.ajax({
+    url:'fetchProducts.php',
+    type:'post',
+    data:{id : procatId},
+    success:function(result){
+        // console.log(result);
+        $(".displayProducts").html(result);
+    }
+
+  });
+
+
+
+});
+
+//check user is logged in or not
+$(document).on("click",".subscribebtn",function(){
+
+
+  jQuery.ajax({
+    url:'checkLogin.php',
+    type:'post',
+    success:function(result){
+        let msg=jQuery.parseJSON(result);
+        console.log(result);
+
+        if(msg.login=="false" ){
+            swal("Login First!", "You are not logged in! Login to get Membership", "info");
+        }
+        if(msg.login=="true" ){
+          window.location.href="getMembership.php";
+        }
     }
 
   });
@@ -242,7 +302,6 @@ function addCartMeals(mealId,mealType,operation) {
     qty=parseInt(q)+1;
     
   
-
   }
   if(operation=="updateCartRemove"){
 
@@ -260,7 +319,8 @@ function addCartMeals(mealId,mealType,operation) {
          
 
       msg=jQuery.parseJSON(result);
-      if(msg.action=="remove"){
+
+      if(msg.action=="remove" || msg.action=="cartUpdate" ){
           window.location.href="cart.php";
       }
 

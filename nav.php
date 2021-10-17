@@ -58,7 +58,8 @@ $fav_count=count($fav_array);
         <i class="fas fa-bars" id="menu-bars"></i>
         <i class="fas fa-search" id="search-icon"></i>
         <a href="favourites.php" class="fas fa-heart" style="position: relative;"><span id="favItems" class="count"><?php echo $fav_count; ?></span></a>
-        <a href="cart.php" class="fas fa-shopping-cart" style="position: relative;"><span id="cartItems" class="count"><?php echo $count; ?></span></a>
+        <a href="cart.php" class="fas fa-shopping-cart" style="position: relative;"><span id="cartItems" class="count"><?php echo $count; ?></span>
+        </a>
 
         <?php 
 
@@ -67,17 +68,17 @@ $fav_count=count($fav_array);
                 ?>
 
             
-        <a class="fas fa-user" href="user.php" ></a>
-
+        <a class="fas fa-user user-icon" href="user.php" ></a>
         <div class="userModal">
           <div class="card">
              <ul class="list-group list-group-flush">
-              <li class="list-group-item">  <a href=""> Profile</a></li>
+              <li class="list-group-item">  <a href="user.php"> Profile</a></li>
               <li class="list-group-item"> <a href="logout.php"> Logout</a></li>
             </ul>
 
           </div>
         </div>
+
   
 
              <!--  <a tabindex="0" class=" fas fa-user" role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="Dismissible popover" data-bs-content="And here's some amazing content. It's very engaging. Right?"></a> -->
@@ -485,6 +486,8 @@ e.preventDefault();
       
         if(msg.status=="error"){
           jQuery("#loginMsg").html("<div class='alert alert-danger' role='alert' >"+msg.message+"</div>");
+          $(".round").removeClass(' spinner-border');
+           $("#loginBtn").attr("disabled",false);
         }
         if(msg.status=="success"){
           

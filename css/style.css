@@ -50,18 +50,43 @@ section:nth-child(even){
 .custombtn{
     margin: 1rem 0px;
     display: inline-block;
-    font-size: 2rem;
-    color:#fff;
+    font-size: 1.3rem;
+    color: #fff;
     background: var(--black);
     border-radius: .5rem;
     cursor: pointer;
-    padding:.8rem 3rem;
+    padding: .8rem 2rem;
 }
 
 .custombtn:hover{
     background: var(--green);
     color: white !important;
     
+}
+
+.subscribebtn{
+    border: 1px solid var(--black);
+    padding: 0.8rem 3rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 5px;
+    color: var(--black);
+}
+.subscribebtn:hover {
+    background-color: var(--black);
+    color: white;
+}
+
+ .displayTiffins .card .card-header{
+    background-color: #010d24;
+    color: white;
+}
+ .displayTiffins .card .card-body{
+    padding: 2rem 1rem;
+ }
+
+.subPrice{
+    font-size: 3rem;
 }
 
 header{
@@ -226,16 +251,16 @@ header .icons #menu-bars{
 
 .dishes .box-container{
     display: grid;
-    grid-template-columns: repeat(auto-fit,25rem);
+    grid-template-columns: repeat(auto-fit,20rem);
     justify-content: center;
     grid-gap:2rem;
 }
 
 .dishes .box-container .box{
-    padding:2rem;
-    background:#fff;
+    padding: 1.5rem;
+    background: #fff;
     border-radius: .5rem;
-    border:.1rem solid rgba(0,0,0,.2);
+    border: .1rem solid rgba(0,0,0,.2);
     box-shadow: var(--box-shadow);
     position: relative;
     overflow: hidden;
@@ -288,14 +313,14 @@ header .icons #menu-bars{
 .dishes .box-container .box .fa-heart,
 .dishes .box-container .box .fa-eye{
     position: absolute;
-    top:1.5rem;
-    background:#eee;
+    top: 1.5rem;
+    background: #eee;
     border-radius: 50%;
-    height: 5rem;
-    width:5rem;
-    line-height: 5rem;
-    font-size: 2rem;
-    color:var(--black);
+    height: 3rem;
+    width: 3rem;
+    line-height: 3rem;
+    font-size: 1.5rem;
+    color: var(--black);
     cursor: pointer;
 }
 
@@ -322,10 +347,10 @@ header .icons #menu-bars{
 }
 
 .dishes .box-container .box img{
-    max-width: 100%;
-    height:15rem;
-    margin:1rem 0;
+    height: 120px;
     width: 100%;
+    object-fit: contain;
+    margin-bottom: 1rem;
 }
 
 .dishes .box-container .box h3{
@@ -429,7 +454,7 @@ header .icons #menu-bars{
 .menu .box-container .box .image{
     height: 15rem;
     width: 100%;
-    padding:1.5rem;
+    padding:1rem;
     overflow: hidden;
     position: relative;
 }
@@ -470,7 +495,7 @@ header .icons #menu-bars{
 }
 
 .menu .box-container .box .content{
-    padding:1.5rem;
+    padding:1rem;
     padding-top: 0;
 }
 
@@ -798,12 +823,12 @@ header .icons #menu-bars{
 }
 
 
-.categories  a{
+.proCate a,.categories  a{
     color: black  !important;
 
 } 
 
-.categories .activeCate {
+.proCate .activeCate,.categories .activeCate {
     color: white !important;
      background-color: #063a52 !important;
     border-color:transparent !important;
@@ -843,6 +868,7 @@ header .icons #menu-bars{
 
 .userModal{
     position: absolute;
+    display: none;
     right: 3rem;
     margin: 1rem 0;
 }
@@ -854,6 +880,7 @@ header .icons #menu-bars{
 
 .userModal li{
     cursor: pointer;
+    padding: .1rem 1.5rem;
 }
 .userModal li:hover,.userModal li:hover a{
     background-color: #eeeeee;

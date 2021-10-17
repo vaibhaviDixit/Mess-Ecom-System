@@ -6,9 +6,17 @@
 
         //if user not logged in and try to access user panel then redirect it to login
 
+        $userDetails=array();
+
         if(!isset($_SESSION['CURRENT_USER'])){
           redirect('index.php');
         }
+        else{
+          $userDetails=getUserDetails();
+          
+        }
+
+
 
 
     ?>
@@ -23,9 +31,9 @@
      <div class="d-flex justify-content-evenly align-items-center">
          <img src="images/pic-2.png" class="img-thumbnail img-fluid rounded-circle" alt="...">
          <div>
-           <h3 class="fs-2">Nora </h3>
-         <h3 class="fs-4">9284552172</h3>
-         <h3 class="fs-4">nora@gmail.com</h3>
+           <h3 class="fs-2"><?php echo $userDetails['name']; ?></h3>
+         <h3 class="fs-4"><?php echo $userDetails['phone']; ?></h3>
+         <h3 class="fs-4"><?php echo $userDetails['email']; ?></h3>
          </div>
          <button  class="btn btn-success fs-5">Edit Profile</button>
          
@@ -38,6 +46,8 @@
      <div class="container-fluid activity-wrapper">
 
         <div class="container-fluid row user-history justify-content-between">
+
+
         
                     <!-- Nav tabs -->
             <div class="col-md-3 activities ">
@@ -49,6 +59,11 @@
               <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#Favourites"><i class="fas fa-heart"></i>Favourites</a>
               </li>
+
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#Favourites"><i class="fas fa-heart"></i>Subscriptions</a>
+              </li>
+
                  <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="tab" href="#Addresses"><i class="fas fa-map-marker-alt"></i>Addresses</a>
               </li>

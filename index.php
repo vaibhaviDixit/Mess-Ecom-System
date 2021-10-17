@@ -136,7 +136,7 @@
                 $cate=mysqli_query($con,"select * from category where status=1");
             ?>
             <div class="col-md-3 fs-2">
-            <form method="post">
+          
                <ul class="list-group categories">
                     <li class="list-group-item disabled" aria-disabled="true">Categories</li>
 
@@ -153,7 +153,7 @@
                     }
                     ?>
                 </ul>
-            </form>
+        
             </div>
 
             <!-- Tab panes -->
@@ -229,7 +229,7 @@
 
 
     <h3 class="sub-heading">Tiffins</h3>
-    <h1 class="heading">Subscription Plans</h1>
+    <h1 class="heading">Membership Plans</h1>
 
     <div class="container mx-auto mt-5" >
         
@@ -263,9 +263,10 @@
                         15 Days Plan
                       </div>
                       <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377;<?php echo $plans['15Days']; ?></h5>
+                        <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice"><?php echo $plans['15Days']; ?> </span></h5>
                         <p class="card-text fs-4"><?php echo $plans['description']; ?></p>
-                        <a href="#" class="custombtn">Subscribe</a>
+                    
+                        <a href="javascript:void(0)" class="subscribebtn ">Subscribe</a>
                       </div>
                     </div>
                 </div>
@@ -276,9 +277,9 @@
                         Weekly Plan
                       </div>
                       <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377;<?php echo $plans['weekly']; ?></h5>
+                        <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice"><?php echo $plans['weekly']; ?></span></h5>
                         <p class="card-text fs-4"><?php echo $plans['description']; ?></p>
-                        <a href="#" class="custombtn">Subscribe</a>
+                        <a href="javascript:void(0)" class="subscribebtn">Subscribe</a>
                       </div>
                     </div>
                 </div>
@@ -289,9 +290,9 @@
                        Monthy Plan
                       </div>
                       <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377;<?php echo $plans['monthly']; ?></h5>
+                        <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice"><?php echo $plans['monthly']; ?></span></h5>
                         <p class="card-text fs-4"><?php echo $plans['description']; ?></p>
-                        <a href="#" class="custombtn">Subscribe</a>
+                        <a href="javascript:void(0)" class="subscribebtn">Subscribe</a>
                       </div>
                     </div>
                 </div>
@@ -321,49 +322,74 @@
     <h3 class="sub-heading">Products</h3>
     <h1 class="heading">Daily Products</h1>
 
-    <div class="container mx-auto mt-5" >
+    <div class="container-fluid row" >
         
-        <nav class="fs-2 m-5">
-          <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="milk-tab" data-bs-toggle="tab" data-bs-target="#milk" type="button" role="tab" aria-controls="milk" aria-selected="true">Milk</button>
+        <?php
+                //select all active categories 
+                $procate=mysqli_query($con,"select * from dailycate where status=1");
+            ?>
+            <div class="col-md-3 fs-2">
+          
+               <ul class="list-group proCate">
+                    <li class="list-group-item disabled" aria-disabled="true">Categories</li>
 
-            <button class="nav-link" id="shrikhand-tab" data-bs-toggle="tab" data-bs-target="#shrikhand" type="button" role="tab" aria-controls="shrikhand" aria-selected="false">Shrikhand</button>
+                    <?php
+                    while ($proCateRow=mysqli_fetch_assoc($procate) ) {
+                        $class='list-group-item d-flex justify-content-between align-items-start list-group-item-action ';
+                        $cId=$proCateRow['id'];
+                        //get number of items in  particular category
+                        $numOfPro=mysqli_num_rows(mysqli_query($con,"select * from dailyproducts where dailyproducts.proCate='$cId'"));
 
-            <button class="nav-link" id="IceCream-tab" data-bs-toggle="tab" data-bs-target="#IceCream" type="button" role="tab" aria-controls="IceCream" aria-selected="false">IceCream</button>
-
-            <button class="nav-link" id="Paneer-tab" data-bs-toggle="tab" data-bs-target="#Paneer" type="button" role="tab" aria-controls="Paneer" aria-selected="false">Paneer</button>
-
-            <button class="nav-link" id="curd-tab" data-bs-toggle="tab" data-bs-target="#curd" type="button" role="tab" aria-controls="curd" aria-selected="false">Curd</button>
-          </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active dishes" id="milk" role="tabpanel" aria-labelledby="milk-tab">
-             <div class="box-container">
+                        echo "<a href='javascript:void(0)' class='fetchProducts ".$class."' data-id='".$proCateRow['id']."'>".$proCateRow['name']." <div><span class='badge bg-primary rounded-pill'>".$numOfPro."</span></div> </a> ";
+                       
+                        
+                    }
+                    ?>
+                </ul>
         
+            </div>
+ 
 
+    <div class="tab-content col-md-9 displayProducts dishes">
 
-                <div class="box">
-                <img src="images/dish-2.png" alt="">
-                <h3>Milk</h3>
-                <span>&#8377;50/Ltr</span>
-                 <div class="quantity">
-                       <span class="dec">-</span>
-                       <span class="qty-input" id="qty">1</span>
-                       <span class="inc">+</span>
-                </div>
-                <a href="#" class="custombtn addCart"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                    <?php
+
+                             $productsSql="select * from dailyproducts";
+                            $products=mysqli_query($con,$productsSql);
+                    ?>
+              
+                    <div class="box-container">
+
+                        <?php
+                            while ($products_row=mysqli_fetch_assoc($products) ) {
+                        ?>
+                        <div class="box">
+                          <img src="<?php echo SITE_MENU_IMAGE.$products_row['proPhoto'];  ?>" alt="">
+                          <h3><?php echo $products_row['proName'];  ?> </h3>
+                          <p class="fs-4"><?php echo $products_row['proDesc'];  ?></p>
+                          <span>&#8377;<?php echo $products_row['proPrice'];  ?></span>
+                          <div class="quantity">
+                                       <span class="dec">-</span>
+                                       <span class="qty-input" id="dailyQty<?php echo $products_row['id']; ?>">1</span>
+                                       <span class="inc">+</span>
+                          </div>
+                                <a href="javascript:void(0)" class="custombtn addCart" onclick="addCartMeals(<?php echo $products_row['id']; ?>,'daily','add')"><i class="fas fa-shopping-cart"></i>  Add to Cart</a>
+
+                      
             
-              </div>
-         </div>
+                       </div>
+
+                     <?php } ?>
+                     <!-- product card ends -->
+
+                    </div>
 
       </div>
-      <div class="tab-pane fade" id="shrikhand" role="tabpanel" aria-labelledby="shrikhand-tab">shrikhand</div>
-      <div class="tab-pane fade" id="IceCream" role="tabpanel" aria-labelledby="IceCream-tab">icecream</div>
-       <div class="tab-pane fade" id="Paneer" role="tabpanel" aria-labelledby="Paneer-tab">paneer</div>
-       <div class="tab-pane fade" id="curd" role="tabpanel" aria-labelledby="curd-tab">curd</div>
-    </div>
 
-    </div>
+
+  </div>
+
+
 
    
 </section>

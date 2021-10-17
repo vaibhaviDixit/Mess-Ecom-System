@@ -22,12 +22,7 @@ if(isset($_POST['login'])){
 		  $_SESSION['CURRENT_USER']=$row['id'];
 
 		   //when user login to account then its session cart will moved to database cart
-		  if (isset($_SESSION['cart']) && count($_SESSION['cart'])>0) {
-		  	foreach ($_SESSION['cart'] as $key => $value) {
-		  		//manageCart function add data to cart table in database
-		  		manageCart($_SESSION['CURRENT_USER'],$value['mealType'],$value['id'],$value['qty']);
-		  	}
-		  }
+		 
 
 		?>
        <script type="text/javascript">

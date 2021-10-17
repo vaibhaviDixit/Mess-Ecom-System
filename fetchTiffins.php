@@ -25,9 +25,9 @@ $output="";
                         15 Days Plan
                       </div>
                       <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377;'.$plans['15Days'].'</h5>
+                        <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice">'.$plans['15Days'].'</span></h5>
                         <p class="card-text fs-4">'.$plans['description'].'</p>
-                        <a href="#" class="custombtn">Subscribe</a>
+                        <a href="javascript:void(0)" class="subscribebtn">Subscribe</a>
                       </div>
                     </div>
                 </div>
@@ -38,9 +38,9 @@ $output="";
                         Weekly Plan
                       </div>
                       <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377;'.$plans['weekly'].'</h5>
+                        <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice">'.$plans['weekly'].'</span></h5>
                         <p class="card-text fs-4">'.$plans['description'].'</p>
-                        <a href="#" class="custombtn">Subscribe</a>
+                        <a href="javascript:void(0)" class="subscribebtn">Subscribe</a>
                       </div>
                     </div>
                 </div>
@@ -51,9 +51,9 @@ $output="";
                        Monthy Plan
                       </div>
                       <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377;'.$plans['monthly'].'</h5>
+                        <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice">'.$plans['monthly'].'</span></h5>
                         <p class="card-text fs-4">'.$plans['description'].'</p>
-                        <a href="#" class="custombtn">Subscribe</a>
+                        <a href="javascript:void(0)" class="subscribebtn">Subscribe</a>
                       </div>
                     </div>
                 </div>

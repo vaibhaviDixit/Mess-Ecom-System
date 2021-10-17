@@ -45,19 +45,44 @@ function manageCart($uid,$mealType,$mealId,$qty){
 
 	$res=mysqli_query($con,"select * from cart where userId='$uid' and menuType='$mealType' and menuId='$mealId' ");
 
+	$subtotal=getSubTotal($mealId,$mealType,$qty);
+
 		//if cart item already exists then annd it quantity
 		if(mysqli_num_rows($res)>0){
 			$row=mysqli_fetch_assoc($res);
 			$cid=$row['id'];
-			mysqli_query($con,"update cart set qty='$qty' where id='$cid' ");
+			mysqli_query($con,"update cart set qty='$qty',subtotal='$subtotal' where id='$cid' ");
 
 		}
 		else
 		{
 
-			mysqli_query($con,"insert into cart(userId, menuType, menuId, qty) VALUES ('$uid','$mealType','$mealId','$qty')");
+			mysqli_query($con,"insert into cart(userId, menuType, menuId, qty,subtotal) VALUES ('$uid','$mealType','$mealId','$qty','$subtotal')");
 		}
 
+}
+
+function getSubTotal($mealId,$mealType,$qty){
+   global $con;
+   
+	if($mealType=="meal"){
+		$getRow=mysqli_fetch_assoc(mysqli_query($con,"select * from meals where id='$mealId' "));
+		$getPrice=$getRow['mealPrice'];
+	}
+	if($mealType=="menu"){
+		$getRow=mysqli_fetch_assoc(mysqli_query($con,"select * from menu where id='$mealId' "));
+		$getPrice=$getRow['menuPrice'];
+	}
+	if($mealType=="daily"){
+		$getRow=mysqli_fetch_assoc(mysqli_query($con,"select * from dailyproducts where id='$mealId' "));
+		$getPrice=$getRow['proPrice'];
+	}
+	
+
+
+	$subtotal=intval($qty)*intval($getPrice);
+
+	return $subtotal;
 }
 
 
@@ -72,7 +97,8 @@ if(isset($_SESSION['CURRENT_USER'])){
    $cart_array[]= array(
         'id'=>$value['menuId'],
         'qty'=>$value['qty'],
-        'mealType'=>$value['menuType']
+        'mealType'=>$value['menuType'],
+        'subtotal'=>$value['subtotal']
 
       );
   }
@@ -143,6 +169,30 @@ else{
 
 }
 return $cart_array;
+
+}
+
+
+function getUserDetails(){
+
+	global $con;
+	$userDetails=array();
+
+		$uid=$_SESSION['CURRENT_USER'];
+
+		$res=mysqli_fetch_assoc(mysqli_query($con,"select * from user where id='$uid' "));
+		$name=$res['name'];
+		$email=$res['email'];
+		$phone=$res['phone'];
+
+		$userDetails= array(
+        'name'=>$name,
+        'email'=>$email,
+        'phone'=>$phone
+
+       );
+
+	return $userDetails;
 
 }
 

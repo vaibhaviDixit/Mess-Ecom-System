@@ -26,6 +26,8 @@ if($operation=="add"){
 			foreach ($_SESSION['cart'] as $key => $value) {
 				if($value['id']==$mealId && $value['mealType']==$mealType){
 					$_SESSION['cart'][$key]['qty']=intval($value['qty'])+intval($qty);
+					$subtotal=getSubTotal($mealId,$mealType,$_SESSION['cart'][$key]['qty']);
+					$_SESSION['cart'][$key]['subtotal']=$subtotal;
 					$update=true;
 
 				}
@@ -33,10 +35,13 @@ if($operation=="add"){
 
 	
 		if(!$update){
+			
+			$subtotal=getSubTotal($mealId,$mealType,$qty);
 			$_SESSION['cart'][]=array(
 				'id'=>$mealId,
 				'qty'=>$qty,
-				'mealType'=>$mealType
+				'mealType'=>$mealType,
+				'subtotal'=>$subtotal
 
 			);
 
@@ -64,14 +69,15 @@ if($operation=="updateCartAdd" || $operation=="updateCartRemove"){
 			foreach ($_SESSION['cart'] as $key => $value) {
 				if($value['id']==$mealId && $value['mealType']==$mealType){
 					$_SESSION['cart'][$key]['qty']=intval($qty);
+					$_SESSION['cart'][$key]['subtotal']=getSubTotal($mealId,$mealType,$qty);
 
 				}
 			}
-
-
-		
 		
 	}
+
+	$arr=array('action'=>'cartUpdate');
+	echo json_encode($arr);
 }
 
 

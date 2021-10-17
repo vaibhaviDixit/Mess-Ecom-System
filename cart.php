@@ -39,9 +39,9 @@
                                         <h3 class="product-name"><?php echo $meals_row['mealName'];  ?></h3>
                                         <h2 class="product-price">&#8377;<?php echo $meals_row['mealPrice'];  ?></h2>
                                          <div class="quantity">
-                                                    <span class="dec">-</span>
-                                                    <span class="qty-input" id="menuQtyUpdate<?php  echo $menuRow['id']; ?>" ><?php echo $value['qty'];  ?> </span>
-                                                    <span class="inc">+</span>
+                                                    <span class="dec" onclick="addCartMeals('<?php echo $id; ?>','meal','updateCartRemove')">-</span>
+                                                    <span class="qty-input" id="mealQtyUpdate<?php  echo $meals_row['id']; ?>" ><?php echo $value['qty'];  ?> </span>
+                                                    <span class="inc" onclick="addCartMeals('<?php echo $id; ?>','meal','updateCartAdd')" >+</span>
                                          </div>
 
                                        <button class="product-remove btn btn-danger" onclick="addCartMeals('<?php echo $id; ?>','meal','remove')" >
@@ -51,6 +51,41 @@
 
                                      </div>
                              </div>
+
+            <?php
+
+                         }
+                    }
+
+                    if($value['mealType']=="daily"){
+                        $id=$value['id'];
+                         $dailySql="select * from dailyproducts where id='$id'";
+                         $daily=mysqli_query($con,$dailySql);
+                         while ($dailyRow=mysqli_fetch_assoc($daily) ){
+                            ?>
+
+                             <div class="product">
+                                    <img src="<?php echo SITE_MENU_IMAGE.$dailyRow['proPhoto'];  ?>" alt="" class="img-fluid">
+                                    <div class="product-info">
+                                        <h3 class="product-name"><?php  echo $dailyRow['proName']; ?></h3>
+                                        <h2 class="product-price">&#8377;<?php  echo $dailyRow['proPrice']; ?></h2>
+                                         <div class="quantity">
+                                                    <span class="dec"  onclick="addCartMeals('<?php echo $id; ?>','daily','updateCartRemove')" >-</span>
+
+                                                    <span class="qty-input"  id="dailyQtyUpdate<?php  echo $dailyRow['id']; ?>" ><?php echo $value['qty'];  ?></span>
+
+                                                    <span class="inc"  onclick="addCartMeals('<?php echo $id; ?>','daily','updateCartAdd')" >+</span>
+                                         </div>
+                                         <button class="product-remove btn btn-danger" onclick="addCartMeals('<?php echo $id; ?>','daily','remove')">
+                                             <i class="fa fa-trash"></i>
+                                             Remove
+                                         </button>
+
+                                     </div>
+                             </div>
+
+    
+
 
             <?php
 
@@ -98,10 +133,21 @@
         
         <div class="cart-total">
             
-            <p fs-3>2 ITEMS</p>
+            <p class=" fs-2"><?php echo count($cart_array); ?> ITEMS</p>
             <p>
-                <span>Subtotal:</span>
-                <span>&#8377;60</span>
+                <div class="fs-3" >Grand Total:</div>
+                
+
+                <?php
+                    $val=0;
+                    foreach ($cart_array as $key => $value) {
+                        $val=$val+intval($value['subtotal']);
+                    }
+
+                    echo "<span class=''>&#8377;".$val."</span>";
+
+                ?>
+
             </p>
             <a href="" class="btn btn-success fs-4">Order</a>
 

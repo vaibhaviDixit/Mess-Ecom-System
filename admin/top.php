@@ -67,6 +67,7 @@ if(!isset($_SESSION['admin_login'])){
 					<li class="sidebar-header">
 						Members
 					</li>
+					
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-addMembers.php">
@@ -95,13 +96,25 @@ if(!isset($_SESSION['admin_login'])){
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-addCategory.php">
-              			<i class="align-middle" data-feather="square"></i> <span class="align-middle">Add Category</span>
+              			<i class="align-middle" data-feather="square"></i> <span class="align-middle">Add Meal Category</span>
             			</a>
 					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-listCategory.php">
-              <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Categories</span>
+              <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Meal Categories</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-addProCate.php">
+              			<i class="align-middle" data-feather="square"></i> <span class="align-middle">Add product Category</span>
+            			</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-listProCate.php">
+              <i class="align-middle" data-feather="check-square"></i> <span class="align-middle">Product Categories</span>
             </a>
 					</li>
 
@@ -134,6 +147,22 @@ if(!isset($_SESSION['admin_login'])){
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-listMealPlans.php">
               <i class="align-middle" data-feather="map"></i> <span class="align-middle">List Meals</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header">
+						Daily Products
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-addDailyPro.php">
+              <i class="align-middle" data-feather="bar-chart-2"></i> <span class="align-middle">Add product</span>
+            </a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="pages-listDailyPro.php">
+              <i class="align-middle" data-feather="map"></i> <span class="align-middle">List products</span>
             </a>
 					</li>
 
@@ -345,14 +374,10 @@ if(!isset($_SESSION['admin_login'])){
               </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">  <?php  echo $_SESSION['admin_name']; ?> </span>
-              </a>
+             					 <span class="text-dark">  <?php  echo $_SESSION['admin_name']; ?> </span>
+              				</a>
 							<div class="dropdown-menu dropdown-menu-end">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
+								<a class="dropdown-item" href="pages-profile.php"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="logout.php">Log out</a>
 							</div>
