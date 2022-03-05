@@ -1,0 +1,13 @@
+
+RewriteEngine On
+
+RewriteRule ^AddBanner/(.*)$ AddBanner.php?id=$1 [QSA]
+RewriteRule ^addSubscription/(.*)$ addSubscription.php?id=$1 [QSA]
+RewriteRule ^addMembers/(.*)$ addMembers.php?id=$1 [QSA]
+RewriteRule ^addMenu/(.*)$ addMenu.php?id=$1 [QSA]
+RewriteRule ^orderReceipt/(.*)$ orderReceipt.php?id=$1 [QSA]
+RewriteRule ^offOrderReceipt/(.*)$ offOrderReceipt.php?id=$1 [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]

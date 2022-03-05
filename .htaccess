@@ -1,0 +1,10 @@
+
+RewriteEngine On
+
+RewriteRule ^getMembership/(.*)/(.*)$ getMembership.php?id=$1&duration=$2 [NC,L]
+RewriteRule ^orderReceipt/(.*)$ orderReceipt.php?id=$1 [QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+

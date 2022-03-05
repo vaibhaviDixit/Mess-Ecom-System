@@ -12,41 +12,29 @@
 
         <div class="swiper-wrapper wrapper">
 
-            <div class="swiper-slide slide">
-                <div class="content">
-                    <span>Our Popular Meals</span>
-                    <h3>spicy noodles</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit natus dolor cumque?</p>
-                    <a href="#" class="custombtn">Order</a>
-                </div>
-                <div class="image">
-                    <img src="images/home-img-1.png" alt="">
-                </div>
-            </div>
+          <?php 
+            $banner=mysqli_query($con,"select banner.*,meals.id,meals.mealName from banner,meals where banner.name=meals.id");
+            if(mysqli_num_rows($banner)>0){
+              while ($bannerRow=mysqli_fetch_assoc($banner)) {
 
-            <div class="swiper-slide slide">
-                <div class="content">
-                    <span>Our Popular Meals</span>
-                    <h3>fried chicken</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit natus dolor cumque?</p>
-                    <a href="#" class="custombtn">Order</a>
-                </div>
-                <div class="image">
-                    <img src="images/home-img-1.png" alt="">
-                </div>
-            </div>
+          ?>
 
-            <div class="swiper-slide slide">
+            <div class="swiper-slide slide banner-img">
                 <div class="content">
                     <span>Our Popular Meals</span>
-                    <h3>hot pizza</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit natus dolor cumque?</p>
-                    <a href="#" class="custombtn">Order</a>
+                    <h3><?php echo $bannerRow['mealName']; ?></h3>
+                    <p><?php echo $bannerRow['description']; ?></p>
+                    <!-- <a href="#" class="custombtn p-3">Order</a> -->
                 </div>
                 <div class="image">
-                    <img src="images/home-img-3.png" alt="">
+                    <img  src="<?php echo SITE_MENU_IMAGE.$bannerRow['image']; ?>" alt="" class=" img-fluid">
                 </div>
             </div>
+            <?php
+                } 
+              }
+            ?>
+
 
         </div>
 
@@ -63,8 +51,8 @@
 
 <section class="dishes" id="">
 
-    <h3 class="sub-heading"> Popular Dishes </h3>
-    <h1 class="heading"> Delicious Dishes </h1>
+    <h3 class="sub-heading"> Popular Menus </h3>
+    <h1 class="heading"> Delicious Menus </h1>
 
     <div class="box-container">
 
@@ -127,7 +115,7 @@
 
 
 
-    <div class="container-fluid row">
+    <div class="container-fluid">
 
          
         
@@ -135,29 +123,25 @@
                 //select all active categories 
                 $cate=mysqli_query($con,"select * from category where status=1");
             ?>
-            <div class="col-md-3 fs-2">
-          
-               <ul class="list-group categories">
-                    <li class="list-group-item disabled" aria-disabled="true">Categories</li>
-
+            <div class="fs-2 categories text-center">
+               
                     <?php
                     while ($cate_row=mysqli_fetch_assoc($cate) ) {
-                        $class='list-group-item d-flex justify-content-between align-items-start list-group-item-action ';
                         $categoryId=$cate_row['id'];
                         //get number of items in  particular category
                         $num=mysqli_num_rows(mysqli_query($con,"select * from meals where meals.mealType='$categoryId'"));
 
-                        echo "<a href='javascript:void(0)' class='fetchMeals ".$class."' data-id='".$cate_row['id']."'>".$cate_row['name']." <div><span class='badge bg-primary rounded-pill'>".$num."</span></div> </a> ";
-                       
-                        
+                        if(!intval($num)<=0){
+                           echo "<a href='javascript:void(0)' class='fetchMeals ' data-id='".$cate_row['id']."'>".$cate_row['name']." <span class='badge bg-primary rounded-pill ms-2'>".$num."</span></a> ";
+                        }                      
                     }
                     ?>
-                </ul>
+            
         
             </div>
 
             <!-- Tab panes -->
-            <div class="tab-content col-md-9 displayMeals">
+            <div class="tab-content displayMeals">
 
                     <?php
 
@@ -249,60 +233,79 @@
             </div>
        </div>
 
-    <div >
-
-        <div class="row displayTiffins">
+        <div class=" displayTiffins">
                           <?php 
                 $subs=mysqli_query($con,"select * from subscriptions");
                 $plans=mysqli_fetch_assoc($subs);
 
                 ?>
-                <div class="col-sm-4"> 
-                    <div class="card">
-                      <div class="card-header fs-2 fw-bold">
-                        15 Days Plan
-                      </div>
-                      <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice"><?php echo $plans['15Days']; ?> </span></h5>
-                        <p class="card-text fs-4"><?php echo $plans['description']; ?></p>
+                <div class="row">
+                  <div class="col-sm-7 menuDesc">
+                    <div id="dispMenu">
+                        <h3 class="sub-heading">-Meal Plan-</h3>
+                        <div class="fs-4" style="padding: 1rem 2rem; text-align: left;"><?php echo $plans['description']; ?></div>
+                    </div>
                     
-                        <a href="javascript:void(0)" class="subscribebtn ">Subscribe</a>
-                      </div>
+                  </div>
+                  <div class="col-sm-5">
+                    <div> 
+                        <div class="card">
+                          <div class="card-header fs-2 fw-bold">
+                            15 Days Plan <small class="fs-6">(Student)</small>
+                          </div>
+                          <div class="card-body d-flex flex-wrap">
+                            <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice"><?php echo $plans['15Days']; ?> </span> </h5>
+                            <div class="mr1">
+                              <form method="post">
+                                <input type="text" name="subId" value="<?php echo $plans['id']; ?>" hidden>
+                                <input type="text" name="subDuration" value="15Days" hidden>
+                                 <input type="submit" value="Subscribe" name="subscribeTiffin" class="subscribebtn"></input>
+                              </form>
+                            </div>         
+                          </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-sm-4"> 
-                    <div class="card">
-                      <div class="card-header fs-2 fw-bold">
-                        Weekly Plan
-                      </div>
-                      <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice"><?php echo $plans['weekly']; ?></span></h5>
-                        <p class="card-text fs-4"><?php echo $plans['description']; ?></p>
-                        <a href="javascript:void(0)" class="subscribebtn">Subscribe</a>
-                      </div>
+                    <div> 
+                        <div class="card">
+                          <div class="card-header fs-2 fw-bold">
+                            Weekly Plan <small class="fs-6">(Student)</small>
+                          </div>
+                          <div class="card-body d-flex flex-wrap">
+                            <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice"><?php echo $plans['weekly']; ?></span></h5>
+                            <div class="mr1">
+                              <form method="post">
+                                <input type="text" name="subId" value="<?php echo $plans['id']; ?>" hidden>
+                                <input type="text" name="subDuration" value="weekly" hidden>
+                                 <input type="submit" value="Subscribe" name="subscribeTiffin" class="subscribebtn"></input>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-sm-4"> 
-                    <div class="card">
-                      <div class="card-header fs-2 fw-bold">
-                       Monthy Plan
-                      </div>
-                      <div class="card-body">
-                        <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice"><?php echo $plans['monthly']; ?></span></h5>
-                        <p class="card-text fs-4"><?php echo $plans['description']; ?></p>
-                        <a href="javascript:void(0)" class="subscribebtn">Subscribe</a>
-                      </div>
+                    <div> 
+                        <div class="card">
+                          <div class="card-header fs-2 fw-bold">
+                           Monthy Plan <small class="fs-6">(Student)</small>
+                          </div>
+                          <div class="card-body d-flex flex-wrap">
+                            <h5 class="card-title fs-3 fw-bold">&#8377;<span class="subPrice"><?php echo $plans['monthly']; ?></span> </h5>
+                            <div class="mr1">
+                              <form method="post">
+                                <input type="text" name="subId" value="<?php echo $plans['id']; ?>" hidden>
+                                <input type="text" name="subDuration" value="monthly" hidden>
+                                 <input type="submit" value="Subscribe" name="subscribeTiffin" class="subscribebtn"></input>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
                     </div>
+                    
+                  </div>
                 </div>
-
-                 
-              
               
         </div>
-
-    </div>
 
     </div>
 
@@ -322,35 +325,33 @@
     <h3 class="sub-heading">Products</h3>
     <h1 class="heading">Daily Products</h1>
 
-    <div class="container-fluid row" >
+    <div class="container-fluid" >
         
         <?php
                 //select all active categories 
                 $procate=mysqli_query($con,"select * from dailycate where status=1");
             ?>
-            <div class="col-md-3 fs-2">
+            <div class="fs-2 proCate text-center">
           
-               <ul class="list-group proCate">
-                    <li class="list-group-item disabled" aria-disabled="true">Categories</li>
-
                     <?php
                     while ($proCateRow=mysqli_fetch_assoc($procate) ) {
-                        $class='list-group-item d-flex justify-content-between align-items-start list-group-item-action ';
                         $cId=$proCateRow['id'];
                         //get number of items in  particular category
                         $numOfPro=mysqli_num_rows(mysqli_query($con,"select * from dailyproducts where dailyproducts.proCate='$cId'"));
 
-                        echo "<a href='javascript:void(0)' class='fetchProducts ".$class."' data-id='".$proCateRow['id']."'>".$proCateRow['name']." <div><span class='badge bg-primary rounded-pill'>".$numOfPro."</span></div> </a> ";
-                       
+                        if(!intval($numOfPro)<=0){
+
+                          echo "<a href='javascript:void(0)' class='fetchProducts' data-id='".$proCateRow['id']."'>".$proCateRow['name']." <div><span class='badge bg-primary rounded-pill ms-2'>".$numOfPro."</span></div> </a> ";
+
+                        }
                         
                     }
                     ?>
-                </ul>
         
             </div>
  
 
-    <div class="tab-content col-md-9 displayProducts dishes">
+    <div class="tab-content  displayProducts dishes">
 
                     <?php
 
@@ -421,7 +422,7 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="card">
-                         <img src="images/menu-6.jpg" class="card-img-top" alt="..." style="height: 15rem;object-fit: cover;">
+                         <img src="<?php echo SITE_PATH; ?>asset/images/menu-6.jpg" class="card-img-top" alt="..." style="height: 15rem;object-fit: cover;">
                       <div class="card-body">
                         <h5 class="card-title">Breakfast</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -432,7 +433,7 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="card">
-                         <img src="images/menu-4.jpg" class="card-img-top" alt="..." style="height: 15rem; object-fit: cover;">
+                         <img src="<?php echo SITE_PATH; ?>asset/images/menu-4.jpg" class="card-img-top" alt="..." style="height: 15rem; object-fit: cover;">
                       <div class="card-body">
                         <h5 class="card-title">Barbecues</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>

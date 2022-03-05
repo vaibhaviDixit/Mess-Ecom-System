@@ -1,7 +1,7 @@
 <?php
 
+include ($_SERVER['DOCUMENT_ROOT'].'/messEcom/include/database.inc.php');
 
-include ('include/database.inc.php');
 //print array
 function printArray($arr){
 	echo "<pre>";
@@ -21,10 +21,79 @@ function redirect($link){
 
 function getSafeVal($str){
 	global $con;
-	$str=mysqli_real_escape_string($con,htmlspecialchars($str));
+	$str=strip_tags(mysqli_real_escape_string($con,htmlspecialchars($str)));
 	return $str;
 }
+function getSafeArrVal($arr){
+	global $con;
+	for($i=0;$i<count($arr);$i++){
+		$arr[$i]=strip_tags(mysqli_real_escape_string($con,htmlspecialchars($arr[$i])));
+	}
+	return $arr;
+}
+function myDate($dt){
+	return date('d-m-Y',strtotime($dt)).' '.date('h:ia',strtotime($dt));
+}
+function getSubscribeInterval($Date,$subDuration){
+	  if($subDuration=="15Days"){
+            $dt=date('d-m-Y', strtotime($Date. ' + 15 days'));
+            $subDate=date('d-m-Y', strtotime( $dt . "-1 day"));
+            return " (".$Date.") TO (".$subDate.")";
+      }
+      elseif($subDuration=="weekly") {
+            $dt=date('d-m-Y', strtotime($Date. ' + 7 days'));
+            $subDate=date('d-m-Y', strtotime( $dt . "-1 day"));
+            return " (".$Date.") TO (".$subDate.")";
+      }
+      elseif ($subDuration=="monthly") {
+            $dt=date('d-m-Y', strtotime($Date. ' + 1 months'));
+            $subDate=date('d-m-Y', strtotime( $dt . "-1 day"));
+            return " (".$Date.") TO (".$subDate.")";
+      }
+}
 
+function dateDiff($date1, $date2)
+{
+    $date1_ts = strtotime($date1);
+    $date2_ts = strtotime($date2);
+    $diff = $date2_ts - $date1_ts;
+    return round($diff / 86400);
+}
+
+function getSubscribeStatus($Date,$subDuration){
+	  $today=date('d-m-Y');
+	  if($subDuration=="15Days"){
+            $dt=date('d-m-Y', strtotime($Date. ' + 15 days'));
+            $subDate=date('d-m-Y', strtotime( $dt . "-1 day"));
+            if(dateDiff($today,$subDate)>0){
+            	return 'Active';
+            }
+            else{
+            	return 'Expired';
+            }
+            
+      }
+      elseif($subDuration=="weekly") {
+            $dt=date('d-m-Y', strtotime($Date. ' + 7 days'));
+            $subDate=date('d-m-Y', strtotime( $dt . "-1 day"));
+            if(dateDiff($today,$subDate)>0){
+            	return 'Active';
+            }
+            else{
+            	return 'Expired';
+            }
+      }
+      elseif ($subDuration=="monthly") {
+            $dt=date('d-m-Y', strtotime($Date. ' + 1 months'));
+            $subDate=date('d-m-Y', strtotime( $dt . "-1 day"));
+            if(dateDiff($today,$subDate)>0){
+            	return 'Active';
+            }
+            else{
+            	return 'Expired';
+            }
+      }
+}
 
 //get cart of user using user id logged in 
 function getUserCart(){
@@ -59,6 +128,12 @@ function manageCart($uid,$mealType,$mealId,$qty){
 
 			mysqli_query($con,"insert into cart(userId, menuType, menuId, qty,subtotal) VALUES ('$uid','$mealType','$mealId','$qty','$subtotal')");
 		}
+
+}
+
+function emptyCart($uid){
+	global $con;
+	$res=mysqli_query($con,"delete from cart where userId='$uid' ");
 
 }
 
@@ -176,28 +251,170 @@ return $cart_array;
 function getUserDetails(){
 
 	global $con;
-	$userDetails=array();
-
 		$uid=$_SESSION['CURRENT_USER'];
 
 		$res=mysqli_fetch_assoc(mysqli_query($con,"select * from user where id='$uid' "));
-		$name=$res['name'];
-		$email=$res['email'];
-		$phone=$res['phone'];
 
-		$userDetails= array(
-        'name'=>$name,
-        'email'=>$email,
-        'phone'=>$phone
-
-       );
-
-	return $userDetails;
+	return $res;
 
 }
 
 
+function userRow(){
+	global $con;
+	$userDetails=array();
+	$uid=$_SESSION['CURRENT_USER'];
+	$res=mysqli_fetch_assoc(mysqli_query($con,"select * from user where id='$uid' "));
+		
+	return $res;
+
+}
+
+function continueWithGoogle($name,$email,$profile){
+	global $con;
+	$checkEmailExist=mysqli_num_rows(mysqli_query($con,"select * from user where email='$email' "));
+       if($checkEmailExist>0){
+              
+        $check=mysqli_query($con,"select * from user where email='$email' ");
+        $row=mysqli_fetch_assoc($check);
+        if (isset($_SESSION['cart']) && count($_SESSION['cart'])>0) {
+		  	foreach ($_SESSION['cart'] as $key => $value) {
+		  		//manageCart function add data to cart table in database
+		  		manageCart($_SESSION['CURRENT_USER'],$value['mealType'],$value['id'],$value['qty']);
+		  	}
+		  }
+		   $updateData=mysqli_query($con,"UPDATE  `user` set `name`='$name', `profile`='$profile' where  `email`='$email' ");
+	      if($updateData){
+
+            $_SESSION['CURRENT_USER']=$row['id'];
+	      	return "success";
+	      }
+         
+       }else{
+
+      $check=mysqli_query($con,"INSERT INTO `user`(`name`, `email`, `profile`) VALUES ('$name','$email','$profile') ");
+
+      if($check){
+        $check=mysqli_query($con,"select * from user where email='$email' ");
+        $row=mysqli_fetch_assoc($check);
+        $_SESSION['CURRENT_USER']=$row['id'];
+        if (isset($_SESSION['cart']) && count($_SESSION['cart'])>0) {
+		  	foreach ($_SESSION['cart'] as $key => $value) {
+		  		//manageCart function add data to cart table in database
+		  		manageCart($_SESSION['CURRENT_USER'],$value['mealType'],$value['id'],$value['qty']);
+		  	}
+		  }
+        return "success";
+      }
+      else{
+        return "fail";
+      }
+
+       }
+}
+
+// functions for dashboard data 
+
+function totalMenus(){
+	global $con;
+
+	$count=mysqli_num_rows(mysqli_query($con,"select meals.*,menu.*,dailyproducts.* from meals,menu,dailyproducts "));
+	return $count;
+}
+
+function totalOrders(){
+	global $con;
+
+	$online=mysqli_fetch_assoc(mysqli_query($con,"select count(*) as total from orders"));
+	$offline=mysqli_fetch_assoc(mysqli_query($con,"select count(*) as total from offlineOrders"));
+	return intval($online['total'])+intval($offline['total']);
+}
+
+function pendingOrders(){
+	global $con;
+
+	$online=mysqli_fetch_assoc(mysqli_query($con,"select count(*) as total from orders where order_status=1"));
+	$offline=mysqli_fetch_assoc(mysqli_query($con,"select count(*) as total from offlineOrders where order_status=1"));
+	return intval($online['total'])+intval($offline['total']);
+}
+
+
+function totalRevenue(){
+	global $con;
+
+	$online=mysqli_fetch_assoc(mysqli_query($con,"select sum(total) as total from orders"));
+	$offline=mysqli_fetch_assoc(mysqli_query($con,"select sum(paid) as total from offlineOrders"));
+	return intval($online['total'])+intval($offline['total']);
+}
+
+
+function totalUsers(){
+	global $con;
+
+	$count=mysqli_num_rows(mysqli_query($con,"select * from user"));
+	return $count;
+}
+
+function activeMembers(){
+
+	global $con;
+
+	$count=0;
+	$onlinemem=mysqli_query($con,"select * from onlinemembers");
+    $offlinemem=mysqli_query($con,"select * from members");
+
+	while ($row1=mysqli_fetch_assoc($onlinemem)) {
+		$status1=getSubscribeStatus($row1['joinDate'],$row1['subDuration']);
+		if($status1=="Active"){
+			$count=$count+1;
+		}
+	}
+
+	while ($row2=mysqli_fetch_assoc($offlinemem)) {
+		$status2=getSubscribeStatus($row2['joinDate'],$row2['duration']);
+		if($status2=="Active"){
+			$count=$count+1;
+		}
+	}
+
+
+
+}
+
+
+function revenueStatistic(){
+	global $con;
+
+	$arr=array();
+	$now=date('Y');
+	$orders=mysqli_query($con,"SELECT total as total,addedOn FROM `orders` UNION SELECT paid as total,addedOn from offlineorders");
+
+	while ($row=mysqli_fetch_assoc($orders)) {
+		$dbDate=date('Y',strtotime($row['addedOn']));
+		if($now==$dbDate){
+			$getMonth=date('m',strtotime($row['addedOn']));
+			$arr[intval($getMonth)-1]=$row['total'];
+		}
+	}
+
+	return json_encode($arr);
+
+
+
+}
+
 ?>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

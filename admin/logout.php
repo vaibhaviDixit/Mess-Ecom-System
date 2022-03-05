@@ -2,11 +2,15 @@
 
 session_start();
 
-include ('function.inc.php');
 
-unset($_SESSION['admin_login']);
+include ($_SERVER['DOCUMENT_ROOT'].'/messEcom/include/database.inc.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/messEcom/include/constants.inc.php');
+include ($_SERVER['DOCUMENT_ROOT'].'/messEcom/include/function.inc.php');
 
-redirect('pages-sign-in.php');
+unset($_SESSION['adminLogin']);
+session_destroy();
+
+redirect(SITE_PATH.'admin/sign-in');
 
 
 ?>

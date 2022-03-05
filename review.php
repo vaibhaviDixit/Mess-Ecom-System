@@ -22,77 +22,41 @@
 
         <div class="swiper-wrapper">
 
-            <div class="swiper-slide slide">
-                <i class="fas fa-quote-right"></i>
-                <div class="user">
-                    <img src="images/pic-1.png" alt="">
-                    <div class="user-info">
-                        <h3>john deo</h3>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat consequuntur repellendus aperiam deserunt nihil, corporis fugit voluptatibus voluptate totam neque illo placeat eius quis laborum aspernatur quibusdam. Ipsum, magni.</p>
-            </div>
 
-            <div class="swiper-slide slide">
-                <i class="fas fa-quote-right"></i>
-                <div class="user">
-                    <img src="images/pic-2.png" alt="">
-                    <div class="user-info">
-                        <h3>john deo</h3>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat consequuntur repellendus aperiam deserunt nihil, corporis fugit voluptatibus voluptate totam neque illo placeat eius quis laborum aspernatur quibusdam. Ipsum, magni.</p>
-            </div>
+            <?php 
+              $fetchReviewsSql=mysqli_query($con,"select * from `reviews`");
+              if(mysqli_num_rows($fetchReviewsSql)){
+                while($reviewRow=mysqli_fetch_assoc($fetchReviewsSql)){
+                    $rvid=$reviewRow['userId'];
+                    $getUser=mysqli_fetch_assoc(mysqli_query($con,"select * from `user` where id='$rvid' "));
+            ?>
+                    <div class="swiper-slide slide">
+                        <i class="fas fa-quote-right"></i>
+                        <div class="user">
+                            <img src="<?php  echo SITE_PROFILE_IMAGE.$getUser['profile']; ?>" onerror="this.onerror=null;this.src=`<?php  echo $getUser['profile']; ?>`;" alt="profile" class="img-fluid rounded" width="200" height="200">
 
-            <div class="swiper-slide slide">
-                <i class="fas fa-quote-right"></i>
-                <div class="user">
-                    <img src="images/pic-3.png" alt="">
-                    <div class="user-info">
-                        <h3>john deo</h3>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
+                            <div class="user-info">
+                                <h4><?php echo $getUser['name'];?></h4>
+                                <div class="stars">
+                                    <?php 
+                                      $st=intval($reviewRow['stars']);
+                                      for ($i=0; $i < $st; $i++) { 
+                                        echo "<i class='fas fa-star'></i>";
+                                      }
+                                      $gray=5-$st;
+                                      for($j=0;$j<$gray;$j++){
+                                        echo "<i class='far fa-star'></i>";
+                                      }
+                                    ?>
+                                </div>
+                            </div>
                         </div>
+                        <p><?php echo $reviewRow['description'];?></p>
                     </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat consequuntur repellendus aperiam deserunt nihil, corporis fugit voluptatibus voluptate totam neque illo placeat eius quis laborum aspernatur quibusdam. Ipsum, magni.</p>
-            </div>
-
-            <div class="swiper-slide slide">
-                <i class="fas fa-quote-right"></i>
-                <div class="user">
-                    <img src="images/pic-4.png" alt="">
-                    <div class="user-info">
-                        <h3>john deo</h3>
-                        <div class="stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat consequuntur repellendus aperiam deserunt nihil, corporis fugit voluptatibus voluptate totam neque illo placeat eius quis laborum aspernatur quibusdam. Ipsum, magni.</p>
-            </div>
+            <?php
+                }//while ends
+              }//if ends
+            ?>
 
         </div>
 
@@ -109,6 +73,14 @@
         include 'footer.php';
 
     ?>
-  
+<script type="text/javascript">
+    
 
+    let getnavlinks = document.querySelectorAll('header .navbar a');
+    getnavlinks.forEach(link=>{
+        link.classList.remove('active');
+    });
+    $("header .navbar #reviewNav").addClass("active");
+
+</script>
 

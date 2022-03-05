@@ -1,6 +1,3 @@
-<?php
-
-?>
 
 <!-- footer section starts  -->
 <div class="pt-5 mt-5">
@@ -11,7 +8,7 @@
 
          <div class="box">
             <h3><i class="fas fa-utensils"></i>Mess</h3>
-            <p class="text-muted fs-4">Mounty is an online discovery platform for unique stays and exciting things to do across india.</p>
+            <p class="text-muted fs-4">Mess is an online platform for server customers across Ahmadnagar.</p>
             <h4 class="">Follow Us:</h4>
             <div class="social-icons fs-1 text-muted">
                 <a href=""> <i class="fab fa-facebook p-3"></i> </a>
@@ -24,13 +21,13 @@
 
         <div class="box">
             <h3>quick links</h3>
-            <a class="active" href="index.php#home">Home</a>
-            <a href="index.php#meals">Meals</a>
-            <a href="index.php#tiffins">Tiffins</a>
-            <a href="index.php#daily">Daily</a>
-            <a href="index.php#offers">Offers & Deals</a>
-            <a href="about.php">About</a>
-            <a href="review.php">Reviews</a>
+            <a class="active" href="<?php echo SITE_PATH; ?>">Home</a>
+            <a href="#meals">Meals</a>
+            <a href="#tiffins">Tiffins</a>
+            <a href="#daily">Daily</a>
+            <a href="#offers">Offers & Deals</a>
+            <a href="about">About</a>
+            <a href="review">Reviews</a>
             
         </div>
 
@@ -54,7 +51,7 @@
 
     </div>
 
-    <div class="credit "> copyright @ 2021 by <span>mr. web designer</span> </div>
+    <div class="credit "> copyright @ 2021 by <span>.....</span> </div>
 
 </section>
 </div>
@@ -68,14 +65,42 @@
     <img src="images/loader.gif" alt="">
 </div> -->
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- custom js file link  -->
-<script src="js/script.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="<?php echo SITE_PATH; ?>asset/js/script.js"></script>
+<script src="<?php echo SITE_PATH; ?>asset/js/bootstrap.min.js"></script>
 
 </body>
 </html>
+
+<?php 
+ if(isset($_POST['subscribeTiffin'])){
+        $subId=getSafeVal($_POST['subId']);
+        $subDuration=getSafeVal($_POST['subDuration']);
+        
+        if(!isset($_SESSION['CURRENT_USER'])){
+?>
+            <script type="text/javascript">
+                    swal("Login First!", "You are not logged in! Login to get Membership", "info");
+            </script>
+<?php
+        }
+        else{
+           redirect(SITE_PATH."getMembership/".$subId."/".$subDuration);
+        }
+ }
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
 

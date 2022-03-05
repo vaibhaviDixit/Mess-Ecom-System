@@ -51,7 +51,7 @@ if($operation=="add"){
 		
 	}
 	$totalItems=count(getFullCart());
-	$arr=array('totalItems'=>$totalItems);
+	$arr=array('action'=>'added','totalItems'=>$totalItems);
 	echo json_encode($arr);
 }
 
@@ -59,21 +59,24 @@ if($operation=="updateCartAdd" || $operation=="updateCartRemove"){
 	if(isset($_SESSION['CURRENT_USER'])){
 		//user is logged in
 		$uid=$_SESSION['CURRENT_USER'];
-		manageCart($uid,$mealType,$mealId,$qty);
-		
-
+		if(intval($qty)<=10 && intval($qty)>=1){
+			manageCart($uid,$mealType,$mealId,$qty);
+		}
 	}
 	else{
 		//user is not logged in
-		
-			foreach ($_SESSION['cart'] as $key => $value) {
+		  if(intval($qty)<=10 && intval($qty)>=1){
+
+		  	foreach ($_SESSION['cart'] as $key => $value) {
 				if($value['id']==$mealId && $value['mealType']==$mealType){
 					$_SESSION['cart'][$key]['qty']=intval($qty);
 					$_SESSION['cart'][$key]['subtotal']=getSubTotal($mealId,$mealType,$qty);
 
 				}
 			}
-		
+
+		  }
+			
 	}
 
 	$arr=array('action'=>'cartUpdate');
@@ -82,7 +85,7 @@ if($operation=="updateCartAdd" || $operation=="updateCartRemove"){
 
 
 
-if($operation=="remove"){
+if($operation=="remove" || $operation=="chkremove"){
 
 	if(isset($_SESSION['CURRENT_USER'])){
 		//user is logged in
@@ -104,7 +107,13 @@ if($operation=="remove"){
 
 		
 	}
-	$arr=array('action'=>'remove');
+
+	if($operation=="remove"){
+	  $arr=array('action'=>'remove');	
+	}
+	if($operation=="chkremove"){
+	  $arr=array('action'=>'chkremove');	
+	}
 	echo json_encode($arr);
 
 }

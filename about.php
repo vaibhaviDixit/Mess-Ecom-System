@@ -16,7 +16,7 @@
     <div class="row">
 
         <div class="image">
-            <img src="images/about-img.png" alt="">
+            <img src="<?php echo SITE_PATH; ?>asset/images/about-img.png" alt="">
         </div>
 
         <div class="content">
@@ -52,5 +52,14 @@
         include 'footer.php';
 
     ?>
+<script type="text/javascript">
+    
 
+    let getnavlinks = document.querySelectorAll('header .navbar a');
+    getnavlinks.forEach(link=>{
+        link.classList.remove('active');
+    });
+    $("header .navbar #aboutNav").addClass("active");
+
+</script>
 

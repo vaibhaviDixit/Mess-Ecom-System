@@ -1,0 +1,142 @@
+.orderMark button{
+	font-weight: bolder;
+	letter-spacing: 1.5px;
+	cursor:default;
+}
+.orderMark button:hover{
+	color: white;
+}
+.orderMark .Pending{
+	background-color: red;
+}
+.orderMark .Processing{
+	background-color: orange;
+}
+.orderMark .Shipped{
+	background-color: blue;
+}
+.orderMark .Canceled{
+	background-color: gray;
+}
+.orderMark .Delivered{
+	background-color: green;
+}
+
+.userSubsCard{
+	position: relative;
+	box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
+	z-index: 100;
+	
+}
+.userSubsCard::before{
+  position: absolute;
+  content: '';
+  background: #000;
+  height: 28px;
+  width: 28px;
+  top:2rem;
+  right:-0.5rem;
+  transform : rotate(45deg);
+  z-index: -1;
+}
+.userSubsCard .subBadge{
+  position: absolute;
+  top: 11px;
+  right: -14px;
+  padding: 0.5rem;
+  width: 10rem;
+  color: white;
+  text-align: center;
+  box-shadow: 4px 4px 15px rgba(26, 35, 126, 0.2);
+}
+.userSubsCard .Active{
+	background-color: green;
+}
+.userSubsCard .Expired{
+	background-color: gray;
+}
+.userSubsCard .Not-Approved{
+  background-color: tomato;
+}
+/*Orderdetails*/
+.orderSumry .product{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+.orderSumry .product .cartProDesc{
+    width: 100%;
+    margin-left: 1rem;
+}
+.orderSumry .product .cartimg img{
+    width: 4rem;
+    height: 3rem;
+    object-fit: cover;
+}
+/*dashboard*/
+
+
+a{
+  text-decoration: none !important;
+}
+
+*{
+    font-size: 98%;
+}
+
+.card .social>a{
+      color: #e8eef3;
+    background: #07124e;
+    border-radius: 50%;
+}
+
+.redStar{
+  color: red !important;
+}
+
+#adminFrom .form-label{
+  font-size: 1rem !important;
+  font-weight: bolder !important;
+}
+.dataCount{
+    font-size: 1.5rem;
+    font-weight: bolder;
+    color: white;
+    text-shadow: 5px 3px 5px black;
+  
+}
+.tags{
+  font-size:17px;
+}
+#payAmt{
+  color: white;
+  background-color: #0a560a;
+}
+#remainAmt{
+  color: white;
+  background-color: #9a0202;
+}
+#totalAmt{
+  color: white;
+  background-color: #747407;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
