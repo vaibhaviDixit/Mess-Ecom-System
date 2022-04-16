@@ -20,6 +20,7 @@ $res=mysqli_query($con,$sql);
                     <thead class="table-primary">
                         <tr>
                             <th scope="col">Sr No.</th>
+                            <th scope="col">Invoice</th>
                             <th scope="col">Status</th>
                             <th scope="col">Name</th>
                             <th scope="col">Phone</th>
@@ -43,6 +44,7 @@ $res=mysqli_query($con,$sql);
                         
                         <tr>
                         <td scope="col"> <?php  echo $i; ?></td>
+                        <td scope="col"><?php  echo $row['id']; ?></td>
                         <td scope="col" class="orderMark"><button class="badge rounded-pill btn btn-sm <?php  echo $row['orderStatus']; ?> "><?php  echo $row['orderStatus']; ?></button></td>
                         <td scope="col"> <?php  echo $row['name']; ?></td>
                         <td scope="col"> <?php  echo $row['phone']; ?></td>
@@ -50,13 +52,13 @@ $res=mysqli_query($con,$sql);
                         <td scope="col"> <?php  echo $row['pincode']; ?></td>
                         <td scope="col"> <?php  echo $row['total']; ?></td>
                         <td scope="col"> <?php  echo myDate($row['addedOn']); ?></td>
-                        <td scope="col">
+                        <td scope="col" class="text-center fs-6">
                             <form action="<?php echo SITE_PATH.'admin/orderDetails'?>" method="get">
                                 <input type="hidden" name="orderID" value="<?php  echo $row['orderId']; ?>">
-                                <button class="btn btn-success btn-sm rounded-pill" type="submit">See Details</button></form>
+                                <button class="badge rounded-pill btn btn-sm btn-info" type="submit">Details</button></form>
 
 
-                            <a target="_blank" href="<?php echo SITE_PATH.'orderReceipt/'.$row['orderId']; ?>"><button class='btn btn-sm rounded-pill btn-success'><i class='fas fa-download'></i>       Receipt</button></a>
+                            <a target="_blank" href="<?php echo SITE_PATH.'orderReceipt/'.$row['orderId']; ?>"><button class='badge rounded-pill btn btn-sm btn-warning'><i class='fas fa-download'></i>  Receipt</button></a>
 
                         </td>
 

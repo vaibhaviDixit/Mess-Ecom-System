@@ -24,6 +24,8 @@ $fav_count=count($fav_array);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo SITE_NAME; ?></title>
 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo SITE_PATH; ?>asset/css/bootstrap.min.css">
 
@@ -34,7 +36,9 @@ $fav_count=count($fav_array);
     <link rel="stylesheet" href="<?php echo SITE_PATH; ?>asset/css/style.css">
     <link href="<?php echo SITE_PATH;?>dist/css/customAdmin.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-messaging.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -44,10 +48,19 @@ $fav_count=count($fav_array);
 <body>
 
 <!-- header section starts      -->
+  <!--language translator -->
 
-<header>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-    <a href="<?php echo SITE_PATH; ?>" class="logo"><i class="fas fa-utensils"></i>mess</a>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script>
+
+<header class="navigationArea">
+
+    <a href="<?php echo SITE_PATH; ?>" class="logo" translate="no"><i class="fas fa-utensils"></i><?php echo SITE_NAME; ?></a>
 
     <nav class="navbar">
         <a class="active" href="<?php echo SITE_PATH; ?>">Home</a>
@@ -69,8 +82,11 @@ $fav_count=count($fav_array);
 
     <div class="icons">
         <i class="fas fa-bars" id="menu-bars"></i>
+
         <i class="fas fa-search" id="search-icon"></i>
+
         <a href="<?php echo SITE_PATH; ?>favourites" class="fas fa-heart" style="position: relative;"><span id="favItems" class="count"><?php echo $fav_count; ?></span></a>
+
         <a href="<?php echo SITE_PATH; ?>cart" class="fas fa-shopping-cart cart-ico" style="position: relative;"><span id="cartItems" class="count"><?php echo $count; ?></span>
         </a>
 
@@ -80,8 +96,8 @@ $fav_count=count($fav_array);
 
                 ?>
 
-            
-        <a class="fas fa-user user-icon" href="<?php echo SITE_PATH; ?>profile" ></a>
+    <dt class="modalDiv"> 
+        <a class="fas fa-user user-icon" href="javascript:void(0)" ></a>
         <div class="userModal">
           <div class="card">
              <ul class="list-group list-group-flush">
@@ -91,7 +107,7 @@ $fav_count=count($fav_array);
 
           </div>
         </div>
-
+    </dt>
   
         <?php
             }
@@ -102,11 +118,13 @@ $fav_count=count($fav_array);
             }
 
         ?>
-
-        
-
-
+    
     </div>
+    <dt class="changeLang">
+        <i class="fa fa-globe" id="globe"></i>
+        <div id="google_translate_element" class="gtranslator"></div>
+    </dt>
+
 
 </header>
 
@@ -127,10 +145,10 @@ $fav_count=count($fav_array);
 
 <!-- search form  -->
 
-<form action="" id="search-form">
-    <input type="search" placeholder="search here..." name="" id="search-box">
-    <label for="search-box" class="fas fa-search"></label>
+<form action="<?php echo SITE_PATH.'results'; ?>" id="search-form" autocomplete="off">
+    <input type="search" placeholder="search here..." name="query" id="search-box" required>
     <i class="fas fa-times" id="close"></i>
+    <button type="submit" name="submit" class="btn fs-2"><i class="fas fa-search text-light" ></i></button>
 </form>
 
 <!-- home section starts  -->

@@ -1,3 +1,11 @@
+// animate div on scroll
+$(".sub-heading").attr('data-aos','slide-up');
+$(".heading").attr('data-aos','zoom-in');
+$(".menuDesc").attr('data-aos','fade-left');
+$("#subscribeCards div").each(function() {
+    $(this).attr('data-aos','fade-right');
+});
+
 let menu = document.querySelector('#menu-bars');
 let navbar = document.querySelector('.navbar');
 
@@ -334,16 +342,30 @@ function ratings(e){
 
 //user registration
 
-$(".user-icon").on("mouseover", function(){
+$(".user-icon").mouseover(function(){
 
-      $(".userModal").slideDown(300);
+      $(".userModal").slideToggle(300);
 });
 
+//changelang 
+$("#globe").mouseover(function(){
 
-$("body").on("click", function(){
-
-      $(".userModal").slideUp(300);
+      $(".gtranslator").slideToggle(300);
 });
+
+//change margin of navbar
+setInterval(function(){ 
+if ( $('html').hasClass('skiptranslate')) {
+  $('.navigationArea').css('margin-top','30px');
+}else{
+  $('.navigationArea').css('margin-top','0px');
+}
+}, 3000);
+
+// $("body").on("click", function(){
+
+//       $(".userModal").slideUp(300);
+// });
 
 
 
@@ -587,19 +609,11 @@ function regValidation(){
     document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" > Please fill your email</div>';
     return false;
   }
-  if(phoneExp.test(phone)){
+  if(!phoneExp.test(phone)){
      document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" >Invalid mobile number</div>';
      return false;
   }
-  if(pass1==""){
-    document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" > Please fill the password</div>';
-    return false;
-  }
-  if(pass1.length<=2 || pass1.length>=20){
-     document.getElementById('validation').innerHTML='<div class="alert alert-danger" role="alert" > Password must be between 3 and 20 characters</div>';
-     return false;
-  }
-  
+
   
 return true;
 
@@ -772,20 +786,17 @@ e.preventDefault();
    jQuery("#loginMsg").html("");
 
    jQuery.ajax({
-
     url:'user_register_login.php',
     type:'post',
     data:jQuery('#userLogin').serialize()+"&verified=false",
     success:function(result){
         msg=jQuery.parseJSON(result);
-      
         if(msg.status=="error"){
           jQuery("#loginMsg").html("<div class='alert alert-danger' role='alert' >"+msg.message+"</div>");
           $(".round").removeClass(' spinner-border');
            $("#loginBtn").attr("disabled",false);
         }
-        if(msg.status=="success"){
-          
+        if(msg.status=="success"){ 
           $("#loginOTPContainer").show();
           $("#loginBtn").hide();
           $("#recaptcha-container").hide();
@@ -807,12 +818,8 @@ e.preventDefault();
                           // ...
                           jQuery("#loginMsg").html("<div class='alert alert-danger' role='alert' >Invalid activity</div>");
                         });
-
         }
-
     }
-
-
   });
 
 });
@@ -923,3 +930,85 @@ function verifyOrderChkOTP(otp){
     });
 
 }
+
+
+
+//firebase push notification
+
+
+
+
+ const messaging=firebase.messaging();
+ var pushtoken=null    
+
+function IntitalizeFireBaseMessaging() {
+if ("serviceWorker" in navigator) {
+navigator.serviceWorker
+  .register("../../firebase-messaging-sw.js")
+  .then(function(registration) {
+    console.log("Registration successful, scope is:", registration.scope);
+    messaging.getToken({vapidKey: 'BDd-btbZx53pKMO7UpMLD7y7gDUptMO1YethuSRUCSr4qvxcJM4v01wn3Bt5krbQ00YUE1WkYTvNi0Y1gs4d_5g', serviceWorkerRegistration : registration })
+      .then((currentToken) => {
+        if (currentToken) {
+          console.log('current token for client: ', currentToken);
+          pushtoken=currentToken
+
+          sendPushNoti("hi","how are you");
+    // 
+          // Track the token -> client mapping, by sending to backend server
+          // show on the UI that permission is secured
+        } else {
+          console.log('No registration token available. Request permission to generate one.');
+
+          // shows on the UI that permission is required 
+        }
+      }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        // catch error while creating client token
+      });  
+    })
+    .catch(function(err) {
+      console.log("Service worker registration failed, error:"  , err );
+  }); 
+}
+    }
+
+    messaging.onMessage(function (payload) {
+        console.log(payload);
+        const notificationOption={
+            body:payload.notification.body,
+            icon:payload.notification.icon
+        };
+
+        if(Notification.permission==="granted"){
+            var notification=new Notification(payload.notification.title,notificationOption);
+
+            notification.onclick=function (ev) {
+                ev.preventDefault();
+                window.open(payload.notification.click_action,'_blank');
+                notification.close();
+            }
+        }
+
+    });
+    messaging.onTokenRefresh(function () {
+        messaging.getToken()
+            .then(function (newtoken) {
+                console.log("New Token : "+ newtoken);
+            })
+            .catch(function (reason) {
+                console.log(reason);
+        //alert(reason);
+            })
+    })
+    IntitalizeFireBaseMessaging();
+
+
+    function sendPushNoti(title,msg){
+      console.log(title,msg,pushtoken)
+      jQuery.ajax({
+            url:'send_notification.php',
+            type:'post',
+            data:"title="+title+"&message="+msg+"&token="+pushtoken
+          });
+    }

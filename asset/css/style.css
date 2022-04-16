@@ -59,6 +59,8 @@ section:nth-child(even){
 }
 .addCart{
     padding: 1rem;
+        display: block;
+    text-align: center;
 }
 
 .custombtn:hover{
@@ -296,7 +298,9 @@ header .icons #menu-bars{
 .swiper-pagination-bullet-active{
     background:var(--green);
 }
-
+.swiper-pagination {
+    position: relative !important;
+}
 .dishes .box-container .box{
     padding: 1.5rem;
     background: #fff;
@@ -314,11 +318,12 @@ header .icons #menu-bars{
     font-size: 1.7rem;
     font-weight: bold;
     display: inline-block;
-    margin: 0 1rem;
+    margin: 0 1.6rem;
 }
 
 .quantity span{
     cursor: pointer;
+    font-size: 2rem;
 }
 
 .box .eyeClick .fa-times{
@@ -401,12 +406,11 @@ header .icons #menu-bars{
 }
 
 .dishes .box-container .box img{
-    height: 100%;
+    height:180px;
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
     margin-bottom: 1rem;
-    border-radius: 4px;
-    max-height: 10rem;
+    border-radius: 3px;
 }
 
 .dishes .box-container .box h3{
@@ -426,7 +430,7 @@ header .icons #menu-bars{
 .dishes .box-container .box span{
     color:var(--green);
     font-weight: bolder;
-    font-size: 1.8rem;
+    font-size: 2rem;
 }
 
 .about .row{
@@ -569,7 +573,7 @@ header .icons #menu-bars{
 
 .menu .box-container .box .content h3{
     color:var(--black);
-    font-size: 1.7rem;
+
 }
 
 .menu .box-container .box .content p{
@@ -582,6 +586,7 @@ header .icons #menu-bars{
 .menu .box-container .box .content .price{
     color:var(--green);
     font-size: 2rem;
+    font-weight: bolder;
 }
 
 .nav a{
@@ -947,11 +952,13 @@ header .icons #menu-bars{
 
 }
 
-
+.modalDiv{
+    position: relative;
+    display: inline-block;
+}
 .userModal{
     position: absolute;
     display: none;
-    right: 3rem;
     margin: 1rem 0;
 }
 .userModal a{
@@ -968,6 +975,26 @@ header .icons #menu-bars{
     background-color: #eeeeee;
     transform: none !important;
     color: var(--green) !important;
+}
+.changeLang #globe{
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    display: inline-block;
+}
+.changeLang #google_translate_element{
+    position: absolute;
+    display: none;
+    margin: 1rem 0;
+    right: 1rem;
+}
+body{
+top: 0px !important; 
+position: static !important; 
+}
+
+.goog-te-banner-frame{
+display:none !important
 }
 .rateMsg .form-control{
   color: #f9fbfd !important;
@@ -1109,7 +1136,6 @@ header .icons #menu-bars{
     }*/
 
     .dishes .box-container .box img{
-        height:auto;
         width: 100%;
     }
 
@@ -1129,9 +1155,12 @@ header .icons #menu-bars{
         width: 100%;
        object-fit:cover;
    }*/
+.userLoginReg .card {
+    width: 100% !important;
+}
 
    .dishes .box-container .box,.menu .box-container .box{
-        width: 22rem;
+        width: 100%;
     }
     .dishes .box-container,.menu .box-container{
         justify-content: center;
@@ -1159,7 +1188,6 @@ header .icons #menu-bars{
     background-color: white;
     border-radius: 9px;
 } 
-
 
 #content.active {
   width: 100%;
@@ -1280,6 +1308,7 @@ background-image: linear-gradient(-200deg, #3bb78f 0%, #0bab64 74%) !important;
 
 
 /*login register page css*/
+
 .gotoWeb{
     border: 2px solid #ff9800;
     display: inline-block;
@@ -1299,8 +1328,8 @@ background-image: linear-gradient(-200deg, #3bb78f 0%, #0bab64 74%) !important;
 }
 .userLoginReg .card {
     width: 400px;
-    height: 650px;
-    perspective: 1000px;
+    height: 700px;
+    /*perspective: 1000px;*/
 }
 
 .userLoginReg .inner-box {
@@ -1347,7 +1376,7 @@ background-image: linear-gradient(-200deg, #3bb78f 0%, #0bab64 74%) !important;
 }
 .userLoginReg .card h2{
      font-weight: bold;
-     font-size: 24px: ;
+     font-size: 24px;
      text-align: center;
      margin-bottom: 4px;
      color: var(--black);
@@ -1355,9 +1384,9 @@ background-image: linear-gradient(-200deg, #3bb78f 0%, #0bab64 74%) !important;
 .userLoginReg .input-box{
     width: 100%;
     border: none;
-    height: 32px;
+    font-size: 16px;
     border-radius: 20px;
-    padding: 0 10px;
+    padding:6px;
     box-sizing: border-box;
     outline: none;
     color: #000000;
@@ -1366,22 +1395,28 @@ background-image: linear-gradient(-200deg, #3bb78f 0%, #0bab64 74%) !important;
 .userLoginReg .form-label{
     font-weight: bolder;
     margin: 3px 0;
+    font-size: 1.5rem !important;
 }
  .userLoginReg button{
     width: 100%;
-    background: transparent;
     border: 1px solid #000000;
     margin: 15px 0 10px;
     height: 32px;
     font-size: 16px;
-    border-radius: 20px;
+    border-radius: 2px;
+    background: var(--black);
     padding: 0 10px;
     box-sizing: border-box;
     outline: none;
-    color: #000000;
+    color: white;
     cursor: pointer;
+    transition: .2s linear;
 
  }
+  .userLoginReg button:hover{
+    background-color: black;
+    color: white;
+  }
  
  .userLoginReg .submit-btn{
     position: relative;

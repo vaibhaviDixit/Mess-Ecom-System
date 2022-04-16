@@ -34,7 +34,7 @@ if(isset($_GET['id'])){
 
 
 if (isset($_POST['submit'])) {
-    $orderId="#".substr(time(),4,6);
+    $orderId="Order_".substr(time(),4,6);
 
 	$name=getSafeVal( $_POST['name'] );
 	$phone=getSafeVal( $_POST['phone'] );
@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
                     
                     if($runDetails){
                     	 
-						echo '<script type="text/javascript">swal("Order Placed Successfully...","","success").then(function(){window.location.href="'.SITE_PATH.'admin/listOnlineOrders";});</script>';
+						echo '<script type="text/javascript">swal("Order Placed Successfully...","","success").then(function(){window.location.href="'.SITE_PATH.'admin/listOfflineOrders";});</script>';
                     }
 					
 				}
@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
 				$run=mysqli_query($con,"UPDATE `members` SET `name`='$memberName',`phone`='$memberPhone',`address`='$memberAddress',`joinDate`='$memberJoinDate',`subscription`='$memberSubscription',`duration`='$memberSubscriptionDuration',`totalAmount`='$totalAmount' $image_condition WHERE id='$id' ");
 
 				if($run){
-					redirect(SITE_PATH.'admin/listOnlineOrders');
+					redirect(SITE_PATH.'admin/listOfflineOrders');
 				}
 			
 		}

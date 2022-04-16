@@ -43,7 +43,7 @@ if(isset($_GET["code"]))
 ?>
 
 
-<section>
+<section id="login-register">
 
   <div class="">
 
@@ -81,7 +81,6 @@ if(isset($_GET["code"]))
                      <button type="submit" name="login" id="verifyLoginBtn" class="btn submit-btn" onclick="verifyLogin()"><span class="round " role="status" aria-hidden="true"></span>  Verify OTP</button>
               </div>
         <button type="button" class="btn" onclick="openRegister()"> I'm New Here </button>
-        <a href="">Forget Password ?</a>
         <a href="<?php echo SITE_PATH.'admin/sign-in'; ?>" class="text-primary">Admin Login</a>
       </div>
 <!-- card front i.e login card ends -->
@@ -130,7 +129,6 @@ if(isset($_GET["code"]))
 
             </div>
             <button type="button" class="btn" onclick="openLogin()"> I've an Account</button>
-           <a href="<?php echo SITE_PATH.'admin/sign-in'; ?>" class="text-primary">Admin Login</a>
          </div>
       <!-- register card ends -->
 

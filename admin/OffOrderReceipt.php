@@ -6,18 +6,15 @@ include ($_SERVER['DOCUMENT_ROOT'].'/messEcom/include/constants.inc.php');
 include ($_SERVER['DOCUMENT_ROOT'].'/messEcom/include/function.inc.php');
 include ($_SERVER['DOCUMENT_ROOT'].'/messEcom/pdf/autoload.php');
 
-if(isset($_SESSION['CURRENT_USER']) || isset($_SESSION['adminLogin'])){
-
+if(isset($_SESSION['adminLogin'])){
 }
 else{
      redirect(SITE_PATH);
 }
 
-
 $css=file_get_contents(SITE_PATH.'asset/css/bootstrap.min.css');
 
-$mpdf = new \Mpdf\Mpdf(['tempDir' => __DIR__ . '/tmp']);
-
+$mpdf = new \Mpdf\Mpdf(['tempDir' => __DIR__ . '/tmp','debug' => true,'allow_output_buffering' => true]);
 
 if(isset($_GET['id'])){
  
@@ -39,10 +36,9 @@ $html='<!DOCTYPE html>
 		</div>';
 
 		 $res=mysqli_query($con,"select * from offlineorders where orderId='$orderID'");
-
 		 if(mysqli_num_rows($res) > 0){
 		 	$orderDetails=mysqli_fetch_assoc($res);
-		 }
+     }
 
 		  	$html.='  <div class="container">
   	<div>
@@ -53,7 +49,7 @@ $html='<!DOCTYPE html>
   <div>
   	<b>Name: </b>'.$orderDetails['name'].'<br>
   	<b>Phone: </b>'.$orderDetails['phone'].'<br>
-  	<b>Address: </b>'.$orderDetails['address'].', '.$orderDetails['pincode'].' <br>
+  	<b>Address: </b>'.$orderDetails['address'].'<br>
   	<b>Payment Type: </b>'.$orderDetails['payment_type'].'<br>
   	<b>Date: </b>'.myDate($orderDetails['addedOn']).'<br>
   </div><br><br>
@@ -105,7 +101,6 @@ $sr=1;
 </html>';
 
 
-// $mpdf->Output('test.pdf','F');
 try {
   ob_end_clean();
   $mpdf->debug = true;
@@ -115,6 +110,7 @@ try {
 } catch (\Mpdf\MpdfException $e) { 
         echo $e->getMessage();
       }
+
 
 ob_end_flush(); 
 ?>

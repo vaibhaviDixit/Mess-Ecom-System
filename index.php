@@ -19,7 +19,7 @@
 
           ?>
 
-            <div class="swiper-slide slide banner-img">
+            <div class="swiper-slide slide banner-img" data-aos="fade-up">
                 <div class="content">
                     <span>Our Popular Meals</span>
                     <h3><?php echo $bannerRow['mealName']; ?></h3>
@@ -27,7 +27,7 @@
                     <!-- <a href="#" class="custombtn p-3">Order</a> -->
                 </div>
                 <div class="image">
-                    <img  src="<?php echo SITE_MENU_IMAGE.$bannerRow['image']; ?>" alt="" class=" img-fluid">
+                    <img src="<?php echo SITE_MENU_IMAGE.$bannerRow['image']; ?>" alt="" class=" img-fluid">
                 </div>
             </div>
             <?php
@@ -66,7 +66,7 @@
         
 
 
-            <div class="box">
+            <div class="box" data-aos="fade-left">
             <a href="javascript:void(0)" class="fas fa-heart"  onclick="addToFav(<?php  echo $menuRow['id']; ?>,'menu','add')"></a>
             <a  class="fas fa-eye desc" ></a>
             <img src="<?php echo SITE_MENU_IMAGE.$menuRow['menuPhoto'];  ?>" alt="">
@@ -141,7 +141,7 @@
             </div>
 
             <!-- Tab panes -->
-            <div class="tab-content displayMeals">
+            <div class="tab-content displayMeals" >
 
                     <?php
 
@@ -154,7 +154,7 @@
                         <?php
                             while ($meals_row=mysqli_fetch_assoc($meals) ) {
                         ?>
-                        <div class="box">
+                        <div class="box" data-aos="fade-right">
                             <div class="image">
                                 <img src="<?php echo SITE_MENU_IMAGE.$meals_row['mealPhoto'];  ?>" alt="">
                                 <a  class="fas fa-eye desc"></a>
@@ -247,7 +247,7 @@
                     </div>
                     
                   </div>
-                  <div class="col-sm-5">
+                  <div class="col-sm-5" id="subscribeCards">
                     <div> 
                         <div class="card">
                           <div class="card-header fs-2 fw-bold">
@@ -364,7 +364,7 @@
                         <?php
                             while ($products_row=mysqli_fetch_assoc($products) ) {
                         ?>
-                        <div class="box">
+                        <div class="box" data-aos="flip-right">
                           <img src="<?php echo SITE_MENU_IMAGE.$products_row['proPhoto'];  ?>" alt="">
                           <h3><?php echo $products_row['proName'];  ?> </h3>
                           <p class="fs-4"><?php echo $products_row['proDesc'];  ?></p>

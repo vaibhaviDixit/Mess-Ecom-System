@@ -15,7 +15,7 @@ require_once __DIR__ . '/pdf/autoload.php';
 
 $css=file_get_contents(SITE_PATH.'asset/css/bootstrap.min.css');
 
-$mpdf = new \Mpdf\Mpdf(['tempDir' => __DIR__ . '/tmp']);
+$mpdf = new \Mpdf\Mpdf(['tempDir' => __DIR__ . '/tmp','debug' => true,'allow_output_buffering' => true]);
 
 
 if(isset($_GET['id'])){
