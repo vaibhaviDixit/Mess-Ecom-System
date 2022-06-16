@@ -18,7 +18,7 @@ $google_client->setClientId('618904802178-uvu58omm48bpgljcah6f67bs7kono91b.apps.
 $google_client->setClientSecret('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');
 
 //Set the OAuth 2.0 Redirect URI
-$google_client->setRedirectUri('http://localhost/messEcom/login');
+$google_client->setRedirectUri('http://localhost/login');
 
 // to get the email and profile 
 $google_client->addScope('email');

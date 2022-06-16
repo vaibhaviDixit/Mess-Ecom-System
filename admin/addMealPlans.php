@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
 			      mysqli_query($con,"INSERT INTO `meals`(`mealName`, `mealDesc`, `mealPrice`, `mealSubscription`, `mealType`, `mealPhoto`) VALUES ('$mealName','$mealDesc','$mealPrice','$mealSubscription','$mealType','$mealPhoto' )");
 			  	
 
-				redirect('pages-listMealPlans.php');
+				redirect(SITE_PATH.'admin/listMealPlans');
 
 			}
 		}
@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
 			}
 			if($msg==""){
 				mysqli_query($con,"update meals set mealName='$mealName',mealDesc='$mealDesc', mealPrice='$mealPrice', mealSubscription='$mealSubscription',mealType='$mealType' $image_condition where id='$id'  ");
-				redirect('pages-listMealPlans.php');
+				redirect(SITE_PATH.'admin/listMealPlans');
 			}
 			
 		}

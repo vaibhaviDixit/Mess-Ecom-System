@@ -2,6 +2,10 @@
 //connect with database
 $con=mysqli_connect('localhost:3309','root','','mess_ecom');
 
+
+// $con=mysqli_connect('localhost','id18854369_vaibhavi','M$(puS_[Y)!4?!2Q','id18854369_messecom');
+
+
 // mysqli_query($con,'CREATE TABLE `admin` (
 //   `id` int(3) NOT NULL AUTO_INCREMENT,
 //   `name` varchar(80) NOT NULL,

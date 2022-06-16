@@ -1,7 +1,7 @@
 <?php
 
 include ('top.php');
-$sql="select members.*, subscriptions.subscriptionName from members,subscriptions  where members.subscription=subscriptions.id ";
+$sql="select members.*, subscriptions.subscriptionName from members,subscriptions  where members.subscription=subscriptions.id order by members.id desc";
 $res=mysqli_query($con,$sql);
 
 ?>

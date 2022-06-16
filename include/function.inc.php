@@ -31,6 +31,20 @@ function getSafeArrVal($arr){
 	}
 	return $arr;
 }
+
+function getAdminToken(){
+	global $con;
+	$tokenrow=mysqli_query($con,"select pushtoken from admin");
+	if(mysqli_num_rows($tokenrow)>0){
+		$gettoken=mysqli_fetch_assoc($tokenrow);
+		return $gettoken['pushtoken']; 
+	}
+	return 0;
+
+}
+
+
+
 function myDate($dt){
 	return date('d-m-Y',strtotime($dt)).' '.date('h:ia',strtotime($dt));
 }
@@ -260,6 +274,27 @@ function getUserDetails(){
 }
 
 
+
+function getUserToken(){
+
+	global $con;
+		$uid=$_SESSION['CURRENT_USER'];
+
+		$res=mysqli_fetch_assoc(mysqli_query($con,"select pushtoken from user where id='$uid' "));
+
+	return $res['pushtoken'];
+
+}
+
+function getUserTokenById($uid){
+
+	global $con;
+	$res=mysqli_fetch_assoc(mysqli_query($con,"select pushtoken from user where id='$uid' "));
+
+	return $res['pushtoken'];
+
+}
+
 function userRow(){
 	global $con;
 	$userDetails=array();
@@ -318,8 +353,10 @@ function continueWithGoogle($name,$email,$profile){
 function totalMenus(){
 	global $con;
 
-	$count=mysqli_num_rows(mysqli_query($con,"select meals.*,menu.*,dailyproducts.* from meals,menu,dailyproducts "));
-	return $count;
+	$countmeals=mysqli_num_rows(mysqli_query($con,"select * from meals"));
+	$countmenu=mysqli_num_rows(mysqli_query($con,"select * from menu"));
+	$countdaily=mysqli_num_rows(mysqli_query($con,"select * from dailyproducts "));
+	return $countmeals+$countmenu+$countdaily;
 }
 
 function totalOrders(){

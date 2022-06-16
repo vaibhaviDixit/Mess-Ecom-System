@@ -45,6 +45,9 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="<?php echo SITE_PATH; ?>ckeditor/ckeditor.js"></script>
 
+
+    <script src="<?php echo SITE_PATH; ?>asset/js/script.js"></script>
+    
     <script type="text/javascript">
         $(document).ready( function () {
         $('#dttable').DataTable();

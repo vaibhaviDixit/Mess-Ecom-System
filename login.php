@@ -1,6 +1,5 @@
 <?php
 
-include 'nav.php';
 //Include Configuration File
 include('config.php');
 

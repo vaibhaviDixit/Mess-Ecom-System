@@ -2,7 +2,7 @@
 
 include ('top.php');
 
-$sql="select meals.*, subscriptions.subscriptionName,category.name from meals,subscriptions,category  where meals.mealSubscription=subscriptions.id and meals.mealType=category.id";
+$sql="select meals.*, subscriptions.subscriptionName,category.name from meals,subscriptions,category  where meals.mealSubscription=subscriptions.id and meals.mealType=category.id order by meals.id desc";
 $res=mysqli_query($con,$sql);
 
 ?>

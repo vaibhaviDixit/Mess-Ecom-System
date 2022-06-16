@@ -56,7 +56,7 @@ if (isset($_POST['submit'])) {
 			//if id is set then update exsting category
 			mysqli_query($con,"update category set name='$category', description='$description' where id='$id'  ");
 		}
-		redirect('pages-listCategory.php');
+		redirect(SITE_PATH.'admin/listCategory.php');
 		
 	}
 	

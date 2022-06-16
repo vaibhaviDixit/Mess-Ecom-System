@@ -14,7 +14,7 @@ $output="";
 
                 if(mysqli_num_rows($meals)>0){
 
-                	$output.="<div class='box-container'>";
+                	$output.="<div class='owl-carousel owl-theme box-container'>";
                     
                     while ($meals_row=mysqli_fetch_assoc($meals) ) {
  							

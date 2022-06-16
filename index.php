@@ -54,7 +54,7 @@
     <h3 class="sub-heading"> Popular Menus </h3>
     <h1 class="heading"> Delicious Menus </h1>
 
-    <div class="box-container">
+    <div class="owl-carousel owl-theme box-container">
 
             <?php
                     //select menu items
@@ -149,7 +149,7 @@
                             $meals=mysqli_query($con,$mealsSql);
                     ?>
               
-                    <div class="box-container">
+                    <div class="owl-carousel owl-theme box-container">
 
                         <?php
                             while ($meals_row=mysqli_fetch_assoc($meals) ) {
@@ -359,7 +359,7 @@
                             $products=mysqli_query($con,$productsSql);
                     ?>
               
-                    <div class="box-container">
+                    <div class="owl-carousel owl-theme box-container">
 
                         <?php
                             while ($products_row=mysqli_fetch_assoc($products) ) {
@@ -400,58 +400,44 @@
 
 <section  id="offers">
 
-
-    <h3 class="sub-heading"></h3>
     <h1 class="heading">Offers & Deals</h1>
 
-    <div class="container mx-auto mt-5" >
-        
-        <nav class="fs-2 m-5">
-          <div class="nav nav-tabs nav-justified" id="nav-tab" role="tablist">
-
-            <button class="nav-link active" id="corporate-tab" data-bs-toggle="tab" data-bs-target="#corporate" type="button" role="tab" aria-controls="corporate" aria-selected="true">Corporate</button>
-
-            <button class="nav-link" id="bulkorders-tab" data-bs-toggle="tab" data-bs-target="#bulkorders" type="button" role="tab" aria-controls="bulkorders" aria-selected="false">Bulk Orders</button>
-
-          </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="corporate" role="tabpanel" aria-labelledby="corporate">
+    <div class="container mx-auto" >
+      
+            <div class="fs-2 proCate text-center">
+                    <h3 class="sub-heading">Corporate Orders / Bulk Orders</h3>
+            </div>
 
 
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="card">
-                         <img src="<?php echo SITE_PATH; ?>asset/images/menu-6.jpg" class="card-img-top" alt="..." style="height: 15rem;object-fit: cover;">
-                      <div class="card-body">
-                        <h5 class="card-title">Breakfast</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <p>Rs. 40/</p>
-                        <a href="#" class="btn btn-primary">Book Now</a>
-                      </div>
-                    </div>
+                    <div class="card p-5 fs-3">
+                         We are accepting corporate orders and bulk orders. since  you know this is an ideal gift you can give to your dignified customers / clients / companies, this is one of the most sought after gifts which the big MNCs are giving as a gift. 
+<br/><p class="text-warning">Please give your requirements by filling below form. we will get back you with the details.</p> <hr/>
+
+              <form method="post">
+                  <div class="row">
+
+                    <div class="mb-3 col">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required maxlength="50"/>
                   </div>
-                  <div class="col-sm-6">
-                    <div class="card">
-                         <img src="<?php echo SITE_PATH; ?>asset/images/menu-4.jpg" class="card-img-top" alt="..." style="height: 15rem; object-fit: cover;">
-                      <div class="card-body">
-                        <h5 class="card-title">Barbecues</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <p>Rs. 250/plate</p>
-                        <a href="#" class="btn btn-primary">Book Now</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
+                  <div class="mb-3 col">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" required maxlength="10"/>
+                  </div>
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="requirements" class="form-label">Requirements</label>
+                    <textarea class="form-control" id="requirements" rows="3" name="requirements" maxlength="250" style="resize:none !important;" required></textarea>
+                  </div>
+                  <input name="orders" type="submit" class="btn btn-primary" value="Submit" />
+              </form>
                 
-        </div>
 
-      <div class="tab-pane fade" id="bulkorders" role="tabpanel" aria-labelledby="bulkorders">
-        bulk order
-          
-      </div>
-    </div>
+
+            </div>
+  
 
     </div>
 
@@ -468,6 +454,32 @@
     <?php
 
         include 'footer.php';
+
+
+        if (isset($_POST['orders'])){
+
+            $name=getSafeVal($_POST['name']);
+            $phone=getSafeVal($_POST['phone']);
+            $requirements=getSafeVal($_POST['requirements']);
+
+            $admintoken=getAdminToken();
+            $ins=mysqli_query($con,"INSERT INTO `bulkorders`(`name`, `phone`, `requirements`) VALUES ('$name','$phone','$requirements')");
+            if($ins){
+              echo '<script>
+              swal("We will contact you soon!", {
+                      icon: "success",
+                  }).then(function(){
+                  sendPushNoti("New Bulk Order","Contact orderer soon!","'.$admintoken.'");
+                    window.location.href=window.location.href;});
+                 </script>';
+            }
+            else{
+                 echo '<script>swal("OOPS! Something wrong", {
+                      icon: "error",
+                  }); </script>';
+            }
+
+        }
 
     ?>
  

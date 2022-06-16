@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3309
--- Generation Time: Apr 16, 2022 at 06:44 AM
+-- Generation Time: May 08, 2022 at 01:42 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -38,15 +38,16 @@ CREATE TABLE `admin` (
   `fb` varchar(255) NOT NULL,
   `insta` varchar(255) NOT NULL,
   `whatsapp` varchar(255) NOT NULL,
-  `website` varchar(40) NOT NULL
+  `website` varchar(40) NOT NULL,
+  `pushtoken` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `name`, `profile`, `email`, `password`, `phone`, `address`, `fb`, `insta`, `whatsapp`, `website`) VALUES
-(1, 'Admin21', '152877641_dm.jpg', 'admin@gmail.com', 'admin1234', '9285126522', '														      															      	Ahmadnagar								', 'https://www.facebook.com/', 'https://www.instagram.com/instagram/', '9284552192', 'https://www.google.com/');
+INSERT INTO `admin` (`id`, `name`, `profile`, `email`, `password`, `phone`, `address`, `fb`, `insta`, `whatsapp`, `website`, `pushtoken`) VALUES
+(1, 'Admin21', '152877641_dm.jpg', 'admin@gmail.com', 'admin1234', '9285126522', '														      															      	Ahmadnagar								', 'https://www.facebook.com/', 'https://www.instagram.com/instagram/', '9284552192', 'https://www.google.com/', 'f6enQaP_GH5ruqVrtFRhJb:APA91bFYpSIq7lzlRngZVVZma9gaixTVl_IOVhPE5X97mk7N8diJSskBHgP0jrlLNXTK0BNGlJ3jhkGhe6pdnvQabxFtuHPEAe-9VLrYs8ZWgbXY7161B3wSOU-VPhrQtiSt3Ba9kDz8');
 
 -- --------------------------------------------------------
 
@@ -69,6 +70,27 @@ INSERT INTO `banner` (`id`, `image`, `name`, `description`) VALUES
 (1, '528498553_istockphoto-481149282-612x612.jpg', 4, 'The curries are thick and sweet and sour and are served with steamed rice.'),
 (2, '847435207_istockphoto-1266098597-1024x1024.jpg', 5, 'Authentic maharashtrian thali.'),
 (3, '935176208_khich.jpg', 7, 'Healthy and classic Indian dish made with rice and yellow mung lentils.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bulkorders`
+--
+
+CREATE TABLE `bulkorders` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `requirements` varchar(255) NOT NULL,
+  `addedon` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bulkorders`
+--
+
+INSERT INTO `bulkorders` (`id`, `name`, `phone`, `requirements`, `addedon`) VALUES
+(1, 'Vaibhavi Dixit', '9284552192', 'I want 200 pizzas', '2022-05-08 11:40:39');
 
 -- --------------------------------------------------------
 
@@ -96,7 +118,10 @@ INSERT INTO `cart` (`id`, `userId`, `menuType`, `menuId`, `qty`, `subtotal`, `ad
 (15, 2, 'daily', 1, 2, 90, '2022-01-06 05:10:45'),
 (17, 2, 'meal', 6, 2, 60, '2022-01-07 13:02:49'),
 (29, 1, 'meal', 3, 1, 60, '2022-01-11 14:15:31'),
-(30, 1, 'meal', 7, 1, 45, '2022-01-11 14:15:31');
+(30, 1, 'meal', 7, 1, 45, '2022-01-11 14:15:31'),
+(31, 0, 'menu', 3, 2, 40, '2022-04-28 14:58:45'),
+(32, 0, 'menu', 5, 1, 40, '2022-04-28 14:58:45'),
+(33, 0, 'meal', 5, 1, 150, '2022-04-28 14:58:45');
 
 -- --------------------------------------------------------
 
@@ -216,7 +241,8 @@ INSERT INTO `meals` (`id`, `mealName`, `mealDesc`, `mealPrice`, `mealSubscriptio
 (4, 'South Special Lunch', 'Pappu podi &amp; Gingely oil + Rice (400 gms) + Kootu (100 gms) + Poriyal (100gms) + Pappu of the day(Tomato Pappu or Keerai Pappu or Dosakai Pappu or Garlic Pappu) +  Vathakulambu (100 gms) + Rasam (100 gm) + Buttermilk (100 gms) +  Gongura Thokku + Swee', 145, 3, '7', '229373379_download (5).jpg', 1),
 (5, 'Maharashtrain Thali', 'flat bread ( can be chapati, phulka, bhakri, ) or poori, a koshimbir ( salad), a chutney, a dry vegetable curry, papad, pickle and a sweet dish. Puranpoli ( stuffed sweet lentil flat bread)', 150, 2, '5', '454505388_download (4).jpg', 1),
 (6, 'Sandwich', '4 Large Slices of Bread with Veg Stuffings', 30, 1, '6', '478078735_download (6).jpg', 1),
-(7, 'Special Khichdi', 'Sabudana Khichdi(350 gm)\r\nChutney(2 Types)(100 gms)', 45, 2, '6', '513279844_images (6).jpg', 1);
+(7, 'Special Khichdi', 'Sabudana Khichdi(350 gm)\r\nChutney(2 Types)(100 gms)', 45, 2, '6', '513279844_images (6).jpg', 1),
+(8, 'Rajma Chawal', 'Rajma is a popular Indian curry made with kidney beans. This recipe is made with aroma of Kashmiri garam masala and a host of other spices.', 145, 3, '7', '851895240_rajma-chawal-1.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -356,7 +382,7 @@ CREATE TABLE `onlinemembers` (
 --
 
 INSERT INTO `onlinemembers` (`id`, `orderId`, `uid`, `phone`, `address`, `subName`, `subDuration`, `price`, `adhar`, `pan`, `photo`, `joinDate`, `paymentId`, `paymentStatus`, `status`) VALUES
-(1, 'MessEcom3746_3', 3, '9284552192', 'Kumbhar Galli, Sangola', 'Classic', 'monthly', 7500, 'NA', 'NA', 'NA', '2021-01-01', '20220101111212800110168502503306686', 'success', 0),
+(1, 'MessEcom3746_3', 3, '9284552192', 'Kumbhar Galli, Sangola', 'Classic', 'monthly', 7500, 'NA', 'NA', 'NA', '2022-04-23', '20220101111212800110168502503306686', 'success', 1),
 (7, 'MessEcom9640_3', 3, '9284552192', 'ok', 'Student', 'monthly', 3000, 'NA', 'NA', 'NA', '2022-01-05', '', 'pending', 0),
 (8, 'MESSECOM9407_3', 3, '9284552192', 'Sangola', 'Student', '15Days', 500, 'NA', 'NA', '468515368_ALIBAG.jpg', '2022-01-12', '20220112111212800110168665103353053', 'success', 1);
 
@@ -487,6 +513,24 @@ INSERT INTO `subscriptions` (`id`, `subscriptionName`, `description`, `15Days`, 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `unregistered`
+--
+
+CREATE TABLE `unregistered` (
+  `id` int(11) NOT NULL,
+  `pushtoken` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `unregistered`
+--
+
+INSERT INTO `unregistered` (`id`, `pushtoken`) VALUES
+(1, 'f6enQaP_GH5ruqVrtFRhJb:APA91bFYpSIq7lzlRngZVVZma9gaixTVl_IOVhPE5X97mk7N8diJSskBHgP0jrlLNXTK0BNGlJ3jhkGhe6pdnvQabxFtuHPEAe-9VLrYs8ZWgbXY7161B3wSOU-VPhrQtiSt3Ba9kDz8');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -497,6 +541,7 @@ CREATE TABLE `user` (
   `address` varchar(200) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
+  `pushtoken` varchar(255) NOT NULL,
   `addedOn` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -504,11 +549,11 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `profile`, `address`, `email`, `phone`, `addedOn`) VALUES
-(1, 'Vaibhavi Dixit', '409602850_sp2.jpg', '', 'vaibhavi2003@gmail.com', '9284552192', '2021-10-06 17:04:23'),
-(2, 'Rashi Deshpande', 'defaultprofile.jpg', '', 'rashi@gmail.com', '8767431102', '2021-10-15 06:31:20'),
-(3, '40ᴠᴀɪʙʜᴀᴠɪ ᴅɪxɪᴛ', 'https://lh3.googleusercontent.com/a-/AOh14Gi70rfAXTd9N6geCFXu-xdJB-fbulBc_UoBf-eSZA=s96-c', '', 'vaibhavidixit511@gmail.com', '', '2021-12-30 12:36:58'),
-(4, 'SayaliDixit', 'https://lh3.googleusercontent.com/a/AATXAJw9tTAJPrvtwY79ik09u7xpwRsqak_89GqVVGvv=s96-c', '', 'dixitsayali184@gmail.com', '', '2022-02-03 14:39:34');
+INSERT INTO `user` (`id`, `name`, `profile`, `address`, `email`, `phone`, `pushtoken`, `addedOn`) VALUES
+(1, 'Vaibhavi Dixit', '409602850_sp2.jpg', '', 'vaibhavi2003@gmail.com', '9284552192', '', '2021-10-06 17:04:23'),
+(2, 'Rashi Deshpande', 'defaultprofile.jpg', '', 'rashi@gmail.com', '8767431102', '', '2021-10-15 06:31:20'),
+(3, '40ᴠᴀɪʙʜᴀᴠɪ ᴅɪxɪᴛ', 'https://lh3.googleusercontent.com/a-/AOh14Gi70rfAXTd9N6geCFXu-xdJB-fbulBc_UoBf-eSZA=s96-c', '', 'vaibhavidixit511@gmail.com', '', 'f6enQaP_GH5ruqVrtFRhJb:APA91bFYpSIq7lzlRngZVVZma9gaixTVl_IOVhPE5X97mk7N8diJSskBHgP0jrlLNXTK0BNGlJ3jhkGhe6pdnvQabxFtuHPEAe-9VLrYs8ZWgbXY7161B3wSOU-VPhrQtiSt3Ba9kDz8', '2021-12-30 12:36:58'),
+(4, 'SayaliDixit', 'https://lh3.googleusercontent.com/a/AATXAJw9tTAJPrvtwY79ik09u7xpwRsqak_89GqVVGvv=s96-c', '', 'dixitsayali184@gmail.com', '', '', '2022-02-03 14:39:34');
 
 --
 -- Indexes for dumped tables
@@ -524,6 +569,12 @@ ALTER TABLE `admin`
 -- Indexes for table `banner`
 --
 ALTER TABLE `banner`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bulkorders`
+--
+ALTER TABLE `bulkorders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -626,6 +677,12 @@ ALTER TABLE `subscriptions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `unregistered`
+--
+ALTER TABLE `unregistered`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -648,10 +705,16 @@ ALTER TABLE `banner`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `bulkorders`
+--
+ALTER TABLE `bulkorders`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -681,7 +744,7 @@ ALTER TABLE `favourites`
 -- AUTO_INCREMENT for table `meals`
 --
 ALTER TABLE `meals`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `members`
@@ -742,6 +805,12 @@ ALTER TABLE `reviews`
 --
 ALTER TABLE `subscriptions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `unregistered`
+--
+ALTER TABLE `unregistered`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user`

@@ -1,7 +1,7 @@
 <?php
 
 include ('top.php');
-$sql="select orders.*,user.name,orderstatus.name as orderStatus from orders,user,orderstatus where orders.userId=user.id and orders.payment_status='success' and orders.order_status=orderstatus.id ";
+$sql="select orders.*,user.name,orderstatus.name as orderStatus from orders,user,orderstatus where orders.userId=user.id and orders.payment_status='success' and orders.order_status=orderstatus.id order by orders.id desc";
 $res=mysqli_query($con,$sql);
 
 ?>

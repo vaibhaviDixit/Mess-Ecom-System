@@ -1,9 +1,9 @@
 // animate div on scroll
-$(".sub-heading").attr('data-aos','slide-up');
-$(".heading").attr('data-aos','zoom-in');
+$(".sub-heading").attr('data-aos','zoom-out');
+$(".heading").attr('data-aos','zoom-out');
 $(".menuDesc").attr('data-aos','fade-left');
 $("#subscribeCards div").each(function() {
-    $(this).attr('data-aos','fade-right');
+    $(this).attr('data-aos','zoom-in');
 });
 
 let menu = document.querySelector('#menu-bars');
@@ -123,7 +123,26 @@ var swiper = new Swiper(".swiper", {
 
 // window.onload = fadeOut;
 
-
+// owl carousel
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    autoplay:true,
+    dots:false,
+    nav:false,
+    margin:15,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:2
+        },
+        1000:{
+            items:4
+        }
+    }
+})
+// 
 //show / hide password field
 function toggleEye(id){
     const selector="#"+id;
@@ -416,8 +435,7 @@ $(document).on("click",".fetchProducts",function(){
 
 
 });
-
-
+ 
 
 $('.tiffinSection a:first-child').addClass(' activeCate active ');
 
@@ -738,7 +756,11 @@ $(".reground").addClass(' spinner-border');
         msg=jQuery.parseJSON(result);
       
         if(msg.status=="error"){
+          
           jQuery("#validation").html("<div class='alert alert-danger' role='alert' >"+msg.message+"</div>");
+        
+          $(".reground").removeClass(' spinner-border');
+           $("#regBtn").attr("disabled",false);
         }
         if(msg.status=="success"){
           
@@ -946,15 +968,29 @@ if ("serviceWorker" in navigator) {
 navigator.serviceWorker
   .register("../../firebase-messaging-sw.js")
   .then(function(registration) {
-    console.log("Registration successful, scope is:", registration.scope);
+    // console.log("Registration successful, scope is:", registration.scope);
     messaging.getToken({vapidKey: 'BDd-btbZx53pKMO7UpMLD7y7gDUptMO1YethuSRUCSr4qvxcJM4v01wn3Bt5krbQ00YUE1WkYTvNi0Y1gs4d_5g', serviceWorkerRegistration : registration })
       .then((currentToken) => {
         if (currentToken) {
-          console.log('current token for client: ', currentToken);
+          // console.log('current token for client: ', currentToken);
           pushtoken=currentToken
 
-          sendPushNoti("hi","how are you");
-    // 
+            jQuery.ajax({
+                  url:'registerpushtoken.php',
+                  type:'post',
+                  data:"token="+pushtoken,
+                  success: function(data){
+
+                     result=jQuery.parseJSON(data)
+                     if(result){
+                      // alert("Registration Successful..!")
+                     }
+                  }
+            });
+          
+
+          // sendPushNoti("hi","how are you");
+    
           // Track the token -> client mapping, by sending to backend server
           // show on the UI that permission is secured
         } else {
@@ -974,7 +1010,7 @@ navigator.serviceWorker
     }
 
     messaging.onMessage(function (payload) {
-        console.log(payload);
+        // console.log(payload);
         const notificationOption={
             body:payload.notification.body,
             icon:payload.notification.icon
@@ -994,21 +1030,22 @@ navigator.serviceWorker
     messaging.onTokenRefresh(function () {
         messaging.getToken()
             .then(function (newtoken) {
-                console.log("New Token : "+ newtoken);
+                // console.log("New Token : "+ newtoken);
             })
             .catch(function (reason) {
-                console.log(reason);
+                // console.log(reason);
         //alert(reason);
             })
     })
     IntitalizeFireBaseMessaging();
 
 
-    function sendPushNoti(title,msg){
+    function sendPushNoti(title,msg,pushnotitoken){
       console.log(title,msg,pushtoken)
       jQuery.ajax({
             url:'send_notification.php',
             type:'post',
-            data:"title="+title+"&message="+msg+"&token="+pushtoken
+            data:"title="+title+"&message="+msg+"&token="+pushnotitoken
           });
     }
+

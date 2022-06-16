@@ -41,9 +41,9 @@ if(!isset($_SESSION['adminLogin'])){
   <!-- font awesome cdn link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+    <script src="<?php echo SITE_PATH; ?>asset/js/swiper-bundle.min.js"></script>
+    <script src="<?php echo SITE_PATH; ?>asset/js/sweetalert.min.js"></script>
+   
     <style type="text/css">
       label{
         font-weight: bolder;
@@ -153,100 +153,7 @@ if(!isset($_SESSION['adminLogin'])){
             
               <!-- ============================================================== -->
               <!-- ============================================================== -->
-              <!-- Messages -->
-              <!-- ============================================================== -->
-              <li class="nav-item dropdown">
-              <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="mdi mdi-bell font-24"></i>
-                </a>
-                <ul
-                  class="
-                    dropdown-menu dropdown-menu-end
-                    mailbox
-                    animated
-                    bounceInDown
-                  "
-                  aria-labelledby="2"
-                >
-                  <ul class="list-style-none">
-                    <li>
-                      <div class="">
-                        <!-- Message -->
-                        <a href="javascript:void(0)" class="link border-top">
-                          <div class="d-flex no-block align-items-center p-10">
-                            <span
-                              class="
-                                btn btn-success btn-circle
-                                d-flex
-                                align-items-center
-                                justify-content-center
-                              "
-                              ><i class="mdi mdi-calendar text-white fs-4"></i
-                            ></span>
-                            <div class="ms-2">
-                              <h5 class="mb-0">Event today</h5>
-                              <span class="mail-desc"
-                                >Just a reminder that event</span
-                              >
-                            </div>
-                          </div>
-                        </a>
-                        <!-- Message -->
-                        
-                        <!-- Message -->
-                        <a href="javascript:void(0)" class="link border-top">
-                          <div class="d-flex no-block align-items-center p-10">
-                            <span
-                              class="
-                                btn btn-primary btn-circle
-                                d-flex
-                                align-items-center
-                                justify-content-center
-                              "
-                              ><i class="mdi mdi-account fs-4"></i
-                            ></span>
-                            <div class="ms-2">
-                              <h5 class="mb-0">Pavan kumar</h5>
-                              <span class="mail-desc"
-                                >Just see the my admin!</span
-                              >
-                            </div>
-                          </div>
-                        </a>
-                        <!-- Message -->
-                        <a href="javascript:void(0)" class="link border-top">
-                          <div class="d-flex no-block align-items-center p-10">
-                            <span
-                              class="
-                                btn btn-danger btn-circle
-                                d-flex
-                                align-items-center
-                                justify-content-center
-                              "
-                              ><i class="mdi mdi-link fs-4"></i
-                            ></span>
-                            <div class="ms-2">
-                              <h5 class="mb-0">Luanch Admin</h5>
-                              <span class="mail-desc"
-                                >Just see the my new admin!</span
-                              >
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </ul>
-              </li>
-              <!-- ============================================================== -->
-              <!-- End Messages -->
+        
               <!-- ============================================================== -->
 
               <!-- ============================================================== -->
@@ -525,6 +432,12 @@ if(!isset($_SESSION['adminLogin'])){
                     <a href="<?php echo SITE_PATH; ?>admin/listOfflineOrders" class="sidebar-link"
                       ><i class="mdi mdi-note-plus"></i
                       ><span class="hide-menu">Offline Orders</span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="<?php echo SITE_PATH; ?>admin/bulkorders" class="sidebar-link"
+                      ><i class="mdi mdi-note-plus"></i
+                      ><span class="hide-menu">Bulk/Corporate</span></a
                     >
                   </li>
                  

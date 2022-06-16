@@ -1,7 +1,7 @@
 <?php
 
 include ('top.php');
-$sql="select offlineorders.*,orderstatus.name as orderStatus from offlineorders,orderstatus where offlineorders.order_status=orderstatus.id order by offlineorders.id desc";
+$sql="select * from bulkorders order by id desc";
 $res=mysqli_query($con,$sql);
 
 ?>
@@ -10,7 +10,7 @@ $res=mysqli_query($con,$sql);
                 <div class="container-fluid p-4">
 
                     <div class="mb-3">
-                        <h1 class="h3 d-inline align-middle">Offline Orders</h1>
+                        <h1 class="h3 d-inline align-middle">Bulk/Corporate Orders</h1>
                     </div>
                     <hr>
 
@@ -20,14 +20,10 @@ $res=mysqli_query($con,$sql);
                     <thead class="table-primary">
                         <tr>
                             <th scope="col">Sr No.</th>
-                            <th scope="col">Invoice</th>
-                            <th scope="col">Status</th>
                             <th scope="col">Name</th>
                             <th scope="col">Phone</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Total</th>
+                            <th scope="col">Requirements</th>
                             <th scope="col">Time</th>
-                            <th scope="col">Actions</th>
 
                         </tr>
                     </thead>
@@ -43,24 +39,10 @@ $res=mysqli_query($con,$sql);
                         
                         <tr>
                         <td scope="col"> <?php  echo $i; ?></td>
-                        <td scope="col"><?php  echo $row['id']; ?></td>
-                        <td scope="col" class="orderMark"><button class="badge rounded-pill btn btn-sm <?php  echo $row['orderStatus']; ?> "><?php  echo $row['orderStatus']; ?></button></td>
                         <td scope="col"> <?php  echo $row['name']; ?></td>
                         <td scope="col"> <?php  echo $row['phone']; ?></td>
-                        <td scope="col"> <?php  echo $row['address']; ?></td>
-                        <td scope="col"> <?php  echo $row['total']; ?></td>
-                        <td scope="col"> <?php  echo myDate($row['addedOn']); ?></td>
-                        <td scope="col" class="text-center fs-6">
-                            <form action="<?php echo SITE_PATH.'admin/orderDetails'; ?>" method="get">
-                                <input type="hidden" name="orderID" value="<?php  echo $row['orderId']; ?>">
-                                <button class="badge rounded-pill btn btn-sm btn-info" type="submit">Details</button>
-
-                            </form>
-
-                             <a target="_blank" href="<?php echo SITE_PATH.'admin/offOrderReceipt/'.$row['orderId']; ?>"><button class='badge rounded-pill btn btn-sm btn-warning'><i class='fas fa-download'></i>  Receipt</button></a>
-
-                            </td>
-
+                        <td scope="col"> <?php  echo $row['requirements']; ?></td>
+                        <td scope="col"> <?php  echo mydate($row['addedon']); ?></td>
 
 
                         </tr>

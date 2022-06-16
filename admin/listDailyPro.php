@@ -2,7 +2,7 @@
 
 include ('top.php');
 
-$sql="select dailyproducts.*,dailycate.name from dailyproducts,dailycate  where dailyproducts.proCate=dailycate.id";
+$sql="select dailyproducts.*,dailycate.name from dailyproducts,dailycate  where dailyproducts.proCate=dailycate.id order by dailyproducts.id desc";
 $res=mysqli_query($con,$sql);
 
 ?>

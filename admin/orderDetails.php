@@ -32,20 +32,26 @@ if(isset($_GET['orderID'])){
 
         $uid=explode("_", $orderId)[1];
 
-        $sql="select orders.*,orderdetails.*,user.name,orderstatus.name as orderStatus from orders,orderdetails,user,orderstatus where orderdetails.uid='$uid' and orders.order_status=orderstatus.id and orders.orderId='$orderId' and orderdetails.orderId='$orderId' ";
+        $sql="select orders.*,orderdetails.*,user.name,user.pushtoken, orderstatus.name as orderStatus from orders,orderdetails,user,orderstatus where orderdetails.uid='$uid' and orders.order_status=orderstatus.id and orders.orderId='$orderId' and orderdetails.orderId='$orderId' ";
 
         $orderDetails=mysqli_query($con,"select * from orderdetails where orderId='$orderId' and uid='$uid' ");
         $res=mysqli_query($con,$sql);
-        $row=mysqli_fetch_assoc($res);
 
+        $row=mysqli_fetch_assoc($res);
+        $pushtoken=$row['pushtoken'];
 
         if(isset($_POST['newOrdStatus']) && intval($_POST['newOrdStatus'])>0){
            $ordId=$_POST['newOrdStatus'];
            $changeStSql=mysqli_query($con,"update orders set order_status='$ordId' where orderId='$orderId' ");
            
            if($changeStSql){
+                $sendstatus=$_POST['newOrdStatus'];
+
                 unset($_POST['newOrdStatus']);
-                echo '<script type="text/javascript">swal("Order Status Updated","","success").then(function(){window.location.href=window.location.href;});</script>';
+                echo '<script type="text/javascript">swal("Order Status Updated","","success").then(function(){
+                    sendPushNoti("Order Status","Order '.$sendstatus.','.$pushtoken.');
+                    window.location.href=window.location.href;});
+                </script>';
 
            }
         }

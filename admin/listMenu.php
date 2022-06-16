@@ -2,7 +2,7 @@
 
 include ('top.php');
 //join two tables menu and category ,select category name based on equality of category id
-$sql="select menu.*, category.name from menu,category where menu.category_id=category.id ";
+$sql="select menu.*, category.name from menu,category where menu.category_id=category.id order by menu.id desc";
 $res=mysqli_query($con,$sql);
 
 ?>

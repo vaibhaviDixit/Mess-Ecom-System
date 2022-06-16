@@ -3,7 +3,8 @@
 // define constants here
 define('SITE_NAME','Mess');
 define('SITE_PATH','http://localhost/messEcom/');
-define('SERVER_PATH',$_SERVER['DOCUMENT_ROOT'].'/messEcom/');
+define('SERVER_PATH',$_SERVER['DOCUMENT_ROOT'].'/');
+define('REDIRECT', SITE_PATH.'login.php');
 
 //path to upload images of menu
 define('SERVER_MENU_IMAGE',SERVER_PATH."asset/media/menu/");

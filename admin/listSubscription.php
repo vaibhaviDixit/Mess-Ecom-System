@@ -2,7 +2,7 @@
 
 include ('top.php');
 
-$sql="select * from subscriptions";
+$sql="select * from subscriptions order by id desc";
 $res=mysqli_query($con,$sql);
 
 

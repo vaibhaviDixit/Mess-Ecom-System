@@ -1,7 +1,7 @@
 <?php
 
 include ('top.php');
-$sql="select onlinemembers.*,user.name from onlinemembers,user where onlinemembers.uid=user.id and onlinemembers.paymentStatus='success' order by id desc ";
+$sql="select onlinemembers.*,user.name,user.pushtoken from onlinemembers,user where onlinemembers.uid=user.id and onlinemembers.paymentStatus='success' order by id desc ";
 $res=mysqli_query($con,$sql);
 
 ?>
@@ -48,8 +48,11 @@ $res=mysqli_query($con,$sql);
 						<td scope="col"> 
 						<?php  
 						   $planid=$row['id'];
+						   $pushtoken=$row['pushtoken'];
 							if($row['status']==0){
-								echo '<button class="btn badge rounded-pill bg-danger" onclick="approvePlan('.$planid.')">Not Approved</button>';
+						    ?>
+						    <button class="btn badge rounded-pill bg-danger" onclick="approvePlan('<?php echo $planid; ?>','<?php echo $pushtoken; ?>' )">Not Approved</button>
+						    <?php
 							} 
 							else{
 
@@ -108,7 +111,8 @@ $res=mysqli_query($con,$sql);
 			</main>
 
 	<script type="text/javascript">
-		function approvePlan(planid){
+		function approvePlan(planid,pushtoken){
+			console.log(pushtoken)
 
   			swal({
 				  title: "Are you sure?",
@@ -124,11 +128,15 @@ $res=mysqli_query($con,$sql);
 				    	url:'approvePlan',
 				    	data:"planid="+planid,
 				    	success:function(result){
+				    		
 				    		if(result){
 				    			swal("Approved successfully!", {
 						      		icon: "success",
 						    	});
+						    	
+						    	sendPushNoti("Meal Subscription","Your Meal Subscription is Approved",pushtoken);
 						    	window.location.href=window.location.href;
+
 				    		}else{
 				    			swal("Not Approved!","","error");
 				    		}

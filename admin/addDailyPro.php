@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
 			      mysqli_query($con,"INSERT INTO `dailyproducts`(`proName`, `proDesc`, `proPrice`,  `proCate`, `proPhoto`) VALUES ('$proName','$proDesc','$proPrice','$proCate','$proPhoto' )");
 			  	
 			     
-				redirect('pages-listDailyPro.php');
+				redirect(SITE_PATH.'admin/listDailyPro');
 
 			}
 		}
@@ -80,7 +80,7 @@ if (isset($_POST['submit'])) {
 			}
 			if($msg==""){
 				mysqli_query($con,"update dailyproducts set proName='$proName',proDesc='$proDesc', proPrice='$proPrice',proCate='$proCate' $image_condition where id='$id'  ");
-				redirect('pages-listDailyPro.php');
+				redirect(SITE_PATH.'admin/listDailyPro');
 			}
 			
 		}

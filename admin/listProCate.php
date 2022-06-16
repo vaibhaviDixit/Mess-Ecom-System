@@ -2,7 +2,7 @@
 
 include ('top.php');
 
-$sql="select * from dailycate";
+$sql="select * from dailycate order by id desc";
 $res=mysqli_query($con,$sql);
 
 

@@ -2,7 +2,7 @@
 
 include ('top.php');
 
-$sql="select * from category";
+$sql="select * from category order by id desc";
 $res=mysqli_query($con,$sql);
 
 
